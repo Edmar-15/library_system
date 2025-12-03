@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LibrarySystem</title>
+    <title>LibrarySystem | Home</title>
 </head>
 <body>
     <header>
-        <h1>LibrarySystem</h1>
+        <h1>Dashboard</h1>
         <nav>
-            <a href="{{ route('show.register') }}">Register</a>
-            <a href="{{ route('show.login') }}">Login</a>
+            <form action="{{ route('logout') }}" method="POST" class="m-0 logout">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
         </nav>
     </header>
+    <main>
+        <h1>Welcome, {{ Auth::user()->name }}</h1>
+    </main>
 </body>
 </html>
