@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+   width: 100%;
+   margin: auto 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   margin: 0;
+}
+
+.orange-back{
+    width: 100%;
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    margin: 20px auto;
+    padding: 100px;
+}
+
+.orange-back #EMAIL{
+    width: 100%;
+    width: 240px;
+    border: none;
+    height: 4vh;
+    padding: 0 15px;
+    border-radius: 50px;
+}
+
+.orange-back #lbl1{
+    color: ghostwhite;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
