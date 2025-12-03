@@ -27,6 +27,9 @@
             <div class="form-group">
                 <button type="submit">Login</button>
             </div>
+            <div class="form-group">
+                <a href="{{ route('password.request') }}">forgot password?</a>
+            </div>
         </form>
 
         @if ($errors->any())

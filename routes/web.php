@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
@@ -19,3 +21,11 @@ Route::post('/librarysystem/login', [AuthController::class, 'login'])->name('log
 Route::post('/librarysystem/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/librarysystem/home', [UserController::class, 'index'])->name('show.home');
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkForm'])->name('password.request');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
