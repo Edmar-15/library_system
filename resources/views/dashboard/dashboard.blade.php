@@ -51,7 +51,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link" title="About">
+            <a href="{{ route('show.about') }}" class="nav-link" title="About">
               <i class="fas fa-solid fa-eye nav-icon"></i>
               <span class="nav-text">About</span>
             </a>
