@@ -9,9 +9,7 @@
 <body>
 <!--tinanggal ko yung h2 rito-->
 
-@if(session('status'))
-    <p>{{ session('status') }}</p>
-@endif
+
 <!--simula bago-->
 <div class="container"> 
     <div class="card-wrapper"> 
@@ -21,6 +19,9 @@
 
         <!-- Orange box -->
         <div class="forgot-card">
+            @if(session('status'))
+                <p><i>{{ session('status') }}</i></p>
+            @endif
             <h2>Forgot password?</h2>
             <p class="subtitle">Don’t worry we got you covered</p>
 
