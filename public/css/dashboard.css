@@ -176,6 +176,7 @@ body {
     align-items: center;
     border-right: 1px solid var(--border-color);
     min-height: 100%;
+    text-align: justify;
 }
 
 .sidebar-content {
