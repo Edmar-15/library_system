@@ -41,7 +41,7 @@
       <div class="sidebar-content">
         <ul class="nav-menu">
           <li class="nav-item">
-            <a href="#dashboard" class="nav-link active" title="Dashboard">
+            <a href="{{ route('show.home') }}" class="nav-link active" title="Dashboard">
               <i class="fas fa-home nav-icon"></i>
               <span class="nav-text">Home</span>
             </a>
