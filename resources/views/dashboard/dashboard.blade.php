@@ -30,11 +30,13 @@
 
     <div class="user-section">
       <div class="user-info">
-        <div class="user-avatar">🥺</div>
-        @auth
-            <div class="user-name">{{ Auth::user()->name }}</div>
-        @endauth
-      </div>
+        <a href="{{ route('show.profile') }}" class="user-avatar">
+          🥺
+          @auth
+              <div class="user-name">{{ Auth::user()->name }}</div>
+          @endauth
+        </div>
+        </a>
     </div>
   </header>
 
@@ -46,6 +48,12 @@
             <a href="{{ route('show.home') }}" class="nav-link active" title="Dashboard">
               <i class="fas fa-home nav-icon"></i>
               <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link" title="About">
+              <i class="fas fa-solid fa-eye nav-icon"></i>
+              <span class="nav-text">About</span>
             </a>
           </li>
           <li class="nav-item">
@@ -64,12 +72,6 @@
             <a href="#bookmarks" class="nav-link" title="Bookmarks">
               <i class="fas fa-bookmark nav-icon"></i>
               <span class="nav-text">Bookmark</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#settings" class="nav-link" title="Settings">
-              <i class="fas fa-cog nav-icon"></i>
-              <span class="nav-text">Settings</span>
             </a>
           </li>
         </ul>

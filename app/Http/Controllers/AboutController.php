@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
-use App\Http\Requests\StoreProfileRequest;
-use App\Http\Requests\UpdateProfileRequest;
+use App\Models\About;
+use App\Http\Requests\StoreAboutRequest;
+use App\Http\Requests\UpdateAboutRequest;
 
-class ProfileController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('user.profile');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProfileRequest $request)
+    public function store(StoreAboutRequest $request)
     {
         //
     }
@@ -27,7 +27,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profile $profile)
+    public function show(About $about)
     {
         //
     }
@@ -35,7 +35,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProfileRequest $request, Profile $profile)
+    public function update(UpdateAboutRequest $request, About $about)
     {
         //
     }
@@ -43,7 +43,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Profile $profile)
+    public function destroy(About $about)
     {
         //
     }

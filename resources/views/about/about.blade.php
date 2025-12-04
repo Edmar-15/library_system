@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibrarySystem | Profile</title>
+    <title>LibrarySystem | About</title>
 </head>
 <body>
     
