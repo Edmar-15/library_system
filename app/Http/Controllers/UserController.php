@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index() {
-        return view('dashboard.home');
+        return view('dashboard.dashboard');
     }
 }

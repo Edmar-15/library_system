@@ -20,7 +20,7 @@ Route::post('/librarysystem/login', [AuthController::class, 'login'])->name('log
 
 Route::post('/librarysystem/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/librarysystem/home', [UserController::class, 'index'])->name('show.home');
+Route::get('/librarysystem/dashboard', [UserController::class, 'index'])->name('show.home');
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkForm'])->name('password.request');
 
