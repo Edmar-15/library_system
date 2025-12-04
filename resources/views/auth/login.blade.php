@@ -33,17 +33,39 @@
             </div> --}}
 
             <div class="container">
-                <div class="white-back">
+
+                    <div class="white-back">
                    
-                </div>
-                <div class="orange-back">
-                    <label for="EMAIL" id="lbl1">Enter Email</label>
-                    <input type="email" id="EMAIL">
-                    <label for="PASS">Enter password</label>
-                    <input type="password" id="PASS">
-                    <a href="#">Forgot password?</a>
-                    <input type="button" value = "confirm">
-                </div>
+                    </div>
+                
+                    <div class="orange-back">
+                    
+                        <label for="EMAIL" id="lbl1">Enter Email</label>
+
+                        <input type="email" id="EMAIL">
+
+                        <label for="PASS">Enter password</label>
+
+                        <input type="password" id="PASS">
+
+                        <a href="#" id="F">Forgot password?</a>
+
+                        <button id ="btn">confirm</button>
+
+                        <p>Don't have an account? <a href="#">create account</a></p>
+
+                        <div class = "divider">
+                            Or log in with
+                        </div>
+
+                        <div class="icons">
+                            <div class="icon"></div>
+                            <div class="icon"></div>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    
+                
             </div>
 
 

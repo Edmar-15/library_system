@@ -2,10 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 
+
+
+
 .container{
-   width: 100%;
    margin: auto 10px;
    display: flex;
    justify-content: center;
@@ -15,27 +19,78 @@
 }
 
 .orange-back{
+    position: relative;
     width: 100%;
-    background-color: orange;
+    background-color: #EB9D2E;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 400px;
-    margin: 20px auto;
+    width: 460px;
     padding: 100px;
+    border-radius: 30px;
 }
 
-.orange-back #EMAIL{
-    width: 100%;
-    width: 240px;
+.orange-back input{
+  
+    outline: none;
+    width: 250px;
     border: none;
     height: 4vh;
-    padding: 0 15px;
+    padding: 5px 15px;
     border-radius: 50px;
 }
 
-.orange-back #lbl1{
+.orange-back a#F{
+    font-weight: normal;
+    font-size: 10px;
+    margin-left: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.orange-back label{
     color: ghostwhite;
     margin-bottom: 5px;
     margin-left: 5px;
 }
+
+.orange-back p{
+    font-weight: 600;
+    margin: auto auto;
+    margin-top: 10px;
+    font-size: 12px;
+    color: white;
+}
+
+.orange-back p a{
+    text-decoration: none;
+    color: #4E95FF;
+}
+
+#btn{
+    background-color: #FFFFFF;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    width: 100px;
+    padding: 5px;
+    margin-left: 145px;
+}
+
+.divider{
+    color: white;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.divider:before,
+.divider::after{
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #FFFF;
+    margin: 0 5px;
+}
+
+
