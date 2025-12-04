@@ -57,12 +57,13 @@
                         <div class = "divider">
                             Or log in with
                         </div>
-
-                        <div class="icons">
-                            <div class="icon"></div>
-                            <div class="icon"></div>
-                            <div class="icon"></div>
-                        </div>
+                        <footer>
+                            <div class="images">
+                                <img src="" alt="">
+                                <img src="" alt="">
+                                <img src="" alt="">
+                            </div>
+                        </footer>
                     </div>
                     
                 
