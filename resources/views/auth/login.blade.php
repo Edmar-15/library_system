@@ -42,15 +42,15 @@
                     
                         <label for="EM" id="lbl1">Enter Email</label>
 
-                        <input type="email" id="EM">
+                        <input type="email" id="EM" name="email">
 
                         <label for="PASS">Enter password</label>
 
-                        <input type="password" id="PASS">
+                        <input type="password" id="PASS" name="password">
 
                         <a href="/forgot-password" id="F">Forgot password?</a>
 
-                        <button id ="btn">confirm</button>
+                        <button id ="btn" type="submit">Login</button>
 
                         <p>Don't have an account? <a href="{{ route('show.register') }}">create account</a></p>
 
