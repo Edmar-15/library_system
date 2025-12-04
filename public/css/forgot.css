@@ -107,3 +107,10 @@ body {
     border-radius: 5px;
     width: 80%;
 }
+a{
+    text-decoration: solid;
+    color:white;
+    padding :6px;
+     float:left;
+    
+}

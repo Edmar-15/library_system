@@ -42,7 +42,8 @@
                 @enderror
 
                 
-                <p class="try-way">Try another way?</p>
+                <a href="reset-password/1234" class="try-way">Try another way?</a>
+
 
                 
                 <button type="submit" class="confirm-btn">Confirm</button>
