@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('show.welcome');
 
 Route::get('/librarysystem/register', [AuthController::class, 'showRegister'])->name('show.register');
 

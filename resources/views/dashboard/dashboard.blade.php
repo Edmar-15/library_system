@@ -31,7 +31,9 @@
     <div class="user-section">
       <div class="user-info">
         <div class="user-avatar">🥺</div>
-        <div class="user-name">{{ Auth::user()->name }}</div>
+        @auth
+            <div class="user-name">{{ Auth::user()->name }}</div>
+        @endauth
       </div>
     </div>
   </header>
@@ -86,7 +88,9 @@
     <main class="main-content">
       <!-- Page Header -->
       <div class="page-header">
-        <h1 class="page-title">Welcome Back, {{ Auth::user()->name }}</h1>
+        @auth
+            <h1 class="page-title">Welcome Back, {{ Auth::user()->name }}</h1>
+        @endauth
         <p class="page-subtitle">
           Here's what's happening with your library today. Continue your reading journey or explore new
           releases.
