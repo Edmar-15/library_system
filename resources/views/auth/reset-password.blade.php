@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
 </head>
 <body>
-    <h2>Reset Password</h2>
 
-<form action="{{ route('password.update') }}" method="POST">
-    @csrf
+<div class="reset-wrapper">
+    <div class="reset-card">
 
-    <input type="hidden" name="token" value="{{ $token }}">
+        <div class="left-box"></div>
 
-    <input type="email" name="email" placeholder="Email">
-    @error('email') <p>{{ $message }}</p> @enderror
+        <div class="right-box">
+            <h2>Forgot Password?</h2>
+            <p>Enter your new password</p>
 
-    <input type="password" name="password" placeholder="New Password">
-    @error('password') <p>{{ $message }}</p> @enderror
+            <form action="{{ route('password.update') }}" method="POST">
+                @csrf
 
-    <input type="password" name="password_confirmation" placeholder="Confirm Password">
+                <input type="hidden" name="token" value="{{ $token }}">
 
-    <button type="submit">Reset Password</button>
-</form>
+                <input type="email" name="email" placeholder="Email">
+                @error('email') <p class="error">{{ $message }}</p> @enderror
+
+                <input type="password" name="password" placeholder="New Password">
+                @error('password') <p class="error">{{ $message }}</p> @enderror
+
+                <input type="password" name="password_confirmation" placeholder="Confirm Password">
+
+                <button type="submit">Reset Password</button>
+            </form>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>
