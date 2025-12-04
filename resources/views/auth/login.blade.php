@@ -40,9 +40,9 @@
                 
                     <div class="orange-back">
                     
-                        <label for="EMAIL" id="lbl1">Enter Email</label>
+                        <label for="EM" id="lbl1">Enter Email</label>
 
-                        <input type="email" id="EMAIL">
+                        <input type="email" id="EM">
 
                         <label for="PASS">Enter password</label>
 

@@ -92,6 +92,7 @@ body{
     max-width: 100px;
     padding: 5px;
     margin-left: 158px;
+    cursor: pointer;
 }
 
 .divider{
@@ -128,6 +129,7 @@ footer .images img{
     padding: 25px 30px;
     border-radius: 3px;
     transition: 0.3s ease;
+    cursor: pointer;
 }
 
 footer .images img:hover{
