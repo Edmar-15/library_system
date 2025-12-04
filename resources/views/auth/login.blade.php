@@ -35,7 +35,7 @@
             <div class="container">
 
                     <div class="white-back">
-                   
+                        
                     </div>
                 
                     <div class="orange-back">
@@ -48,11 +48,11 @@
 
                         <input type="password" id="PASS">
 
-                        <a href="#" id="F">Forgot password?</a>
+                        <a href="/forgot-password" id="F">Forgot password?</a>
 
                         <button id ="btn">confirm</button>
 
-                        <p>Don't have an account? <a href="#">create account</a></p>
+                        <p>Don't have an account? <a href="{{ route('show.register') }}">create account</a></p>
 
                         <div class = "divider">
                             Or log in with
@@ -65,7 +65,6 @@
                             </div>
                         </footer>
                     </div>
-                    
             </div>
 
 

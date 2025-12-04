@@ -95,6 +95,11 @@ body{
     cursor: pointer;
 }
 
+#btn:hover{
+    box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.2);
+    margin-bottom: 2px;
+}
+
 .divider{
     color: whitesmoke;
     display: flex;
@@ -131,5 +136,5 @@ footer .images img{
 }
 
 footer .images img:hover{
-    box-shadow: 5px 5px 5px 4px rgba(0,0,0,0.2);;
+    box-shadow: 5px 5px 5px 4px rgba(0,0,0,0.2);
 }
