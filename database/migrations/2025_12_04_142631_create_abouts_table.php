@@ -27,7 +27,7 @@ return new class extends Migration
             // Example content: "Borrowing System, Book Catalog, Inventory Management..."
 
             // Developer Info
-            $table->string('developer_name')->nullable();
+            $table->longtext('developer_name')->nullable();
             $table->string('developer_role')->nullable();
             $table->string('developer_email')->nullable();
 

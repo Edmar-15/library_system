@@ -33,4 +33,9 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showRese
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 
 Route::get('/librarysystem/profile', [ProfileController::class, 'index'])->name('show.profile');
+
 Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('show.about');
+
+Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
+
+Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
