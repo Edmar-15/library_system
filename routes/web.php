@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('show.welcome');
 
 Route::get('/librarysystem/register', [AuthController::class, 'showRegister'])->name('show.register');
 
@@ -29,3 +31,6 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
+
+Route::get('/librarysystem/profile', [ProfileController::class, 'index'])->name('show.profile');
+Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('show.about');

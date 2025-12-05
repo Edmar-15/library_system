@@ -30,9 +30,13 @@
 
     <div class="user-section">
       <div class="user-info">
-        <div class="user-avatar">🥺</div>
-        <div class="user-name">{{ Auth::user()->name }}</div>
-      </div>
+        <a href="{{ route('show.profile') }}" class="user-avatar">
+          🥺
+          @auth
+              <div class="user-name">{{ Auth::user()->name }}</div>
+          @endauth
+        </div>
+        </a>
     </div>
   </header>
 
@@ -44,6 +48,12 @@
             <a href="{{ route('show.home') }}" class="nav-link active" title="Dashboard">
               <i class="fas fa-home nav-icon"></i>
               <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('show.about') }}" class="nav-link" title="About">
+              <i class="fas fa-solid fa-eye nav-icon"></i>
+              <span class="nav-text">About</span>
             </a>
           </li>
           <li class="nav-item">
@@ -64,12 +74,6 @@
               <span class="nav-text">Bookmark</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#settings" class="nav-link" title="Settings">
-              <i class="fas fa-cog nav-icon"></i>
-              <span class="nav-text">Settings</span>
-            </a>
-          </li>
         </ul>
         <div class="sidebar-logout">
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
@@ -86,7 +90,9 @@
     <main class="main-content">
       <!-- Page Header -->
       <div class="page-header">
-        <h1 class="page-title">Welcome Back, {{ Auth::user()->name }}</h1>
+        @auth
+            <h1 class="page-title">Welcome Back, {{ Auth::user()->name }}</h1>
+        @endauth
         <p class="page-subtitle">
           Here's what's happening with your library today. Continue your reading journey or explore new
           releases.
