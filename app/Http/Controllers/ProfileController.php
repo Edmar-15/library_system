@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Profile;
 use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
-
 class ProfileController extends Controller
 {
     /**
@@ -29,7 +28,9 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
+        $user = User::find('name');
+        $email = User::where('email', $profile->email)->first();
+        return response()->JSON($user);
     }
 
     /**
@@ -37,7 +38,7 @@ class ProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request, Profile $profile)
     {
-        //
+        
     }
 
     /**

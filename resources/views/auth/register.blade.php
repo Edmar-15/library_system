@@ -44,15 +44,18 @@
                 
                     <div class="orange-back">
                         <h1>Register</h1>
+                        <label for="name" id="lbl1">Enter Name</label>
+                        <input type="text" id="name" name="name">
+
                         <label for="EM" id="lbl1">Enter Email</label>
-                        <input type="email" id="EM">
+                        <input type="email" id="EM" name="email">
 
-                        <label for="PASS">Enter password</label>
-                        <input type="password" id="PASS">
+                        <label for="password_Comfirmation">Enter password</label>
+                        <input type="password" id="PASS" name="password">
 
 
-                        <label for="re-enter">Re-Enter Password</label>
-                        <input type="password" id="re-enter">
+                        <label for="password_Comfirmation">Re-Enter Password</label>
+                        <input type="password" id="re-enter" name="password_confirmation">
 
                         <button id ="btn">confirm</button>
                     </div>
