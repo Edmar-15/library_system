@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
 </head>
 <body>
+    <header>
+        <h1>Library System</h1>
+    </header>
 
 <div class="reset-wrapper">
     <div class="reset-card">
@@ -22,8 +25,8 @@
 
                 <input type="hidden" name="token" value="{{ $token }}">
 
-                <input type="email" name="email" placeholder="Email">
-                @error('email') <p class="error">{{ $message }}</p> @enderror
+                <!-- <input type="email" name="email" placeholder="Email">
+                @error('email') <p class="error">{{ $message }}</p> @enderror -->
 
                 <input type="password" name="password" placeholder="New Password">
                 @error('password') <p class="error">{{ $message }}</p> @enderror
@@ -36,6 +39,9 @@
 
     </div>
 </div>
+<footer>
+        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
+    </footer>
 
 </body>
 </html>
