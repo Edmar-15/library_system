@@ -35,11 +35,11 @@
             <div class="form-group">
                 <button type="submit">Register</button>
             </div> --}}
-
+    
             <div class="container">
 
                     <div class="white-back">
-                        {{-- wala sadya ditong laman --}}
+                        
                     </div>
                 
                     <div class="orange-back">

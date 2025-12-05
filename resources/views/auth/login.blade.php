@@ -44,7 +44,7 @@
                     </div>
                 
                     <div class="orange-back">
-                    
+            
                         <label for="EM" id="lbl1">Enter Email</label>
 
                         <input type="email" id="EM" name="email">
@@ -73,12 +73,10 @@
             </div>
                 <footer class="dashboard-footer">
                     <div class="copyright">
-                    &copy; {{ date('Y') }} LibrarySystem.
+                        &copy; {{ date('Y') }} LibrarySystem.
                     </div>
                     </div>
                 </footer>
-
-
         </form>
 
         @if ($errors->any())

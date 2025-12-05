@@ -240,7 +240,7 @@
         nst query = document.querySelector('.search-input').value.trim();
          (query) {
           ert(`Searching for: "${query}"`);
-              ;
+         ;
   </script>
 </body>
 
