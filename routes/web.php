@@ -38,4 +38,5 @@ Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('sho
 
 Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
 
-Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
+
+Route::get('/librarysystem/api/about', [AboutController::class, 'getAboutData'])->name('api.about.data');
