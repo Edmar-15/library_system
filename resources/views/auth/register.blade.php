@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibrarySystem | Register</title>
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 </head>
 <body>
-    <header>
+    {{-- <header>
         <h1>Register</h1>
         <nav>
             <a href="/">Home</a>
         </nav>
-    </header>
+    </header> --}}
     <main>
         <form action="{{ route('register') }}" method="POST" class="form-container">
             @csrf
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="name">Username: </label>
                 <input type="name" name="name" id="name" required>
             </div>
@@ -33,6 +34,29 @@
             </div>
             <div class="form-group">
                 <button type="submit">Register</button>
+            </div> --}}
+
+            <div class="container">
+
+                    <div class="white-back">
+                        {{-- wala sadya ditong laman --}}
+                    </div>
+                
+                    <div class="orange-back">
+                        <h1>Register</h1>
+                        <label for="EM" id="lbl1">Enter Email</label>
+                        <input type="email" id="EM">
+
+                        <label for="PASS">Enter password</label>
+                        <input type="password" id="PASS">
+
+
+                        <label for="re-enter">Re-Enter Password</label>
+                        <input type="password" id="re-enter">
+
+                        <button id ="btn">confirm</button>
+                    </div>
+                    
             </div>
         </form>
 
