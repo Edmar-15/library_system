@@ -60,6 +60,10 @@ body {
     border-radius: 50px;
 }
 
+.orange-back input:focus{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .orange-back a#F{
     font-weight: normal;
     font-size: 10px;
