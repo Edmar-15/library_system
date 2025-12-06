@@ -3,6 +3,7 @@
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
+    font-weight: bold;
 }
 
 
@@ -12,7 +13,6 @@ body {
     display: flex;
     flex-direction: column;
     overflow:hidden;
-             
 }
 
 .container {
@@ -107,21 +107,21 @@ body {
 
 }
 
-.divider{
+/* .divider{
     color: whitesmoke;
     display: flex;
     align-items: center;
     text-align: center;
     margin: 5px 0;
-}
+} */
 
-.divider:before,
+/* .divider:before,
 .divider::after{
     content: "";
     flex: 1;
     border-bottom: 1px solid #FFFF;
     margin: 0 5px;
-}
+} */
 
 /* footer .images{
     width: 100%;

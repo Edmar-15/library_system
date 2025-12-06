@@ -9,7 +9,7 @@
 </head>
 <body>
    <header> 
-    <h1>Library System</h1>
+    <h1>LibrarySystem</h1>
    </header>
 
 
@@ -58,10 +58,6 @@
                         <button id ="btn" type="submit">Login</button>
 
                         <p>Don't have an account? <a href="{{ route('show.register') }}">create account</a></p>
-
-                        <div class = "divider">
-                            Or log in with
-                        </div>
                         <!-- <footer>
                             <div class="images">
                                 <img src="" alt="">
