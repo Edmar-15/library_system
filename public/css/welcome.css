@@ -1,4 +1,4 @@
-         * {
+         /* * {
             margin: 0;
             padding: 0;
             font-family: Arial, Helvetica, sans-serif;
@@ -179,4 +179,408 @@
                  width: 100%;
                  text-align: center;
              }
-         }
+         } */
+
+
+  /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #dfb87d;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background: #d98c19;
+    padding: 20px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    color: #ffffff;
+}
+
+#headerTitle {
+    margin: 0;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Main Container */
+#mainContainer {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    perspective: 2000px;
+}
+
+/* Page Container */
+.page-container {
+    display: none;
+    width: 100%;
+    max-width: 900px;
+}
+
+.page-container.active {
+    display: flex;
+    justify-content: center;
+}
+
+/* Book Styles */
+.book {
+    display: flex;
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+}
+
+.book.open .left-page {
+    transform: perspective(2000px) rotateY(0deg);
+}
+
+/* Left Page - White */
+.left-page {
+    width: 450px;
+    height: 500px;
+    background: #fff;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.8s ease-in-out;
+}
+
+.left-page .emoji {
+    font-size: 72px;
+    margin-bottom: 30px;
+    color: #d98c19;
+}
+
+.left-page .title {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.left-page .description {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: normal;
+}
+
+.left-page .form-title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+/* Right Page - Orange */
+.right-page {
+    width: 450px;
+    height: 500px;
+    background: #d98c19;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.right-page h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#registerPage .right-page h1,
+#forgotPage .right-page h1 {
+    font-size: 36px;
+    color: whitesmoke;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.right-page .subtitle {
+    font-size: 18px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-weight: normal;
+}
+
+#forgotPage .right-page .subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+}
+
+.btn-primary {
+    background: white;
+    color: #d98c19;
+    border: 3px solid white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: #f5f5f5;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 3px solid white;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-submit {
+    background-color: #FFFFFF;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-submit:hover {
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#forgotPage .btn-submit {
+    padding: 12px 30px;
+}
+
+/* Book Spine */
+.book-spine {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 500px;
+    background: linear-gradient(to right, #8B4513 0%, #654321 50%, #8B4513 100%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+}
+
+label {
+    font-weight: 500;
+    color: whitesmoke;
+    margin-bottom: 5px;
+    font-size: 14px;
+    display: block;
+}
+
+input[type="email"],
+input[type="password"] {
+    font-weight: normal;
+    outline: none;
+    width: 100%;
+    border: none;
+    height: 45px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input[type="email"].error,
+input[type="password"].error {
+    border: 2px solid #ff4444;
+}
+
+.error-message {
+    display: block;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    min-height: 16px;
+    font-weight: 600;
+}
+
+#registerPage input[type="email"],
+#registerPage input[type="password"] {
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+#forgotPage input[type="email"] {
+    height: 50px;
+    padding: 10px 45px 10px 20px;
+    margin-bottom: 5px;
+}
+
+.forgot-link {
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: whitesmoke;
+    text-decoration: none;
+    display: block;
+}
+
+.account-text {
+    font-weight: 600;
+    text-align: center;
+    font-size: 12px;
+    color: whitesmoke;
+    margin-top: 15px;
+}
+
+.create-link {
+    text-decoration: none;
+    color: #4E95FF;
+}
+
+/* Divider */
+.divider {
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0 0 0;
+    font-size: 12px;
+}
+
+.divider-line {
+    flex: 1;
+    border-bottom: 1px solid #FFFF;
+    margin: 0 10px;
+}
+
+/* Input Wrapper (for forgot password) */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+}
+
+/* Forgot Actions */
+.forgot-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.another-way-link {
+    font-size: 14px;
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+/* Success Message */
+.success-message {
+    background: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Animation Keyframes */
+@keyframes openBook {
+    0% {
+        transform: perspective(2000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(2000px) rotateY(-180deg);
+    }
+}
+
+@keyframes closeBook {
+    0% {
+        transform: perspective(2000px) rotateY(-180deg);
+    }
+    100% {
+        transform: perspective(2000px) rotateY(0deg);
+    }
+}
+
+.book-opening .right-page {
+    animation: openBook 0.8s ease-in-out forwards;
+    transform-origin: left center;
+}

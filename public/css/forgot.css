@@ -140,3 +140,7 @@ footer {
              font-size: 14px;
              margin-top: auto;
          }
+.open .try-way {
+  transform: rotateY(-140deg);
+}
+
