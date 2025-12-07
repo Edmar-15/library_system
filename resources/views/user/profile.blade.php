@@ -3,81 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibrarySystem | Profile</title>
+    <title>Profile Page</title>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Profile Form</h2>
-        <form action="#" method="POST" enctype="multipart/form-data">
-            
-            <!-- Profile Picture -->
-            <div class="form-group">
-                <label for="profile-picture">Profile Picture</label>
-                <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
-                <img id="image-preview" src="#" alt="Profile Picture Preview" style="display: none;">
-            </div>
-            
-            <!-- Name -->
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            
-            <!-- Email -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" readonly>
-            </div>
-            
-            <!-- Address -->
-            <div class="form-group">
-                <label for="address">Address</label>
-                <textarea id="address" name="address" rows="4" required></textarea>
-            </div>
-            
-            <!-- Phone Number -->
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="XXX-XXX-XXXX">
-            </div>
-            
-            <!-- Submit Button -->
-            <div class="form-group">
-                <button type="submit">Save Profile</button>
-            </div>
-        </form>
+    <h1>Profile Information</h1>
 
-        <a href="{{ route('show.home') }}">Back</a>
-    </div>
+    <h2>Edit Profile</h2>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        fetchProfile();
-    });
-    function fetchProfile() {
-        fetch('/api/users') // Make sure this API returns user + profile data
-            .then(res => res.json())
-            .then(data => {
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                const addressInput = document.getElementById('address');
-                const phoneInput = document.getElementById('phone');
-                const imgPreview = document.getElementById('image-preview');
+    <form id="profileForm" action="/librarysystem/profile/{{ auth()->user()->profile->id }}" method="POST" enctype="multipart/form-data">
 
-                // Fill form fields
-                nameInput.value = data.name || '';
-                emailInput.value = data.email || '';
-                addressInput.value = data.profile?.address || 'Address not found';
-                phoneInput.value = data.profile?.phone || 'Phone not found';
+        @csrf
+        @method('PUT')
 
-                // Display profile picture
-                if (data.profile?.profile_picture) {
-                    imgPreview.src = `/storage/${data.profile.profile_picture}`;
-                    imgPreview.style.display = 'block';
-                }
-            })
-            .catch(err => console.error('Error fetching profile:', err));
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture"><br><br>
+        <div id="profile_picture_container"></div>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" readonly><br><br>
+
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio"></textarea><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone"><br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address"><br><br>
+
+
+        <button type="submit">Update Profile</button>
+    </form>
+
+<script>
+async function loadProfile() {
+    try {
+        const response = await fetch('/librarysystem/profile/api', {
+            method: 'GET',
+            credentials: 'same-origin', 
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch profile');
+
+        const profile = await response.json();
+
+        document.getElementById('name').value = profile.name;
+        document.getElementById('email').value = profile.email;
+        document.getElementById('bio').value = profile.bio;
+        document.getElementById('phone').value = profile.phone;
+        document.getElementById('address').value = profile.address;
+
+        
+        if (profile.profile_picture) {
+            const imgTag = document.createElement('img');
+            imgTag.src = '/storage/' + profile.profile_picture;
+            imgTag.width = 150;
+            document.getElementById('profile_picture_container').appendChild(imgTag);
+        }
+
+    } catch (err) {
+        console.error(err);
     }
-    </script>
+}
+
+
+document.addEventListener('DOMContentLoaded', loadProfile);
+</script>
+
 </body>
 </html>

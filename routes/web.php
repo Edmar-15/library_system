@@ -34,3 +34,5 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']
 
 Route::get('/librarysystem/profile', [ProfileController::class, 'index'])->name('show.profile');
 Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('show.about');
+
+Route::middleware('auth')->get('/librarysystem/profile/api', [ProfileController::class, 'getProfileApi']);

@@ -5,4 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::apiResource('users', ProfileController::class);
+Route::middleware('auth')->get('/librarysystem/profile/api', [ProfileController::class, 'getProfileApi']);
+
+
+

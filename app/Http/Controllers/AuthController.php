@@ -34,7 +34,7 @@ class AuthController extends Controller
 
     // Return the profile view directly
     return view('profile', ['user' => $user]);   
- }
+ }  
         // Get user profile
    
     public function login (Request $request) {
