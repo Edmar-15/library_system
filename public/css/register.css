@@ -7,16 +7,20 @@
 }
 
 body{
-    background-color: whitesmoke;
+    background: #dfb87d;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
 }
 
 .container{
-   position: relative;
-   margin: auto 10px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
 }
 
 
@@ -51,10 +55,14 @@ body{
     font-weight: normal;
     outline: none;
     max-width: 350px;
-    border: none;
+    border: 1px solid white;
     height: 4vh;
     padding: 5px 15px;
     border-radius: 50px;
+}
+
+.orange-back input:focus{
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .orange-back label{
@@ -74,24 +82,42 @@ body{
     padding: 5px;
     margin-left: 158px;
     cursor: pointer;
+    transition: 0.3s ease;
 }
 
 #btn:hover{
-    box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.2);
-    margin-bottom: 2px;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-h1{
+#Title{
     position: relative;
-    top: -20px;
+    top: -5px;
     display: flex;
     justify-content: center;
     color: whitesmoke;
     margin-bottom: 20px;
 }
 
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
 
-
+header {
+    background: #d98c19;
+    padding: 20px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    color: #ffffff;
+         }
+.dashboard-footer {
+    color: white;
+    padding: 25px 40px;
+    margin-top: 72px;
+    text-align: center;
+    font-size: 14px;
+}
 
 
 

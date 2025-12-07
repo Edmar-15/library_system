@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
+   <header> 
+    <h1>LibrarySystem</h1>
+   </header>
+
+
     {{-- <header>
         <h1>Login</h1>
         <nav>
@@ -39,7 +44,7 @@
                     </div>
                 
                     <div class="orange-back">
-                    
+            
                         <label for="EM" id="lbl1">Enter Email</label>
 
                         <input type="email" id="EM" name="email">
@@ -53,21 +58,21 @@
                         <button id ="btn" type="submit">Login</button>
 
                         <p>Don't have an account? <a href="{{ route('show.register') }}">create account</a></p>
-
-                        <div class = "divider">
-                            Or log in with
-                        </div>
-                        <footer>
+                        <!-- <footer>
                             <div class="images">
                                 <img src="" alt="">
                                 <img src="" alt="">
                                 <img src="" alt="">
                             </div>
-                        </footer>
+                        </footer> -->
                     </div>
             </div>
-
-
+                <footer class="dashboard-footer">
+                    <div class="copyright">
+                        &copy; {{ date('Y') }} LibrarySystem.
+                    </div>
+                    </div>
+                </footer>
         </form>
 
         @if ($errors->any())
@@ -78,5 +83,6 @@
             </ul>
         @endif
     </main>
+
 </body>
 </html>
