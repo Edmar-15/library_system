@@ -10,7 +10,7 @@
 
     <h2>Edit Profile</h2>
 
-    <form id="profileForm" action="/librarysystem/profile/{{ auth()->user()->profile->id }}" method="POST" enctype="multipart/form-data">
+    <form id="profileForm" action="{{ route('profile.update', $user->profile->id) }}" method="POST" enctype="multipart/form-data">
 
         @csrf
         @method('PUT')

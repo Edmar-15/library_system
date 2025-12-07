@@ -20,21 +20,21 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
-    $validated = $request->validate([
+        $validated = $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|string|min:8|confirmed'
-    ]);
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8|confirmed'
+        ]);
 
-    $validated['password'] = Hash::make($validated['password']);
+        $validated['password'] = Hash::make($validated['password']);
 
-    $user = User::create($validated);
+        $user = User::create($validated);
 
-    Auth::login($user); // log in the user
+        Auth::login($user); // log in the user
 
-    // Return the profile view directly
-    return view('profile', ['user' => $user]);   
- }  
+        // Return the profile view directly
+        return redirect()->route('show.home');      
+    }  
         // Get user profile
    
     public function login (Request $request) {

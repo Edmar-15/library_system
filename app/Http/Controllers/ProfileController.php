@@ -58,7 +58,6 @@ class ProfileController extends Controller
     public function store(StoreProfileRequest $request)
     {
          $user = Auth::user();
-
         // Create a new profile for the user
         $profile = new Profile();
         $profile->user_id = $user->id;
