@@ -84,6 +84,5 @@
         @endif
     </main>
 
-    
 </body>
 </html>
