@@ -20,21 +20,23 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|confirmed'
-        ]);
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:8|confirmed'
+    ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+    $validated['password'] = Hash::make($validated['password']);
 
-        $user = User::create($validated);
+    $user = User::create($validated);
 
-        Auth::login($user);
+    Auth::login($user); // log in the user
 
-        return redirect()->route('show.home');
-    }
-
+    // Return the profile view directly
+    return view('profile', ['user' => $user]);   
+ }  
+        // Get user profile
+   
     public function login (Request $request) {
         $validated = $request->validate([
             'email' => 'required|email',
@@ -50,7 +52,7 @@ class AuthController extends Controller
             'credentials' => 'Sorry, incorrect credentials',
         ]);
     }
-
+    
     public function logout(Request $request) {
         Auth::logout();
 
