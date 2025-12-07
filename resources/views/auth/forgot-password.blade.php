@@ -8,7 +8,9 @@
 </head>
 <body>
 <!--tinanggal ko yung h2 rito-->
-
+<header>
+    <h1>Library System</h1>
+</header>
 
 <!--simula bago-->
 <div class="container"> 
@@ -18,7 +20,7 @@
         <div class="left-panel"></div>
 
         <!-- Orange box -->
-        <div class="forgot-card">
+        <div class="forgot-card" id="card">
             @if(session('status'))
                 <p><i>{{ session('status') }}</i></p>
             @endif
@@ -53,6 +55,10 @@
 
     </div> <!-- End card wrapper -->
 </div>
+
+ <footer>
+        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
+    </footer>
 <!--end-->
 
 </body>

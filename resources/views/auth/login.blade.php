@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
+   <header> 
+    <h1>Library System</h1>
+   </header>
+
+
     {{-- <header>
         <h1>Login</h1>
         <nav>
@@ -57,15 +62,18 @@
                         <div class = "divider">
                             Or log in with
                         </div>
-                        <footer>
+                        <!-- <footer>
                             <div class="images">
                                 <img src="" alt="">
                                 <img src="" alt="">
                                 <img src="" alt="">
                             </div>
-                        </footer>
+                        </footer> -->
                     </div>
             </div>
+            <footer>
+        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
+    </footer>
 
 
         </form>
@@ -78,5 +86,7 @@
             </ul>
         @endif
     </main>
+
+    
 </body>
 </html>
