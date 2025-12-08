@@ -43,6 +43,8 @@
         <button type="submit">Update Profile</button>
     </form>
 
+    <a href="{{ route('show.home') }}">Back to Dashboard</a>
+
     <script>
     async function loadProfile() {
         try {

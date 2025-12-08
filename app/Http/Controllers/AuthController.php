@@ -33,7 +33,7 @@ class AuthController extends Controller
         Auth::login($user); // log in the user
 
         // Return the profile view directly
-        return view('profile', ['user' => $user]);   
+        return redirect()->route('show.home');  
     }  
         // Get user profile
    
