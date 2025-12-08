@@ -11,7 +11,7 @@ class StoreProfileRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,11 @@ class StoreProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+            return [
+        'profile_picture' => 'nullable|image|max:2048',
+        'bio' => 'nullable|string|max:500',
+        'phone' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:255',
+    ];
     }
 }

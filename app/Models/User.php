@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        
     ];
     
     /**
@@ -49,10 +50,9 @@ class User extends Authenticatable
         ];
     }
 
-     public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
-
+  public function profile()
+{
+    return $this->hasOne(Profile::class);
+}
 }
 
