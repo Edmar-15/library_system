@@ -20,6 +20,10 @@
         </nav>
     </header> --}}
     <main>
+
+
+
+                <div class="right-page">
         <form action="{{ route('login') }}" method="POST" class="form-container">
             @csrf
             {{-- <div class="form-group">
