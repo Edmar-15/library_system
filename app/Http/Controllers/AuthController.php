@@ -21,7 +21,7 @@ class AuthController extends Controller
 
     public function register(Request $request) {
         $validated = $request->validate([
-        'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|confirmed'
         ]);
@@ -33,7 +33,7 @@ class AuthController extends Controller
         Auth::login($user); // log in the user
 
         // Return the profile view directly
-        return redirect()->route('show.home');      
+        return view('profile', ['user' => $user]);   
     }  
         // Get user profile
    
@@ -47,7 +47,6 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->route('show.home');
         }
-
         throw ValidationException::withMessages([
             'credentials' => 'Sorry, incorrect credentials',
         ]);
