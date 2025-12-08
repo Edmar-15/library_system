@@ -6,18 +6,14 @@ use App\Models\About;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-    /**
-     * Display the about page (public view)
-     */
     public function index()
     {
-        // Get the first (or only) about record
         $about = About::first();
-        
-        // If no record exists, create a default one
+
         if (!$about) {
             $about = About::create([
                 'title' => 'About the Library System',
@@ -33,97 +29,100 @@ class AboutController extends Controller
                 'contact_phone' => null,
             ]);
         }
-        
+
         return view('about.about', compact('about'));
     }
 
-    /**
-     * Show the form for editing the about page (admin)
-     */
+    public function getAboutData()
+    {
+        $about = About::first();
+
+        if (!$about) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No about data found',
+                'data' => null
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $about
+        ]);
+    }
+
     public function edit()
     {
         $about = About::first();
-        
+
         if (!$about) {
             $about = About::create([
                 'title' => 'About the Library System',
                 'description' => 'Welcome to our library management system.',
             ]);
         }
-        
+
         return view('about.edit', compact('about'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAboutRequest $request)
-    {
-        $data = $request->validated();
-        
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/about', 'public');
-        }
-        
-        $about = About::create($data);
-        
-        return redirect()->route('show.about')
-            ->with('success', 'About page created successfully.');
-    }
+    public function updateJson(Request $request, $id)
+{
+    $about = About::findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(About $about)
-    {
-        return view('about.show', compact('about'));
-    }
+    // Update fields safely
+    $about->title = $request->input('title', $about->title);
+    $about->description = $request->input('description', $about->description);
+    $about->mission = $request->input('mission', $about->mission);
+    $about->vision = $request->input('vision', $about->vision);
+    $about->features = $request->input('features', $about->features);
+    $about->contact_email = $request->input('contact_email', $about->contact_email);
+    $about->contact_phone = $request->input('contact_phone', $about->contact_phone);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAboutRequest $request)
-    {
-        // Get the first about record
-        $about = About::first();
-        
-        if (!$about) {
-            return redirect()->route('show.about')
-                ->with('error', 'About page not found.');
-        }
-        
-        $data = $request->validated();
-        
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($about->image && Storage::disk('public')->exists($about->image)) {
-                Storage::disk('public')->delete($about->image);
-            }
-            
-            $data['image'] = $request->file('image')->store('uploads/about', 'public');
-        }
-        
-        $about->update($data);
-        
-        return redirect()->route('show.about')
-            ->with('success', 'About page updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(About $about)
-    {
-        // Delete image if exists
+    // Handle image upload
+    if ($request->hasFile('image')) {
         if ($about->image && Storage::disk('public')->exists($about->image)) {
             Storage::disk('public')->delete($about->image);
         }
-        
-        $about->delete();
-        
-        return redirect()->route('show.about')
-            ->with('success', 'About page deleted successfully.');
+        $about->image = $request->file('image')->store('uploads/about', 'public');
+    }
+
+    try {
+        $about->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'About page updated successfully!',
+            'data' => $about
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Update failed: ' . $e->getMessage()
+        ], 500);
+    }
+}
+
+
+    public function update(UpdateAboutRequest $request, $id = null)
+    {
+        $about = $id ? About::find($id) : About::first();
+
+        if (!$about) {
+            return redirect()->route('about.edit')
+                ->with('error', 'About page not found.');
+        }
+
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($about->image && Storage::disk('public')->exists($about->image)) {
+                Storage::disk('public')->delete($about->image);
+            }
+            $data['image'] = $request->file('image')->store('uploads/about', 'public');
+        }
+
+        $about->update($data);
+
+        return redirect()->route('about.edit')
+            ->with('success', 'About page updated successfully!');
     }
 }

@@ -16,32 +16,7 @@
     <main>
         <h1>Edit About Page</h1>
 
-        @if(session('success'))
-        <div class="alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
-
-        @if(session('error'))
-        <div class="alert-error">
-            {{ session('error') }}
-        </div>
-        @endif
-
-        @if($errors->any())
-        <div class="alert-error">
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-
-        <form action="{{ route('about.update') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-
+        <form id="aboutForm" enctype="multipart/form-data">
             <!-- Title -->
             <div class="form-group">
                 <label for="title">Page Title:</label>
@@ -54,19 +29,19 @@
                 <textarea id="description" name="description" rows="4">{{ old('description', $about->description) }}</textarea>
             </div>
 
-            <!-- Mission (Editable by Librarian) -->
+            <!-- Mission -->
             <div class="form-group">
                 <label for="mission">Mission:</label>
                 <textarea id="mission" name="mission" rows="5">{{ old('mission', $about->mission) }}</textarea>
             </div>
 
-            <!-- Vision (Editable by Librarian) -->
+            <!-- Vision -->
             <div class="form-group">
                 <label for="vision">Vision:</label>
                 <textarea id="vision" name="vision" rows="5">{{ old('vision', $about->vision) }}</textarea>
             </div>
 
-            <!-- System Features -->
+            <!-- Features -->
             <div class="form-group">
                 <label for="features">System Features:</label>
                 <textarea id="features" name="features" rows="6">{{ old('features', $about->features) }}</textarea>
@@ -98,7 +73,7 @@
                 <input type="text" id="contact_phone" name="contact_phone" value="{{ old('contact_phone', $about->contact_phone) }}">
             </div>
 
-            <!-- Submit Button -->
+            <!-- Submit -->
             <div class="form-group">
                 <button type="submit">Update About Page</button>
                 <a href="{{ route('show.about') }}">Cancel</a>
@@ -122,5 +97,45 @@
         </div>
         @endif
     </main>
+
+<script>
+document.getElementById('aboutForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    formData.append('_method', 'PATCH'); // simulate PATCH request
+
+    const id = "{{ $about->id }}";
+
+    try {
+        const response = await fetch("{{ url('api/about') }}/" + id, {
+            method: "POST", // use POST to send FormData
+            headers: {
+                "Accept": "application/json"
+            },
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("About Page updated successfully!");
+            window.location.href = "{{ route('show.about') }}";
+        } else {
+            console.error(result);
+            let msg = result.message || "Update failed. Check console for details.";
+            if (result.errors) {
+                msg += "\n" + JSON.stringify(result.errors);
+            }
+            alert(msg);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong.");
+    }
+});
+</script>
+
 </body>
 </html>
