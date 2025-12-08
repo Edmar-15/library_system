@@ -30,11 +30,13 @@ class AuthController extends Controller
 
         $user = User::create($validated);
 
-        Auth::login($user);
+        Auth::login($user); // log in the user
 
-        return redirect()->route('show.home');
-    }
-
+        // Return the profile view directly
+        return redirect()->route('show.home');  
+    }  
+        // Get user profile
+   
     public function login (Request $request) {
         $validated = $request->validate([
             'email' => 'required|email',
@@ -45,12 +47,11 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->route('show.home');
         }
-
         throw ValidationException::withMessages([
             'credentials' => 'Sorry, incorrect credentials',
         ]);
     }
-
+    
     public function logout(Request $request) {
         Auth::logout();
 

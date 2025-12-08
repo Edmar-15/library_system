@@ -9,7 +9,7 @@
 </head>
 <body>
    <header> 
-    <h1>Library System</h1>
+    <h1>LibrarySystem</h1>
    </header>
 
 
@@ -48,7 +48,7 @@
                     </div>
                 
                     <div class="orange-back">
-                    
+            
                         <label for="EM" id="lbl1">Enter Email</label>
 
                         <input type="email" id="EM" name="email">
@@ -62,10 +62,6 @@
                         <button id ="btn" type="submit">Login</button>
 
                         <p>Don't have an account? <a href="{{ route('show.register') }}">create account</a></p>
-
-                        <div class = "divider">
-                            Or log in with
-                        </div>
                         <!-- <footer>
                             <div class="images">
                                 <img src="" alt="">
@@ -75,11 +71,12 @@
                         </footer> -->
                     </div>
             </div>
-            <footer>
-        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
-    </footer>
-
-
+                <footer class="dashboard-footer">
+                    <div class="copyright">
+                        &copy; {{ date('Y') }} LibrarySystem.
+                    </div>
+                    </div>
+                </footer>
         </form>
 
         @if ($errors->any())
@@ -91,6 +88,5 @@
         @endif
     </main>
 
-    
 </body>
 </html>

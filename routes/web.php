@@ -34,3 +34,18 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']
 
 Route::get('/librarysystem/profile', [ProfileController::class, 'index'])->name('show.profile');
 Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('show.about');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/librarysystem/profile', [ProfileController::class, 'index'])->name('show.profile');
+    Route::put('/librarysystem/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
+
+
+Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('show.about');
+
+Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
+
+Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
+Route::get('/librarysystem/api/about', [AboutController::class, 'getAboutData'])->name('api.about.data');
