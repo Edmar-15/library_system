@@ -6,22 +6,6 @@
 }
 
 body {
-             background: #dfb87d;
-             min-height: 100vh;
-             display: flex;
-             flex-direction: column;
-             overflow:hidden;
-             
-         }
-
-         .container {
-             flex: 1;
-             width: 100%;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             padding: 40px 20px;
-         }
     position: relative;
     background: #dfb87d;
     min-height: 100vh;
@@ -251,4 +235,3 @@ header {
     text-align: center;
     font-size: 14px;
 }
-
