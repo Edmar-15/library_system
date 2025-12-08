@@ -67,6 +67,7 @@
                         <div class="form-group">
                             <button id = "btn" type="submit">Register</button>
                         </div> 
+                        
                         {{-- <h1>Register</h1>
                         <label for="EM" id="lbl1">Enter Email</label>
                         <input type="email" id="EM">
@@ -88,6 +89,7 @@
                     </div>
                 </footer>
         </form>
+        <script src=" {{ asset('js/register.js') }}"></script>
 
         @if ($errors->any())
             <ul style="padding: 8px 16px; background-color: ffe2e2;">
