@@ -41,10 +41,11 @@
             </div>  --}}
     
             <div class="container">
-
-                    <div class="white-back">
-                        
-                    </div>
+<div class="white-back">
+    <div class="emoji">📚</div>
+    <div class="title">Welcome to Our Digital Library</div>
+    <div class="description">Access thousands of books, journals, and resources from anywhere, anytime. Join our community of readers and learners today.</div>
+</div>
                 
                     <div class="orange-back">
                         <h1 id="Title">Register</h1>
