@@ -110,6 +110,9 @@ class ProfileController extends Controller
                     $profile = Profile::create(['user_id' => $user->id]);
                 }
 
+                $user->name = $request->name;
+                $user->save();
+
                 if ($request->hasFile('profile_picture')) {
                     $file = $request->file('profile_picture');
                     $path = $file->store('profile_pictures', 'public');
