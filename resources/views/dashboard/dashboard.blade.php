@@ -31,9 +31,9 @@
     <div class="user-section">
       <div class="user-info">
         <a href="{{ route('show.profile') }}" class="user-avatar">
-          🥺
+          <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="profile-pic" srcset="">
           @auth
-              <div class="user-name">{{ Auth::user()->name }}</div>
+              <i class="user-name">{{ Auth::user()->name }}</i>
           @endauth
         </div>
         </a>
@@ -223,30 +223,32 @@
   </footer>
 
   <script>
-      cument.querySelector('.sidebar-logout-btn').addEventListener('click', function (e) { }
-        document.querySelectorAll('.nav-link').forEach(link => {
-        nk.addEventListener('click', function (e) {
-          preventDefault();
-          cument.querySelectorAll('.nav-link').forEach(item => {
-            em.classList.remove('active');
-          ;
-          is.classList.add('active');
-        ;
-      ;
+    // Logout button
+    document.querySelector('.sidebar-logout-btn')?.addEventListener('click', function (e) {
+      // Optional custom logic
+    });
 
-       Search functionality
-      cument.querySelector('.search-input').addEventListener('keypress', function (e) {
-         (e.key === 'Enter') {
-          nst query = this.value.trim();
-           (query) {
-            ert(`Searching for: "${query}"`);
-                        ;
+    // Sidebar active links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
 
-      cument.querySelector('.search-btn').addEventListener('click', function () {
-        nst query = document.querySelector('.search-input').value.trim();
-         (query) {
-          ert(`Searching for: "${query}"`);
-         ;
+    // Search input (enter key)
+    document.querySelector('.search-input')?.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        const query = this.value.trim();
+        if (query) alert(`Searching for: "${query}"`);
+      }
+    });
+
+    // Search button
+    document.querySelector('.search-btn')?.addEventListener('click', function () {
+      const query = document.querySelector('.search-input').value.trim();
+      if (query) alert(`Searching for: "${query}"`);
+    });
   </script>
 </body>
 
