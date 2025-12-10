@@ -57,7 +57,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#books" class="nav-link" title="Books">
+            <a href="{{ route('books.index') }}" class="nav-link" title="Books">
+
               <i class="fas fa-book nav-icon"></i>
               <span class="nav-text">Books</span>
             </a>

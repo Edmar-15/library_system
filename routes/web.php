@@ -7,6 +7,8 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\BooklistController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,4 +50,17 @@ Route::get('/librarysystem/about', [AboutController::class, 'index'])->name('sho
 Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
 
 Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
+
 Route::get('/librarysystem/api/about', [AboutController::class, 'getAboutData'])->name('api.about.data');
+
+
+
+Route::resource('books', BookController::class);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/booklists', [BooklistController::class, 'index'])->name('booklists.index');
+    Route::post('/booklists', [BooklistController::class, 'store'])->name('booklists.store'); // Changed from /booklists/add
+    Route::put('/booklists/{booklist}', [BooklistController::class, 'update'])->name('booklists.update');
+    Route::delete('/booklists/{booklist}', [BooklistController::class, 'destroy'])->name('booklists.destroy');
+    Route::get('/booklists/stats', [BooklistController::class, 'stats'])->name('booklists.stats');
+});
