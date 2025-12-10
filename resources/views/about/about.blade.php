@@ -1,4 +1,6 @@
-
+<head>
+     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+</head>
 <body>
     <header class="about-header">
         <nav class="about-nav">
