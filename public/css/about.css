@@ -1,31 +1,41 @@
-/* ===============================
-   GLOBAL
-================================== */
+:root {
+    --primary: #E07B16;
+    --primary-light: #F39C3D;
+    --primary-dark: #B35E0F;
+    --secondary: #8B5E34;
+    --secondary-dark: #5A3E24;
+    --light-bg: #FFF3E0;
+    --white: #FFFFFF;
+    --text-dark: #3A2F28;
+    --text-light: #7B6754;
+    --text-white: #FFFFFF;
+    --border-color: #E6D4B8;
+    --shadow: 0 4px 12px rgba(139, 94, 52, 0.16);
+    --shadow-hover: 0 8px 24px rgba(139, 94, 52, 0.24);
+}
+
+/* GLOBAL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Segoe UI", sans-serif;
 }
-html, body{
-    height: 100%;
-}
+html, body { height: 100%; }
 
 body {
-    background: #e4be89; /* beige background like screenshot */
-    color: #333;
+    background: var(--light-bg);
+    color: var(--text-dark);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ===============================
-   HEADER / NAVIGATION
-================================== */
+/* HEADER */
 .about-header {
-    background: #d98c19; /* warm orange */
-    padding: 20px 40px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: var(--primary);
+    padding: 30px 40px;
+    box-shadow: var(--shadow);
 }
 
 .about-nav {
@@ -35,7 +45,7 @@ body {
 }
 
 .nav-link {
-    color: white;
+    color: var(--white);
     font-weight: bold;
     text-decoration: none;
     margin-right: 20px;
@@ -43,7 +53,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #fff7dd;
+    color: var(--primary-light);
 }
 
 .edit-btn {
@@ -52,9 +62,7 @@ body {
     border-radius: 6px;
 }
 
-/* ===============================
-   MAIN CONTAINER
-================================== */
+/* MAIN */
 .about-main {
     width: 100%;
     max-width: 1100px;
@@ -63,9 +71,7 @@ body {
     flex: 1;
 }
 
-/* ===============================
-   LOADING STATE
-================================== */
+/* LOADING */
 .loading {
     text-align: center;
     margin-top: 80px;
@@ -74,7 +80,7 @@ body {
 .spinner {
     width: 40px;
     height: 40px;
-    border: 5px solid #d98c19;
+    border: 5px solid var(--primary);
     border-top-color: transparent;
     border-radius: 50%;
     margin: 0 auto 15px;
@@ -85,9 +91,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* ===============================
-   TITLE SECTION
-================================== */
+/* TITLE */
 .about-title-section {
     text-align: center;
     margin-bottom: 30px;
@@ -95,23 +99,19 @@ body {
 
 .about-title {
     font-size: 45px;
-    color: #b46900;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    color: var(--primary-dark);
+    text-shadow: var(--shadow);
 }
 
-/* ===============================
-   SECTION HEADINGS
-================================== */
+/* HEADINGS */
 .section-heading {
     font-size: 28px;
     margin-bottom: 12px;
-    color: #c5770c;
+    color: var(--primary-light);
     text-align: center;
 }
 
-/* ===============================
-   CONTENT SECTIONS
-================================== */
+/* CONTENT BOXES */
 .about-description-section,
 .mission-box,
 .vision-box,
@@ -119,19 +119,16 @@ body {
 .logo-section,
 .team-section,
 .contact-section {
-    background: #fff;
+    background: var(--white);
     padding: 25px;
     border-radius: 18px;
     margin-bottom: 25px;
-    border: 3px solid #d98c19; /* soft warm border */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border: 2px solid var(--primary);
+    box-shadow: var(--shadow);
     text-align: justify;
 }
 
-
-/* ===============================
-   MISSION & VISION GRID
-================================== */
+/* MISSION / VISION GRID */
 .mission-vision-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -139,35 +136,28 @@ body {
     margin: 25px 0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .mission-vision-section {
         grid-template-columns: 1fr;
     }
 }
 
-/* ===============================
-   FEATURES
-================================== */
+/* FEATURES */
 .features-text {
     line-height: 1.7;
-    color: #444;
+    color: var(--text-light);
 }
 
-/* ===============================
-   LOGO IMAGE
-================================== */
+/* LOGO */
 .about-logo {
     display: block;
     max-width: 200px;
     margin: 0 auto;
     border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-hover);
 }
 
-/* ===============================
-   TEAM SECTION
-================================== */
+/* TEAM */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -176,28 +166,27 @@ body {
 }
 
 .team-member-card {
-    background: #fff7ea;
+    background: var(--light-bg);
     padding: 18px;
-    border-left: 6px solid #d98c19;
+    border-left: 6px solid var(--primary);
     border-radius: 14px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
     transition: 0.2s;
 }
 
 .team-member-card:hover {
     transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
-/* ===============================
-   CONTACT SECTION
-================================== */
+/* CONTACT */
 .contact-info p {
     margin-bottom: 8px;
     font-size: 16px;
 }
 
 .email-link {
-    color: #c5770c;
+    color: var(--primary-dark);
     font-weight: bold;
     text-decoration: none;
 }
@@ -206,14 +195,12 @@ body {
     text-decoration: underline;
 }
 
-/* ===============================
-   FOOTER
-================================== */
+/* FOOTER */
 .about-footer {
     text-align: center;
     padding: 20px;
     margin-top: 70px;
-    color: #fff;
-    background: #d98c19;
+    color: var(--white);
+    background: var(--primary);
     font-size: 14px;
 }

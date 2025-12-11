@@ -1,3 +1,19 @@
+:root {
+    --primary: #E07B16;
+    --primary-light: #F39C3D;
+    --primary-dark: #B35E0F;
+    --secondary: #8B5E34;
+    --secondary-dark: #5A3E24;
+    --light-bg: #FFF3E0;
+    --white: #FFFFFF;
+    --text-dark: #3A2F28;
+    --text-light: #7B6754;
+    --text-white: #FFFFFF;
+    --border-color: #E6D4B8;
+    --shadow: 0 4px 12px rgba(139, 94, 52, 0.16);
+    --shadow-hover: 0 8px 24px rgba(139, 94, 52, 0.24);
+}
+
 /* ===============================
    GLOBAL
 ================================== */
@@ -9,15 +25,14 @@
 }
 
 body {
-    background: #e4be89;
-    color: #333;
+    background: var(--light-bg);
+    color: var(--text-dark);
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
 }
 
-/* MAIN CONTAINER - wider, cleaner */
+/* MAIN CONTAINER */
 main {
     flex: 1;
     width: 100%;
@@ -30,9 +45,9 @@ main {
    HEADER / NAV
 ================================== */
 header {
-    background: #d98c19;
-    padding: 15px 25px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    background: var(--primary);
+    padding: 24px 25px;
+    box-shadow: var(--shadow);
 }
 
 nav {
@@ -41,7 +56,7 @@ nav {
 }
 
 nav a {
-    color: white;
+    color: var(--white);
     font-weight: bold;
     text-decoration: none;
     padding: 6px 12px;
@@ -55,7 +70,7 @@ nav a:hover {
 }
 
 /* ===============================
-   PAGE HEADER (title left, desc right)
+   PAGE HEADER
 ================================== */
 .page-header {
     display: flex;
@@ -67,31 +82,31 @@ nav a:hover {
 
 .page-header h1 {
     font-size: 38px;
-    color: #b46900;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    color: var(--primary-dark);
+    text-shadow: var(--shadow);
     margin-bottom: 5px;
 }
 
 .page-header p {
     max-width: 400px;
     font-size: 15px;
-    color: #744b00;
+    color: var(--text-light);
 }
 
 /* ===============================
-   FORM WRAPPER (modern card)
+   FORM WRAPPER
 ================================== */
 .form-wrapper {
-    background: #fff;
+    background: var(--white);
     padding: 30px;
     border-radius: 18px;
-    border: 3px solid #d98c19;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 3px solid var(--primary);
+    box-shadow: var(--shadow);
     margin-bottom: 40px;
 }
 
 /* ===============================
-   TWO-COLUMN GRID (desktop)
+   GRID
 ================================== */
 .form-grid {
     display: grid;
@@ -107,7 +122,7 @@ nav a:hover {
 /* Labels */
 .form-group label {
     font-weight: bold;
-    color: #c5770c;
+    color: var(--primary-light);
     margin-bottom: 6px;
 }
 
@@ -119,10 +134,18 @@ input[type="file"] {
     width: 100%;
     padding: 10px 12px;
     border-radius: 10px;
-    border: 2px solid #d98c19;
-    outline: none;
+    border: 2px solid var(--primary);
+    outline: none; 
     font-size: 15px;
-    background: #fffdf8;
+    background-color: var(--white);
+}
+
+.form-group textarea:focus{
+    background-color: rgba(250,250,250,0.5);
+}
+
+.form-group input:focus{
+    background-color: rgba(250,250,250,0.5);
 }
 
 textarea {
@@ -134,15 +157,15 @@ textarea {
 small {
     margin-top: 5px;
     font-size: 13px;
-    color: #744b00;
+    color: var(--text-light);
 }
 
 /* ===============================
    BUTTONS
 ================================== */
 button[type="submit"] {
-    background: #d98c19;
-    color: white;
+    background: var(--primary);
+    color: var(--white);
     border: none;
     padding: 12px 25px;
     border-radius: 10px;
@@ -155,14 +178,14 @@ button[type="submit"] {
 }
 
 button:hover {
-    background: #b97203;
+    background: var(--primary-dark);
 }
 
 .form-group a {
     margin-left: 10px;
     font-weight: bold;
     text-decoration: none;
-    color: #744b00;
+    color: var(--text-light);
 }
 
 .form-group a:hover {
@@ -174,18 +197,18 @@ button:hover {
 ================================== */
 .current-image {
     margin-top: 10px;
-    background: #fff7ea;
+    background: var(--light-bg);
     padding: 12px;
     border-radius: 12px;
-    border-left: 6px solid #d98c19;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    border-left: 6px solid var(--primary);
+    box-shadow: var(--shadow);
 }
 
 .current-image img {
     margin-top: 10px;
     border-radius: 12px;
     max-width: 180px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-hover);
 }
 
 /* ===============================
@@ -194,7 +217,7 @@ button:hover {
 h2 {
     font-size: 28px;
     margin-bottom: 10px;
-    color: #b46900;
+    color: var(--primary-dark);
 }
 
 .team-list {
@@ -205,11 +228,11 @@ h2 {
 }
 
 .team-member {
-    background: #fff;
+    background: var(--white);
     padding: 18px;
     border-radius: 14px;
-    border-left: 6px solid #d98c19;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    border-left: 6px solid var(--primary);
+    box-shadow: var(--shadow);
 }
 
 /* ===============================
@@ -219,7 +242,7 @@ hr {
     margin: 40px 0;
     border: none;
     height: 2px;
-    background: #d98c19;
+    background: var(--primary);
 }
 
 /* ===============================
@@ -228,8 +251,8 @@ hr {
 footer {
     text-align: center;
     padding: 20px;
-    background: #d98c19;
-    color: #fff;
+    background: var(--primary);
+    color: var(--white);
 }
 
 /* ===============================
