@@ -28,16 +28,16 @@
       </div>
     </div>
 
+    @auth
     <div class="user-section">
       <div class="user-info">
         <a href="{{ route('show.profile') }}" class="user-avatar">
           <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="profile-pic" srcset="">
-          @auth
-              <i class="user-name">{{ Auth::user()->name }}</i>
-          @endauth
-        </div>
+          <i class="user-name">{{ Auth::user()->name }}</i>
         </a>
+      </div>
     </div>
+    @endauth
   </header>
 
   <div class="dashboard-container">
@@ -91,7 +91,7 @@
       <!-- Page Header -->
       <div class="page-header">
         @auth
-            <h1 class="page-title">Welcome Back, {{ Auth::user()->name }}</h1>
+            <h1 class="page-title">Welcome, {{ Auth::user()->name }}</h1>
         @endauth
         <p class="page-subtitle">
           Here's what's happening with your library today. Continue your reading journey or explore new
