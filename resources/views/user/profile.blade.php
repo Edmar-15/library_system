@@ -14,10 +14,6 @@
 
     <div class="profile-container">
         <div class="profile-header">
-            <a href="{{ route('show.home') }}" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-                Back to Dashboard
-            </a>
             <h1>Profile Settings</h1>
             <p>Update your personal information and preferences</p>
         </div>
@@ -49,94 +45,155 @@
                 </div>
             @endif
 
-            <form id="profileForm" class="profile-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            <div class="profile-layout">
+                <!-- Left Column: Form -->
+                <div class="profile-left">
+                    <form id="profileForm" class="profile-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                <div class="profile-picture-section">
-                    <div class="profile-picture-container" id="profile_picture_container">
-                        @if($user->profile && $user->profile->profile_picture)
-                            <img src="{{ asset('storage/' . $user->profile->profile_picture) }}"
-                                 alt="Profile Picture" id="profileImage">
-                        @else
-                            <div class="default-avatar">
-                                <i class="fas fa-user-circle"></i>
-                                <small>No profile picture</small>
+                        <div class="form-section personal-info">
+                            <div class="section-header">
+                                <h3><i class="fas fa-user"></i> Personal Information</h3>
+                                <p class="section-description">Update your basic personal details</p>
                             </div>
-                        @endif
-                    </div>
 
-                    <div class="file-input-wrapper">
-                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
-                        <label for="profile_picture" class="file-input-label">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            Choose New Photo
-                        </label>
-                        <small>Max size: 5MB • Formats: JPG, PNG, GIF</small>
-                    </div>
+                            <div class="form-grid">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" name="name"
+                                               value="{{ $user->name }}"
+                                               placeholder="Enter your full name"
+                                               required>
+                                        <div class="input-info">Your full legal name</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email"
+                                               value="{{ $user->email }}"
+                                               readonly>
+                                        <div class="input-info">Email cannot be changed</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone"
+                                               value="{{ $user->profile->phone ?? '' }}"
+                                               placeholder="Enter your phone number">
+                                        <div class="input-info">Include country code if international</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" id="address" name="address"
+                                               value="{{ $user->profile->address ?? '' }}"
+                                               placeholder="Enter your address">
+                                        <div class="input-info">Your current residential address</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section biography">
+                            <div class="section-header">
+                                <h3><i class="fas fa-edit"></i> Biography</h3>
+                                <p class="section-description">Tell others about yourself</p>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea id="bio" name="bio"
+                                          placeholder="Share your interests, background, or anything you'd like others to know..."
+                                          maxlength="500">{{ $user->profile->bio ?? '' }}</textarea>
+                                <div class="char-count">
+                                    <span id="bioCharCount">0</span>/500 characters
+                                </div>
+                                <div class="input-info">This will be visible on your public profile</div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="action-group">
+                                <a href="{{ route('show.home') }}" class="btn-cancel dashboard-btn">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back to Dashboard
+                                </a>
+                            </div>
+
+                            <div class="action-group">
+                                <button type="reset" class="btn-cancel">
+                                    <i class="fas fa-times"></i>
+                                    Cancel Changes
+                                </button>
+                                <button type="submit" class="btn-submit" id="submitBtn">
+                                    <i class="fas fa-save"></i>
+                                    Update Profile
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="name">
-                            <i class="fas fa-user"></i>
-                            Full Name
-                        </label>
-                        <input type="text" id="name" name="name"
-                               value="{{ $user->name }}"
-                               placeholder="Enter your full name"
-                               required>
-                    </div>
+                <!-- Right Column: Profile Picture -->
+                <div class="profile-right">
+                    <div class="profile-picture-card">
+                        <div class="picture-header">
+                            <h3><i class="fas fa-camera"></i> Profile Picture</h3>
+                            <p class="section-description">Upload a clear photo of yourself</p>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="email">
-                            <i class="fas fa-envelope"></i>
-                            Email Address
-                        </label>
-                        <input type="email" id="email" name="email"
-                               value="{{ $user->email }}"
-                               readonly>
-                    </div>
+                        <div class="picture-preview">
+                            <div class="profile-picture-container" id="profile_picture_container">
+                                @if($user->profile && $user->profile->profile_picture)
+                                    <img src="{{ asset('storage/' . $user->profile->profile_picture) }}"
+                                         alt="Profile Picture" id="profileImage">
+                                    <div class="image-overlay">
+                                        <i class="fas fa-sync-alt"></i>
+                                        <span>Change Photo</span>
+                                    </div>
+                                @else
+                                    <div class="default-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                        <div class="avatar-text">
+                                            <span>No Profile Picture</span>
+                                            <small>Click to upload</small>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
 
-                    <div class="form-group full-width">
-                        <label for="bio">
-                            <i class="fas fa-edit"></i>
-                            Biography
-                        </label>
-                        <textarea id="bio" name="bio"
-                                  placeholder="Tell us about yourself, your interests, or anything you'd like to share..."
-                                  maxlength="500">{{ $user->profile->bio ?? '' }}</textarea>
-                        <div class="char-count">
-                            <span id="bioCharCount">0</span>/500 characters
+                            <div class="file-input-wrapper">
+                                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="picture-info">
+                            <div class="info-item">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Recommended: Square image, 500x500px or larger</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-file-upload"></i>
+                                <span>Max size: 5MB • Formats: JPG, PNG, GIF</span>
+                            </div>
+                        </div>
+
+                        <div class="picture-actions">
+                            <label for="profile_picture" class="file-input-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Choose a Photo
+                            </label>
+                            <button type="button" class="btn-remove" id="removePhotoBtn">
+                                <i class="fas fa-trash-alt"></i>
+                                Remove Photo
+                            </button>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="phone">
-                            <i class="fas fa-phone"></i>
-                            Phone Number
-                        </label>
-                        <input type="tel" id="phone" name="phone"
-                               value="{{ $user->profile->phone ?? '' }}"
-                               placeholder="Enter your phone number">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Address
-                        </label>
-                        <input type="text" id="address" name="address"
-                               value="{{ $user->profile->address ?? '' }}"
-                               placeholder="Enter your address">
-                    </div>
                 </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-save"></i>
-                    Update Profile
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -202,7 +259,7 @@
                 const originalText = submitBtn.innerHTML;
                 const originalDisabled = submitBtn.disabled;
 
-                submitBtn.innerHTML = '<i class="fas fa-spinner"></i> Updating...';
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
                 submitBtn.disabled = true;
 
                 try {
@@ -233,6 +290,10 @@
                                         <img src="${data.profile_picture}"
                                              alt="Profile Picture"
                                              style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                        <div class="image-overlay">
+                                            <i class="fas fa-sync-alt"></i>
+                                            <span>Change Photo</span>
+                                        </div>
                                     `;
                                 }
                             }
@@ -251,7 +312,7 @@
                                         </button>
                                     </div>
                                 `;
-                                profileForm.insertAdjacentHTML('beforebegin', successMessage);
+                                document.querySelector('.profile-content').insertAdjacentHTML('afterbegin', successMessage);
                             }
 
                             setTimeout(() => {
@@ -295,6 +356,9 @@
 
         // Image preview with progress indication
         const profilePictureInput = document.getElementById('profile_picture');
+        const profilePictureContainer = document.getElementById('profile_picture_container');
+        const removePhotoBtn = document.getElementById('removePhotoBtn');
+
         if (profilePictureInput) {
             profilePictureInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
@@ -318,12 +382,15 @@
                 const reader = new FileReader();
 
                 reader.onload = (event) => {
-                    const container = document.getElementById('profile_picture_container');
-                    if (container) {
-                        container.innerHTML = `
+                    if (profilePictureContainer) {
+                        profilePictureContainer.innerHTML = `
                             <img src="${event.target.result}"
                                  alt="Profile Picture Preview"
                                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                            <div class="image-overlay">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Change Photo</span>
+                            </div>
                         `;
                     }
                 };
@@ -333,6 +400,34 @@
                 };
 
                 reader.readAsDataURL(file);
+            });
+        }
+
+        // Click on profile picture to trigger file input
+        if (profilePictureContainer) {
+            profilePictureContainer.addEventListener('click', function() {
+                profilePictureInput.click();
+            });
+        }
+
+        // Remove photo button
+        if (removePhotoBtn) {
+            removePhotoBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to remove your profile picture?')) {
+                    profilePictureInput.value = '';
+                    if (profilePictureContainer) {
+                        profilePictureContainer.innerHTML = `
+                            <div class="default-avatar">
+                                <i class="fas fa-user-circle"></i>
+                                <div class="avatar-text">
+                                    <span>No Profile Picture</span>
+                                    <small>Click to upload</small>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    NotificationSystem.show('info', 'Photo Removed', 'Profile picture has been removed');
+                }
             });
         }
 
@@ -376,6 +471,10 @@
                                     <img src="${profile.profile_picture}"
                                          alt="Profile Picture"
                                          style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                    <div class="image-overlay">
+                                        <i class="fas fa-sync-alt"></i>
+                                        <span>Change Photo</span>
+                                    </div>
                                 `;
                             }
                         }
@@ -401,28 +500,11 @@
                 @endforeach
             @endif
 
-            const backBtn = document.querySelector('.back-btn');
-            if (backBtn) {
-                function adjustButtonPosition() {
-                    if (window.innerWidth <= 768) {
-                        backBtn.style.margin = '0 auto 20px auto';
-                        backBtn.style.display = 'flex';
-                        backBtn.style.justifyContent = 'center';
-                    } else {
-                        backBtn.style.margin = '';
-                        backBtn.style.display = 'inline-flex';
-                        backBtn.style.justifyContent = '';
-                    }
-                }
-
-                adjustButtonPosition();
-                window.addEventListener('resize', adjustButtonPosition);
-            }
-
             // Load profile data
             loadProfile();
         });
 
+        // Form field focus effects
         document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
             input.addEventListener('focus', function() {
                 this.parentElement.classList.add('focused');
@@ -431,6 +513,14 @@
             input.addEventListener('blur', function() {
                 this.parentElement.classList.remove('focused');
             });
+        });
+
+        // Cancel button functionality
+        document.querySelector('.btn-cancel[type="reset"]')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            profileForm.reset();
+            updateCharCount();
+            NotificationSystem.show('info', 'Form Reset', 'All changes have been discarded');
         });
     </script>
 </body>
