@@ -15,7 +15,7 @@
     <div class="profile-container">
         <div class="profile-header">
             <h1>Profile Settings</h1>
-            <p>Update your personal information and preference/p>
+            <p>Update your personal information and preferences</p>
         </div>
 
         <div class="profile-content">
