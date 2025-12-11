@@ -1,0 +1,263 @@
+/* ===============================
+   GLOBAL
+================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #e4be89;
+    color: #333;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* MAIN CONTAINER - wider, cleaner */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+/* ===============================
+   HEADER / NAV
+================================== */
+header {
+    background: #d98c19;
+    padding: 15px 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.15);
+    transition: 0.2s;
+}
+
+nav a:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* ===============================
+   PAGE HEADER (title left, desc right)
+================================== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.page-header h1 {
+    font-size: 38px;
+    color: #b46900;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    max-width: 400px;
+    font-size: 15px;
+    color: #744b00;
+}
+
+/* ===============================
+   FORM WRAPPER (modern card)
+================================== */
+.form-wrapper {
+    background: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    border: 3px solid #d98c19;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+}
+
+/* ===============================
+   TWO-COLUMN GRID (desktop)
+================================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 35px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+    font-weight: bold;
+    color: #c5770c;
+    margin-bottom: 6px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid #d98c19;
+    outline: none;
+    font-size: 15px;
+    background: #fffdf8;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* SMALL TEXT */
+small {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #744b00;
+}
+
+/* ===============================
+   BUTTONS
+================================== */
+button[type="submit"] {
+    background: #d98c19;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s;
+    width: fit-content;
+}
+
+button:hover {
+    background: #b97203;
+}
+
+.form-group a {
+    margin-left: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #744b00;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+/* ===============================
+   IMAGE PREVIEW CARD
+================================== */
+.current-image {
+    margin-top: 10px;
+    background: #fff7ea;
+    padding: 12px;
+    border-radius: 12px;
+    border-left: 6px solid #d98c19;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.current-image img {
+    margin-top: 10px;
+    border-radius: 12px;
+    max-width: 180px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* ===============================
+   TEAM SECTION
+================================== */
+h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #b46900;
+}
+
+.team-list {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.team-member {
+    background: #fff;
+    padding: 18px;
+    border-radius: 14px;
+    border-left: 6px solid #d98c19;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   HR LINE
+================================== */
+hr {
+    margin: 40px 0;
+    border: none;
+    height: 2px;
+    background: #d98c19;
+}
+
+/* ===============================
+   FOOTER
+================================== */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #d98c19;
+    color: #fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================== */
+@media (max-width: 900px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 0 15px;
+    }
+
+    .form-wrapper {
+        padding: 20px;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+}
