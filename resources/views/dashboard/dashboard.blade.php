@@ -32,7 +32,7 @@
     <div class="user-section">
       <div class="user-info">
         <a href="{{ route('show.profile') }}" class="user-avatar">
-          <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="profile-pic" srcset="">
+          <img src="{{ asset('storage/' . $profile->profile_picture) }}" alt="profile-pic" srcset="">
           <i class="user-name">{{ Auth::user()->name }}</i>
         </a>
       </div>
