@@ -20,7 +20,7 @@
         <div class="left-panel"></div>
 
         <!-- Orange box -->
-        <div class="forgot-card">
+        <div class="forgot-card" id="card">
             @if(session('status'))
                 <p><i>{{ session('status') }}</i></p>
             @endif

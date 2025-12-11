@@ -9,7 +9,7 @@
 </head>
 <body>
    <header> 
-    <h1>LibrarySystem</h1>
+    <h1>Library System</h1>
    </header>
 
 
@@ -40,11 +40,13 @@
             <div class="container">
 
                     <div class="white-back">
-                        
-                    </div>
+    <div class="emoji">📚</div>
+    <div class="title">Welcome to Our Digital Library</div>
+    <div class="description">Access thousands of books, journals, and resources from anywhere, anytime. Join our community of readers and learners today.</div>
+</div>
                 
                     <div class="orange-back">
-            
+                    
                         <label for="EM" id="lbl1">Enter Email</label>
 
                         <input type="email" id="EM" name="email">
@@ -58,6 +60,10 @@
                         <button id ="btn" type="submit">Login</button>
 
                         <p>Don't have an account? <a href="{{ route('show.register') }}">create account</a></p>
+
+                        <div class = "divider">
+                            Or log in with
+                        </div>
                         <!-- <footer>
                             <div class="images">
                                 <img src="" alt="">
@@ -67,12 +73,11 @@
                         </footer> -->
                     </div>
             </div>
-                <footer class="dashboard-footer">
-                    <div class="copyright">
-                        &copy; {{ date('Y') }} LibrarySystem.
-                    </div>
-                    </div>
-                </footer>
+            <footer>
+        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
+    </footer>
+
+
         </form>
 
         @if ($errors->any())
@@ -84,5 +89,6 @@
         @endif
     </main>
 
+    
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
@@ -43,4 +43,75 @@
     </footer>
 </body>
 </html>
-<script src="{{ asset('js/sample.js') }}"></script>
+<script src="{{ asset('js/book.js') }}"></script> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>LibrarySystem</title>
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1 id="headerTitle">Library System</h1>
+    </header>
+
+    <!-- Main Container -->
+    <div id="mainContainer">
+        <!-- HOME PAGE - CLOSED BOOK -->
+        <div id="homePage" class="page-container active">
+            <div id="book" class="book">
+                <!-- Left Page - White -->
+                <div class="left-page">
+                    <div class="emoji">📚</div>
+                    <div class="title">Welcome to Our Digital Library</div>
+                    <div class="description">
+                        Access thousands of books, journals, and resources from anywhere, anytime. 
+                        Join our community of readers and learners today.
+                    </div>
+                </div>
+
+                <!-- Right Page - Orange -->
+                <div class="right-page">
+                    <h1>Welcome Back!</h1>
+                    <div class="subtitle">
+                        Sign in to access your personal library, continue reading, or register to 
+                        explore our vast collection of resources.
+                    </div>
+
+                    <div class="button-container">
+                        
+                        <a href="{{ route('show.register') }}" class="registerBtn">Register</a>
+                    <a href="{{ route('show.login') }}" class="loginBtn">Login</a>
+                    <!-- <button id="registerBtn" class="btn btn-primary" data-link="{{ route('show.register') }}">
+                            Register
+                        </button>
+                        <button id="loginBtn" class="btn btn-secondary" data-link="{{ route('show.login') }}">
+                            Login
+                        </button> -->
+
+                        
+                    </div>
+                </div>
+
+                <!-- Book Spine -->
+                <div class="book-spine"></div>
+            </div>
+        </div>
+
+            </div>
+        </div>
+    </div>  
+
+    <!-- Footer -->
+    <footer>
+        © 2025 LibrarySystem.
+    </footer>
+
+    <script src="{{ asset('js/book.js') }}"></script>
+</body>
+</html>
