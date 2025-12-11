@@ -71,6 +71,13 @@
                                 <img src="" alt="">
                             </div>
                         </footer> -->
+                        @if ($errors->any())
+                            <ul style="padding: 8px 16px; background-color: ffe2e2;">
+                                @foreach ($errors->all() as $error)
+                                    <li style="color: red;">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
             </div>
             <footer>
@@ -79,14 +86,6 @@
 
 
         </form>
-
-        @if ($errors->any())
-            <ul style="padding: 8px 16px; background-color: ffe2e2;">
-                @foreach ($errors->all() as $error)
-                    <li style="color: red;">{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
     </main>
 
     
