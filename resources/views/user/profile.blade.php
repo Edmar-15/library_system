@@ -15,7 +15,7 @@
     <div class="profile-container">
         <div class="profile-header">
             <h1>Profile Settings</h1>
-            <p>Update your personal information and preferences</p>
+            <p>Update your personal information and preference/p>
         </div>
 
         <div class="profile-content">
@@ -165,7 +165,6 @@
                                 @endif
                             </div>
 
-                            <!-- File input moved here to be inside the form's visual area -->
                             <div class="file-input-wrapper">
                                 <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
                             </div>
@@ -247,7 +246,7 @@
 
         if (bioTextarea) {
             bioTextarea.addEventListener('input', updateCharCount);
-            updateCharCount(); // Initial count
+            updateCharCount();
         }
 
         const profileForm = document.getElementById('profileForm');
@@ -264,10 +263,8 @@
                 submitBtn.disabled = true;
 
                 try {
-                    // Manually add the file input to FormData since it's outside the form
                     const formData = new FormData();
 
-                    // Add all form fields from the form
                     const formElements = profileForm.elements;
                     for (let element of formElements) {
                         if (element.name && element.type !== 'file') {
@@ -281,7 +278,6 @@
                         }
                     }
 
-                    // Add the file input manually
                     const profilePictureInput = document.getElementById('profile_picture');
                     if (profilePictureInput && profilePictureInput.files[0]) {
                         formData.append('profile_picture', profilePictureInput.files[0]);
@@ -306,7 +302,6 @@
                         if (response.ok) {
                             NotificationSystem.show('success', 'Success!', data.message || 'Profile updated successfully!');
 
-                            // Update displayed data
                             if (data.profile_picture) {
                                 const container = document.getElementById('profile_picture_container');
                                 if (container) {
@@ -434,7 +429,6 @@
             });
         }
 
-        // Remove photo button
         if (removePhotoBtn) {
             removePhotoBtn.addEventListener('click', function() {
                 if (confirm('Are you sure you want to remove your profile picture?')) {
@@ -455,7 +449,6 @@
             });
         }
 
-        // Load profile data on page load
         async function loadProfile() {
             try {
                 const response = await fetch('/librarysystem/profile/api', {
@@ -472,7 +465,6 @@
                     if (contentType && contentType.includes("application/json")) {
                         const profile = await response.json();
 
-                        // Update form fields
                         const nameInput = document.getElementById('name');
                         const emailInput = document.getElementById('email');
                         const bioInput = document.getElementById('bio');
@@ -487,7 +479,6 @@
 
                         updateCharCount();
 
-                        // Update profile picture if available
                         if (profile.profile_picture) {
                             const container = document.getElementById('profile_picture_container');
                             if (container) {
@@ -528,7 +519,6 @@
             loadProfile();
         });
 
-        // Form field focus effects
         document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
             input.addEventListener('focus', function() {
                 this.parentElement.classList.add('focused');
