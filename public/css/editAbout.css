@@ -14,9 +14,8 @@
     --shadow-hover: 0 8px 24px rgba(139, 94, 52, 0.24);
 }
 
-/* ===============================
-   GLOBAL
-================================== */
+/* =============================== GLOBAL =============================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -32,7 +31,6 @@ body {
     flex-direction: column;
 }
 
-/* MAIN CONTAINER */
 main {
     flex: 1;
     width: 100%;
@@ -41,9 +39,8 @@ main {
     padding: 0 25px;
 }
 
-/* ===============================
-   HEADER / NAV
-================================== */
+/* =============================== HEADER / NAV =============================== */
+
 header {
     background: var(--primary);
     padding: 24px 25px;
@@ -61,17 +58,16 @@ nav a {
     text-decoration: none;
     padding: 6px 12px;
     border-radius: 6px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     transition: 0.2s;
 }
 
 nav a:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* ===============================
-   PAGE HEADER
-================================== */
+/* =============================== PAGE HEADER =============================== */
+
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -93,9 +89,8 @@ nav a:hover {
     color: var(--text-light);
 }
 
-/* ===============================
-   FORM WRAPPER
-================================== */
+/* =============================== FORM WRAPPER =============================== */
+
 .form-wrapper {
     background: var(--white);
     padding: 30px;
@@ -105,9 +100,8 @@ nav a:hover {
     margin-bottom: 40px;
 }
 
-/* ===============================
-   GRID
-================================== */
+/* =============================== GRID =============================== */
+
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -119,33 +113,49 @@ nav a:hover {
     flex-direction: column;
 }
 
-/* Labels */
 .form-group label {
     font-weight: bold;
     color: var(--primary-light);
     margin-bottom: 6px;
 }
 
-/* Inputs */
+/* =============================== INPUT RECOGNITION =============================== */
+
 input[type="text"],
 input[type="email"],
+input[type="password"],
+input[type="number"],
 textarea,
-input[type="file"] {
+input[type="file"],
+select {
     width: 100%;
     padding: 10px 12px;
     border-radius: 10px;
     border: 2px solid var(--primary);
-    outline: none; 
+    outline: none;
     font-size: 15px;
-    background-color: var(--white);
+
+    /* Recognition enhancements */
+    background: #fffaf3;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
 }
 
-.form-group textarea:focus{
-    background-color: rgba(250,250,250,0.5);
+/* Hover — makes inputs feel interactive */
+input:hover,
+textarea:hover,
+select:hover {
+    background: #fff5e6;
+    border-color: var(--primary-light);
 }
 
-.form-group input:focus{
-    background-color: rgba(250,250,250,0.5);
+/* Focus — strong visible highlight */
+input:focus,
+textarea:focus,
+select:focus {
+    background: var(--light-bg);
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 3px rgba(224,123,22,0.25);
 }
 
 textarea {
@@ -153,16 +163,36 @@ textarea {
     min-height: 120px;
 }
 
-/* SMALL TEXT */
+/* =============================== READONLY =============================== */
+
+input[readonly],
+textarea[readonly],
+select[readonly] {
+    background: #f2e6d8;
+    border-color: var(--secondary);
+    color: var(--text-light);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+input[readonly]:focus,
+textarea[readonly]:focus,
+select[readonly]:focus {
+    background: #f2e6d8;
+    border-color: var(--secondary);
+    box-shadow: none;
+}
+
+/* =============================== SMALL TEXT =============================== */
+
 small {
     margin-top: 5px;
     font-size: 13px;
     color: var(--text-light);
 }
 
-/* ===============================
-   BUTTONS
-================================== */
+/* =============================== BUTTONS =============================== */
+
 button[type="submit"] {
     background: var(--primary);
     color: var(--white);
@@ -192,9 +222,8 @@ button:hover {
     text-decoration: underline;
 }
 
-/* ===============================
-   IMAGE PREVIEW CARD
-================================== */
+/* =============================== IMAGE PREVIEW =============================== */
+
 .current-image {
     margin-top: 10px;
     background: var(--light-bg);
@@ -211,9 +240,8 @@ button:hover {
     box-shadow: var(--shadow-hover);
 }
 
-/* ===============================
-   TEAM SECTION
-================================== */
+/* =============================== TEAM SECTION =============================== */
+
 h2 {
     font-size: 28px;
     margin-bottom: 10px;
@@ -235,9 +263,8 @@ h2 {
     box-shadow: var(--shadow);
 }
 
-/* ===============================
-   HR LINE
-================================== */
+/* =============================== HR LINE =============================== */
+
 hr {
     margin: 40px 0;
     border: none;
@@ -245,9 +272,8 @@ hr {
     background: var(--primary);
 }
 
-/* ===============================
-   FOOTER
-================================== */
+/* =============================== FOOTER =============================== */
+
 footer {
     text-align: center;
     padding: 20px;
@@ -255,9 +281,8 @@ footer {
     color: var(--white);
 }
 
-/* ===============================
-   RESPONSIVE
-================================== */
+/* =============================== RESPONSIVE =============================== */
+
 @media (max-width: 900px) {
     .form-grid {
         grid-template-columns: 1fr;
