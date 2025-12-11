@@ -54,6 +54,16 @@
                                     <i class="fas fa-bookmark"></i> Reserve Book
                                 </button>
                             @endif
+
+                            {{-- Book Content Actions --}}
+                            @if($book->hasContentFile())
+                                <a href="{{ route('books.readbook', $book) }}" class="btn btn-info btn-large">
+                                    <i class="fas fa-book-open"></i> Read Online
+                                </a>
+                                <a href="{{ route('books.download', $book) }}" class="btn btn-success btn-large">
+                                    <i class="fas fa-download"></i> Download Book
+                                </a>
+                            @endif
                         @else
                             <a href="{{ route('show.login') }}" class="btn btn-primary btn-large">
                                 <i class="fas fa-sign-in-alt"></i> Login to Add
@@ -143,6 +153,18 @@
                                 <span class="meta-label">Available Copies:</span>
                                 <span class="meta-value {{ $book->available_copies > 0 ? 'text-success' : 'text-danger' }}">
                                     {{ $book->available_copies }}
+                                </span>
+                            </li>
+
+                            {{-- Content File Status --}}
+                            <li>
+                                <span class="meta-label">Book Content:</span>
+                                <span class="meta-value">
+                                    @if($book->hasContentFile())
+                                        <i class="fas fa-check-circle" style="color: green;"></i> Available
+                                    @else
+                                        <i class="fas fa-times-circle" style="color: red;"></i> Not Available
+                                    @endif
                                 </span>
                             </li>
                         </ul>

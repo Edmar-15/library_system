@@ -64,3 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/booklists/{booklist}', [BooklistController::class, 'destroy'])->name('booklists.destroy');
     Route::get('/booklists/stats', [BooklistController::class, 'stats'])->name('booklists.stats');
 });
+
+// Book content routes
+Route::get('/books/{book}/read', [BookController::class, 'readContent'])->name('books.readbook');
+Route::get('/books/{book}/download', [BookController::class, 'downloadContent'])->name('books.download');

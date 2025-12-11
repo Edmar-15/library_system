@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage; // ADD THIS LINE
 
 class Book extends Model
 {
@@ -14,6 +15,7 @@ class Book extends Model
         'author',
         'description',
         'cover_picture',
+        'content_file',
         'rating',
         'total_copies',
         'available_copies',
@@ -98,5 +100,35 @@ class Book extends Model
     public function scopeHighRated($query, $minRating = 4.0)
     {
         return $query->where('rating', '>=', $minRating);
+    }
+
+    /**
+     * Get the content file URL
+     */
+    public function getContentFileUrlAttribute(): ?string
+    {
+        if ($this->content_file) {
+            return asset('storage/' . $this->content_file);
+        }
+        return null;
+    }
+
+    /**
+     * Check if book has content file
+     */
+    public function hasContentFile(): bool
+    {
+        return !empty($this->content_file) && Storage::disk('public')->exists($this->content_file);
+    }
+
+    /**
+     * Read the content file
+     */
+    public function readContent(): ?string
+    {
+        if ($this->hasContentFile()) {
+            return Storage::disk('public')->get($this->content_file);
+        }
+        return null;
     }
 }

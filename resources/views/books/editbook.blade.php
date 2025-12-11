@@ -61,6 +61,30 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="content_file"><i class="fas fa-file-alt"></i> Book Content File (TXT)</label>
+                        @if($book->hasContentFile())
+                            <div class="current-file" style="margin-bottom: 10px; padding: 10px; background: #e8f5e9; border-radius: 5px;">
+                                <i class="fas fa-check-circle" style="color: green;"></i> 
+                                <span>Content file uploaded</span>
+                                <a href="{{ route('books.download', $book) }}" style="margin-left: 10px; color: #1976d2;">
+                                    <i class="fas fa-download"></i> Download Current
+                                </a>
+                            </div>
+                        @else
+                            <div style="margin-bottom: 10px; padding: 10px; background: #ffebee; border-radius: 5px;">
+                                <i class="fas fa-times-circle" style="color: red;"></i> 
+                                <span>No content file uploaded</span>
+                            </div>
+                        @endif
+                        <input type="file" id="content_file" name="content_file" accept=".txt" onchange="previewContentFile(event)">
+                        <small style="display: block; margin-top: 5px; color: #666;">Upload TXT file (Max: 10MB). Leave empty to keep current file.</small>
+                        <div id="contentFilePreview"></div>
+                        @error('content_file')
+                            <span class="error-message">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="rating"><i class="fas fa-star"></i> Rating</label>
@@ -175,6 +199,23 @@
                     preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 200px; margin-top: 10px; border-radius: 8px;">`;
                 }
                 reader.readAsDataURL(file);
+            }
+        }
+
+        function previewContentFile(event) {
+            const preview = document.getElementById('contentFilePreview');
+            const file = event.target.files[0];
+            
+            if (file) {
+                const fileSizeKB = (file.size / 1024).toFixed(2);
+                preview.innerHTML = `
+                    <div style="margin-top: 10px; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+                        <i class="fas fa-file-alt" style="color: #1976d2;"></i> 
+                        <strong>${file.name}</strong> (${fileSizeKB} KB)
+                    </div>
+                `;
+            } else {
+                preview.innerHTML = '';
             }
         }
     </script>

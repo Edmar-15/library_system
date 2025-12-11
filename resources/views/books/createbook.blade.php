@@ -107,7 +107,7 @@
                 </div>
 
                 <!-- Cover Picture -->
-                <div class="mb-6">
+                <div class="mb-4">
                     <label for="cover_picture" class="block text-gray-700 font-semibold mb-2">Cover Picture</label>
                     <input type="file" name="cover_picture" id="cover_picture" accept="image/*"
                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -115,6 +115,22 @@
                     
                     <div id="imagePreview" class="mt-3 hidden">
                         <img id="preview" src="" alt="Cover preview" class="max-w-xs rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <!-- Content File (TXT) -->
+                <div class="mb-6">
+                    <label for="content_file" class="block text-gray-700 font-semibold mb-2">Book Content File (TXT)</label>
+                    <input type="file" name="content_file" id="content_file" accept=".txt"
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <p class="text-sm text-gray-500 mt-1">Upload the book content as a TXT file (Max: 10MB)</p>
+                    
+                    <div id="fileInfo" class="mt-2 hidden">
+                        <p class="text-sm text-green-600">
+                            <i class="fas fa-file-alt"></i> 
+                            <span id="fileName"></span> 
+                            (<span id="fileSize"></span>)
+                        </p>
                     </div>
                 </div>
 
@@ -147,6 +163,18 @@ document.getElementById('cover_picture').addEventListener('change', function(e) 
         reader.readAsDataURL(file);
     } else {
         document.getElementById('imagePreview').classList.add('hidden');
+    }
+});
+
+// Content file info display
+document.getElementById('content_file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('fileSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+        document.getElementById('fileInfo').classList.remove('hidden');
+    } else {
+        document.getElementById('fileInfo').classList.add('hidden');
     }
 });
 

@@ -61,6 +61,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'description' => 'nullable|string',
             'cover_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content_file' => 'nullable|file|mimes:txt|max:10240', // Max 10MB for txt files
             'rating' => 'nullable|numeric|min:0|max:5',
             'total_copies' => 'required|integer|min:1',
             'available_copies' => 'required|integer|min:0',
@@ -75,7 +76,13 @@ class BookController extends Controller
         // Handle cover picture upload
         if ($request->hasFile('cover_picture')) {
             $validated['cover_picture'] = $request->file('cover_picture')
-                ->store('uploads/books', 'public');
+                ->store('uploads/books/covers', 'public');
+        }
+
+        // Handle content file upload (TXT only)
+        if ($request->hasFile('content_file')) {
+            $validated['content_file'] = $request->file('content_file')
+                ->store('uploads/books/contents', 'public');
         }
 
         // Set status based on available copies
@@ -113,6 +120,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'description' => 'nullable|string',
             'cover_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content_file' => 'nullable|file|mimes:txt|max:10240', // Max 10MB for txt files
             'rating' => 'nullable|numeric|min:0|max:5',
             'total_copies' => 'required|integer|min:1',
             'available_copies' => 'required|integer|min:0',
@@ -131,7 +139,17 @@ class BookController extends Controller
                 Storage::disk('public')->delete($book->cover_picture);
             }
             $validated['cover_picture'] = $request->file('cover_picture')
-                ->store('uploads/books', 'public');
+                ->store('uploads/books/covers', 'public');
+        }
+
+        // Handle content file upload
+        if ($request->hasFile('content_file')) {
+            // Delete old content file
+            if ($book->content_file && Storage::disk('public')->exists($book->content_file)) {
+                Storage::disk('public')->delete($book->content_file);
+            }
+            $validated['content_file'] = $request->file('content_file')
+                ->store('uploads/books/contents', 'public');
         }
 
         // Update status based on available copies
@@ -153,10 +171,44 @@ class BookController extends Controller
             Storage::disk('public')->delete($book->cover_picture);
         }
 
+        // Delete content file if exists
+        if ($book->content_file && Storage::disk('public')->exists($book->content_file)) {
+            Storage::disk('public')->delete($book->content_file);
+        }
+
         $book->delete();
 
         return redirect()->route('books.index')
             ->with('success', 'Book deleted successfully!');
+    }
+
+    /**
+     * Read the content of a book (display or download)
+     */
+    public function readContent(Book $book)
+    {
+        if (!$book->hasContentFile()) {
+            abort(404, 'Content file not found');
+        }
+
+        $content = $book->readContent();
+        
+        return view('books.readbook', compact('book', 'content'));
+    }
+
+    /**
+     * Download the book content file
+     */
+    public function downloadContent(Book $book)
+    {
+        if (!$book->hasContentFile()) {
+            abort(404, 'Content file not found');
+        }
+
+        $filePath = storage_path('app/public/' . $book->content_file);
+        $fileName = $book->title . '.txt';
+
+        return response()->download($filePath, $fileName);
     }
 
     /**

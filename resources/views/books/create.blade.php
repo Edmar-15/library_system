@@ -55,6 +55,24 @@
                         @enderror
                     </div>
 
+                    <!-- Content File (TXT) -->
+                    <div class="mb-6">
+                        <label for="content_file" class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-file-alt"></i> Book Content File (TXT)
+                        </label>
+                        <input type="file" name="content_file" id="content_file" accept=".txt"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <p class="text-sm text-gray-500 mt-1">Upload the book content as a TXT file (Max: 10MB)</p>
+                        
+                        <div id="fileInfo" class="mt-2 hidden">
+                            <p class="text-sm text-green-600">
+                                <i class="fas fa-file-alt"></i> 
+                                <span id="fileName"></span> 
+                                (<span id="fileSize"></span>)
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="rating"><i class="fas fa-star"></i> Rating</label>
