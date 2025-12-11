@@ -165,6 +165,7 @@
                                 @endif
                             </div>
 
+                            <!-- File input moved here to be inside the form's visual area -->
                             <div class="file-input-wrapper">
                                 <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
                             </div>
@@ -263,9 +264,32 @@
                 submitBtn.disabled = true;
 
                 try {
+                    // Manually add the file input to FormData since it's outside the form
+                    const formData = new FormData();
+
+                    // Add all form fields from the form
+                    const formElements = profileForm.elements;
+                    for (let element of formElements) {
+                        if (element.name && element.type !== 'file') {
+                            if (element.type === 'checkbox' || element.type === 'radio') {
+                                if (element.checked) {
+                                    formData.append(element.name, element.value);
+                                }
+                            } else {
+                                formData.append(element.name, element.value);
+                            }
+                        }
+                    }
+
+                    // Add the file input manually
+                    const profilePictureInput = document.getElementById('profile_picture');
+                    if (profilePictureInput && profilePictureInput.files[0]) {
+                        formData.append('profile_picture', profilePictureInput.files[0]);
+                    }
+
                     const response = await fetch(profileForm.action, {
                         method: 'POST',
-                        body: new FormData(profileForm),
+                        body: formData,
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest',
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ||
