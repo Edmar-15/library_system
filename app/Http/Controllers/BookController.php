@@ -185,15 +185,31 @@ class BookController extends Controller
     /**
      * Read the content of a book (display or download)
      */
-    public function readContent(Book $book)
+    public function readContent(Book $book, Request $request)
     {
         if (!$book->hasContentFile()) {
             abort(404, 'Content file not found');
         }
 
         $content = $book->readContent();
-        
-        return view('books.readbook', compact('book', 'content'));
+
+        $charsPerPage = 1500;
+        $pages = str_split($content, $charsPerPage);
+        $totalPages = count($pages);
+
+        $page = (int) $request->query('page', 1);
+        if ($page < 1 || $page > $totalPages) {
+            $page = 1;
+        }
+
+        $pageContent = $pages[$page - 1];
+
+        return view('books.readbook', [
+            'book'       => $book,
+            'content'    => $pageContent,
+            'page'       => $page,
+            'totalPages' => $totalPages
+        ]);
     }
 
     /**

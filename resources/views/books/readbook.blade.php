@@ -33,7 +33,27 @@
             </div>
 
             <div class="book-content">
-                <pre>{{ $content }}</pre>
+                <pre style="white-space: pre-wrap;">{{ $content }}</pre>
+            </div>
+
+            <div class="pagination-controls">
+                @if ($page > 1)
+                    <a class="pagination-btn"
+                    href="{{ route('books.readbook', ['book' => $book->id, 'page' => $page - 1]) }}">
+                        <i class="fas fa-angle-left"></i> Previous
+                    </a>
+                @endif
+
+                <span class="page-indicator">
+                    Page {{ $page }} of {{ $totalPages }}
+                </span>
+
+                @if ($page < $totalPages)
+                    <a class="pagination-btn"
+                    href="{{ route('books.readbook', ['book' => $book->id, 'page' => $page + 1]) }}">
+                        Next <i class="fas fa-angle-right"></i>
+                    </a>
+                @endif
             </div>
         </div>
     </main>
