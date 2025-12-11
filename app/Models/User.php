@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Profile;
-
+use App\Models\Booklist;
 
 class User extends Authenticatable
 {
@@ -53,6 +53,11 @@ class User extends Authenticatable
   public function profile()
 {
     return $this->hasOne(Profile::class);
+}
+
+public function booklists()
+{
+    return $this->hasMany(Booklist::class);
 }
 }
 
