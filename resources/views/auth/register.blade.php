@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>LibrarySystem</h1>
+        <h1>Library System</h1>
     </header>
     {{-- <header>
         <h1>Register</h1>
@@ -83,12 +83,9 @@
                         <button id ="btn">confirm</button> --}}
                     </div>
             </div>
-            <footer class="dashboard-footer">
-                    <div class="copyright">
-                        &copy; {{ date('Y') }} LibrarySystem.
-                    </div>
-                    </div>
-                </footer>
+              <footer>
+        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
+    </footer>
         </form>
         <script src=" {{ asset('js/register.js') }}"></script>
 
