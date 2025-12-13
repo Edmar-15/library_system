@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/bookmarks.css') }}">
 </head>
 <body>
 @section('content')
@@ -39,7 +40,7 @@
         </table>
     @endif
         <a href="{{ route('show.home') }}">Back to the future</a>
-        <a href="{{ route('booklists.index') }}">back to booklists</a>
+        <a href="{{ route('booklists.index') }}">Back to booklists</a>
 
 </div>
 
