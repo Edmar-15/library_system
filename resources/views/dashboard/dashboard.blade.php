@@ -63,15 +63,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#edit" class="nav-link" title="Edit">
-              <i class="fas fa-edit nav-icon"></i>
-              <span class="nav-text">Edit</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{ route('bookmarks.index') }}" class="nav-link" title="Bookmarks">
               <i class="fas fa-bookmark nav-icon"></i>
               <span class="nav-text">Bookmark</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#edit" class="nav-link" title="Edit">
+              <i class="fas fa-edit nav-icon"></i>
+              <span class="nav-text">Edit</span>
             </a>
           </li>
         </ul>
@@ -145,9 +145,9 @@
 
         <div class="stat-card">
           <div class="stat-header">
-            <h3 class="stat-title">Wishlist</h3>
+            <h3 class="stat-title">Bookmarks</h3>
             <div class="stat-icon">
-              <i class="fas fa-heart"></i>
+              <i class="fas fa-bookmark"></i>
             </div>
           </div>
           <div class="stat-value">18</div>
@@ -161,7 +161,7 @@
       <div class="content-grid">
         <!-- Book of the Month -->
         <div class="content-card">
-          <h2><i class="fas fa-crown"></i> Book of the Month</h2>
+          <h2><i class="fas fa-crown"></i> New Book Upload</h2>
           <div class="book-of-month">
             <div class="book-cover">
               <i class="fas fa-book"></i>
