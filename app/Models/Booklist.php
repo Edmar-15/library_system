@@ -45,4 +45,9 @@ class Booklist extends Model
             default => $this->status,
         };
     }
+
+    public function booklists()
+    {
+        return $this->hasMany(Booklist::class);
+    }
 }

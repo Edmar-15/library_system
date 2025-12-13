@@ -103,16 +103,12 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-header">
-            <h3 class="stat-title">Currently Reading</h3>
+            <h3 class="stat-title">My Booklist</h3>
             <div class="stat-icon">
               <i class="fas fa-book-open"></i>
             </div>
           </div>
-          <div class="stat-value">3</div>
-          <div class="stat-change positive">
-            <i class="fas fa-arrow-up"></i>
-            <span>+1 this week</span>
-          </div>
+          <div class="stat-value">{{ $booklist }}</div>
         </div>
 
         <div class="stat-card">
@@ -122,25 +118,17 @@
               <i class="fas fa-check-circle"></i>
             </div>
           </div>
-          <div class="stat-value">42</div>
-          <div class="stat-change positive">
-            <i class="fas fa-arrow-up"></i>
-            <span>+5 this month</span>
-          </div>
+          <div class="stat-value">{{ $booklistCounts['finished'] }}</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-header">
-            <h3 class="stat-title">Reading Hours</h3>
+            <h3 class="stat-title">Currently Reading</h3>
             <div class="stat-icon">
               <i class="fas fa-clock"></i>
             </div>
           </div>
-          <div class="stat-value">156</div>
-          <div class="stat-change positive">
-            <i class="fas fa-arrow-up"></i>
-            <span>+12 this week</span>
-          </div>
+          <div class="stat-value">{{ $booklistCounts['reading'] }}</div>
         </div>
 
         <div class="stat-card">
@@ -150,11 +138,7 @@
               <i class="fas fa-bookmark"></i>
             </div>
           </div>
-          <div class="stat-value">18</div>
-          <div class="stat-change negative">
-            <i class="fas fa-arrow-down"></i>
-            <span>-2 this week</span>
-          </div>
+          <div class="stat-value">{{ $bookmarks }}</div>
         </div>
       </div>
 
@@ -164,20 +148,17 @@
           <h2><i class="fas fa-crown"></i> New Book Upload</h2>
           <div class="book-of-month">
             <div class="book-cover">
-              <i class="fas fa-book"></i>
+              <img src="{{ asset('storage/' . $newBook->cover_picture) }}" alt="book_cover" class="book-cover">
             </div>
             <div class="book-info">
-              <h3 class="book-title">The Journey to the West</h3>
-              <p class="book-author">By Litewaran</p>
+              <h3 class="book-title">{{ $newBook->title }}</h3>
+              <p class="book-author">{{ $newBook->author }}</p>
               <p class="book-description">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                book.
+                {{ $newBook->description }}
               </p>
               <div class="book-actions">
                 <a href="#read" class="book-btn primary">
-                  <i class="fas fa-play"></i> Start Reading
+                  <i class="fas fa-plus"></i> Add to List
                 </a>
                 <a href="#details" class="book-btn secondary">
                   <i class="fas fa-info-circle"></i> View Details
@@ -190,25 +171,35 @@
         <!-- Popular Releases -->
         <div class="content-card">
           <h2><i class="fas fa-fire"></i> Popular Releases</h2>
+
           <div class="releases-grid">
-            @for($i = 1; $i <= 4; $i++) <div class="release-item">
-              <div class="release-cover">
-                <i class="fas fa-book"></i>
-              </div>
-              <div class="release-info">
-                <h4 class="release-title">New Selection {{ $i }}</h4>
-                <p class="release-author">Author Name</p>
-                <div class="release-rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
+            @foreach ($popularBooks as $book)
+              <div class="release-item">
+                <div class="release-cover">
+                  <img src="{{ asset('storage/' . $book->cover_picture) }}" alt="book_cover" class="release-cover-img">
+                </div>
+
+                <div class="release-info">
+                  <h4 class="release-title">{{ $book->title }}</h4>
+                  <p class="release-author">{{ $book->author }}</p>
+
+                  <div class="release-rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                      @if ($i <= floor($book->rating))
+                        <i class="fas fa-star"></i>
+                      @elseif ($i - $book->rating >= 0.5)
+                        <i class="fas fa-star-half-alt"></i>
+                      @else
+                        <i class="far fa-star"></i>
+                      @endif
+                    @endfor
+                  </div>
                 </div>
               </div>
+            @endforeach
           </div>
-          @endfor
         </div>
+
       </div>
   </div>
   </main>

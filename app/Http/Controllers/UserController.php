@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Booklist;
+use App\Models\Bookmark;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +27,29 @@ class UserController extends Controller
             ]);
         }
 
-        return view('dashboard.dashboard', compact('user', 'profile'));
+        $newBook = Book::latest()->first();
+
+        $booklist = $user->booklists()->count();
+
+        $booklistCounts = [
+            'want_to_read' => Booklist::where('user_id', $user->id)
+                ->where('status', 'want_to_read')
+                ->count(),
+
+            'reading' => Booklist::where('user_id', $user->id)
+                ->where('status', 'reading')
+                ->count(),
+
+            'finished' => Booklist::where('user_id', $user->id)
+                ->where('status', 'finished')
+                ->count(),
+        ];
+
+        $bookmarks = Bookmark::where('user_id', $user->id)->count();
+
+        $popularBooks = Book::orderBy('rating', 'desc')->limit(4)->get();
+
+        return view('dashboard.dashboard', compact('user', 'profile', 'newBook', 'booklist', 'booklistCounts', 'bookmarks', 'popularBooks'));
     }
 
     public function getProfile(){
