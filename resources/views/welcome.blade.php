@@ -70,7 +70,7 @@
                     <div class="emoji">📚</div>
                     <div class="title">Welcome to Our Digital Library</div>
                     <div class="description">
-                        Access thousands of books, journals, and resources from anywhere, anytime. 
+                        Access thousands of books, journals, and resources from anywhere, anytime.
                         Join our community of readers and learners today.
                     </div>
                 </div>
@@ -79,12 +79,12 @@
                 <div class="right-page">
                     <h1>Welcome Back!</h1>
                     <div class="subtitle">
-                        Sign in to access your personal library, continue reading, or register to 
+                        Sign in to access your personal library, continue reading, or register to
                         explore our vast collection of resources.
                     </div>
 
                     <div class="button-container">
-                        
+
                         <a href="{{ route('show.register') }}" class="registerBtn">Register</a>
                     <a href="{{ route('show.login') }}" class="loginBtn">Login</a>
                     <!-- <button id="registerBtn" class="btn btn-primary" data-link="{{ route('show.register') }}">
@@ -94,7 +94,7 @@
                             Login
                         </button> -->
 
-                        
+
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@
 
             </div>
         </div>
-    </div>  
+    </div>
 
     <!-- Footer -->
     <footer>
