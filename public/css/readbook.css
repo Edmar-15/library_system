@@ -1,0 +1,1313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary: #E07B16;
+    --primary-light: #F39C3D;
+    --primary-dark: #B35E0F;
+    --secondary: #8B5E34;
+    --secondary-dark: #5A3E24;
+    --light-bg: #FFF3E0;
+    --white: #FFFFFF;
+    --text-dark: #3A2F28;
+    --text-light: #7B6754;
+    --text-white: #FFFFFF;
+    --border-color: #E6D4B8;
+    --shadow: 0 4px 12px rgba(139, 94, 52, 0.16);
+    --shadow-hover: 0 8px 24px rgba(139, 94, 52, 0.24);
+    --page-bg: #FCF8F2;
+}
+
+body {
+    background: var(--page-bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+/* Header  */
+.reader-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: 12px 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: var(--text-white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Back Button  */
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn i {
+    font-size: 18px;
+}
+
+.back-text {
+    display: none;
+}
+
+.book-title {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    flex: 1;
+    padding: 0 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.download-btn {
+    background: var(--white);
+    color: var(--primary);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.download-btn:hover {
+    background: var(--light-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.download-text {
+    display: none;
+}
+
+.reading-progress {
+    width: 100%;
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+}
+
+.reading-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin: 0 15px 20px;
+    border: 1px solid var(--border-color);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.control-label {
+    font-size: 14px;
+    color: var(--text-light);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.control-label i {
+    color: var(--primary);
+}
+
+/* Font Size Controls */
+.font-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.font-size-display {
+    min-width: 70px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.font-btn {
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-dark);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    flex-shrink: 0;
+}
+
+.font-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.font-btn:active {
+    transform: scale(0.95);
+}
+
+.font-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--border-color);
+}
+
+.font-btn:disabled:hover {
+    background: var(--border-color);
+    color: var(--text-dark);
+    transform: none;
+}
+
+.font-scale {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 5px;
+}
+
+.font-option {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--light-bg);
+    color: var(--text-light);
+    border: 2px solid transparent;
+    flex-shrink: 0;
+}
+
+.font-option:hover {
+    background: var(--primary-light);
+    color: var(--white);
+}
+
+.font-option.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary-dark);
+    transform: scale(1.1);
+}
+
+/* Main Content */
+.reader-main {
+    flex: 1;
+    padding: 0 15px 80px;
+    width: 100%;
+    position: relative;
+}
+
+.reader-container {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.book-info-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.book-info-bar span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.book-info-bar span i {
+    color: var(--primary);
+    width: 16px;
+    text-align: center;
+}
+
+/* Book Content  */
+.book-content {
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 25px 20px;
+    margin: 20px 0;
+    min-height: 300px;
+    max-height: 60vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-content pre {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    max-width: 100%;
+    margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    text-align-last: left;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+
+.book-content p {
+    margin-bottom: 1.2em;
+    text-align: justify;
+    text-justify: inter-word;
+    text-align-last: left;
+    width: 100%;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
+.book-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Font Size Classes */
+.font-small .book-content {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.font-small .book-content pre {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.font-medium .book-content {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.font-medium .book-content pre {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.font-large .book-content {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.font-large .book-content pre {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.font-xlarge .book-content {
+    font-size: 20px;
+    line-height: 2.0;
+}
+
+.font-xlarge .book-content pre {
+    font-size: 20px;
+    line-height: 2.0;
+}
+
+/*Pagination Controls */
+.pagination-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px 0;
+    margin-top: 20px;
+    border-top: 2px solid var(--border-color);
+    position: relative;
+}
+
+/* Page Indicator */
+.page-indicator {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--white);
+    padding: 14px 20px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--white);
+    position: relative;
+    overflow: hidden;
+    order: -1;
+    margin-bottom: 8px;
+}
+
+.page-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%);
+    animation: shimmer-indicator 3s infinite;
+}
+
+.page-indicator i {
+    font-size: 16px;
+    margin-bottom: 3px;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+}
+
+.current-page {
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.total-pages {
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.page-separator {
+    opacity: 0.7;
+}
+
+.page-progress {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 3px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Pagination Buttons */
+.pagination-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.pagination-btn {
+    background: var(--white);
+    color: var(--primary);
+    text-decoration: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    font-size: 15px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.pagination-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.5s;
+}
+
+.pagination-btn:hover:not(.disabled) {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.pagination-btn:hover:not(.disabled)::before {
+    left: 100%;
+}
+
+.pagination-btn:active:not(.disabled) {
+    transform: translateY(-1px);
+}
+
+.next-btn {
+    margin-top: 4px;
+}
+
+.pagination-btn.disabled {
+    background: var(--light-bg);
+    color: var(--text-light);
+    border-color: var(--border-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination-btn.disabled:hover {
+    background: var(--light-bg);
+    color: var(--text-light);
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination-btn i {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.pagination-btn:hover:not(.disabled) i.fa-angle-left {
+    transform: translateX(-3px);
+}
+
+.pagination-btn:hover:not(.disabled) i.fa-angle-right {
+    transform: translateX(3px);
+}
+
+/* Floating Scroll Down Arrow  */
+.scroll-down-arrow {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(224, 123, 22, 0.3);
+    z-index: 99;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.scroll-down-arrow.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-down-arrow:hover {
+    background: var(--primary-dark);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(224, 123, 22, 0.4);
+}
+
+.scroll-down-arrow i {
+    font-size: 24px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-5px);
+    }
+
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes shimmer-indicator {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Footer */
+.reader-footer {
+    background: var(--secondary);
+    color: var(--text-white);
+    padding: 20px 15px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.reader-footer p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.footer-sub {
+    margin-top: 8px;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* scrollbar for book content */
+.book-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--border-color);
+}
+
+.book-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.book-content::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.book-content::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.book-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Animations */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Selection */
+.book-content ::selection {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.book-content ::-moz-selection {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Animation for page */
+.book-content {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 8px;
+    z-index: 10000;
+    animation: slideUp 0.3s ease-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 250px;
+    max-width: 90%;
+    text-align: center;
+    display: none;
+}
+
+.toast.show {
+    display: flex;
+    animation: slideUp 0.3s ease-out;
+}
+
+.toast-success {
+    background: #27ae60;
+}
+
+.toast-error {
+    background: #e74c3c;
+}
+
+.toast-info {
+    background: #3498db;
+}
+
+.toast i {
+    font-size: 18px;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .reader-header {
+        padding: 15px 30px;
+    }
+
+    .back-btn {
+        width: auto;
+        padding: 10px 20px;
+        border-radius: 25px;
+        gap: 8px;
+    }
+
+    .back-text {
+        display: inline;
+        font-size: 15px;
+    }
+
+    .book-title {
+        font-size: 20px;
+        padding: 0 20px;
+    }
+
+    .download-btn {
+        width: auto;
+        padding: 10px 20px;
+        border-radius: 25px;
+        gap: 8px;
+    }
+
+    .download-text {
+        display: inline;
+        font-size: 15px;
+    }
+
+    .reading-progress {
+        height: 8px;
+        margin-bottom: 20px;
+    }
+
+    .progress-text {
+        font-size: 11px;
+    }
+
+    .reading-controls {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+        margin: 0 30px 30px;
+        gap: 20px;
+    }
+
+    .control-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .font-controls {
+        width: auto;
+    }
+
+    .font-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .font-option {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .font-size-display {
+        min-width: 80px;
+        font-size: 15px;
+    }
+
+    .reader-main {
+        padding: 0 30px 30px;
+    }
+
+    .reader-container {
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+    }
+
+    .book-info-bar {
+        flex-direction: row;
+        justify-content: center;
+        gap: 25px;
+        padding: 15px 0;
+        margin-bottom: 25px;
+    }
+
+    .book-info-bar span {
+        font-size: 14px;
+    }
+
+    .book-content {
+        padding: 35px 30px;
+        min-height: 400px;
+        max-height: 65vh;
+        font-size: 17px;
+        line-height: 1.7;
+        border-radius: 15px;
+    }
+
+    .book-content pre {
+        font-size: 17px;
+        line-height: 1.7;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .font-small .book-content {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .font-small .book-content pre {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .font-medium .book-content {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .font-medium .book-content pre {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .font-large .book-content {
+        font-size: 19px;
+        line-height: 1.9;
+    }
+
+    .font-large .book-content pre {
+        font-size: 19px;
+        line-height: 1.9;
+    }
+
+    .font-xlarge .book-content {
+        font-size: 21px;
+        line-height: 2.1;
+    }
+
+    .font-xlarge .book-content pre {
+        font-size: 21px;
+        line-height: 2.1;
+    }
+
+    /* Pagination for Tablet */
+    .pagination-controls {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        margin-top: 25px;
+        gap: 20px;
+    }
+
+    .page-indicator {
+        order: 0;
+        margin-bottom: 0;
+        padding: 12px 24px;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .page-indicator i {
+        margin-bottom: 0;
+        font-size: 18px;
+    }
+
+    .page-numbers {
+        font-size: 18px;
+        gap: 10px;
+    }
+
+    .current-page {
+        font-size: 22px;
+    }
+
+    .page-progress {
+        font-size: 13px;
+        margin-top: 0;
+        margin-left: 10px;
+    }
+
+    .pagination-buttons {
+        flex-direction: row;
+        width: auto;
+        gap: 15px;
+        margin-top: 0;
+    }
+
+    .pagination-btn {
+        width: auto;
+        min-width: 140px;
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+
+    .next-btn {
+        margin-top: 0;
+    }
+
+    .reader-footer {
+        padding: 25px 30px;
+    }
+
+    .reader-footer p {
+        font-size: 14px;
+    }
+
+    .footer-sub {
+        font-size: 12px;
+    }
+
+    /* Hide scroll arrow on tablet/desktop */
+    .scroll-down-arrow {
+        display: none;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .reader-header {
+        padding: 15px 40px;
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .book-title {
+        font-size: 24px;
+    }
+
+    .reading-controls {
+        max-width: 1400px;
+        margin: 0 auto 30px;
+    }
+
+    .reader-main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px 40px;
+    }
+
+    .reader-container {
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .book-content {
+        padding: 45px 40px;
+        min-height: 500px;
+        max-height: 70vh;
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    .book-content pre {
+        font-size: 18px;
+        line-height: 1.8;
+        max-width: 900px;
+    }
+
+    .font-medium .book-content {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    .font-medium .book-content pre {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    .font-large .book-content {
+        font-size: 20px;
+        line-height: 2.0;
+    }
+
+    .font-large .book-content pre {
+        font-size: 20px;
+        line-height: 2.0;
+    }
+
+    .font-xlarge .book-content {
+        font-size: 22px;
+        line-height: 2.2;
+    }
+
+    .font-xlarge .book-content pre {
+        font-size: 22px;
+        line-height: 2.2;
+    }
+
+    .book-info-bar {
+        gap: 30px;
+    }
+
+    .book-info-bar span {
+        font-size: 15px;
+    }
+
+    /* Pagination for Desktop */
+    .page-indicator {
+        padding: 14px 28px;
+    }
+
+    .page-numbers {
+        font-size: 19px;
+    }
+
+    .current-page {
+        font-size: 24px;
+    }
+
+    .pagination-btn {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+
+    .reader-footer {
+        padding: 25px 40px;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 360px) {
+    .reader-header {
+        padding: 10px 12px;
+    }
+
+    .book-title {
+        font-size: 14px;
+        padding: 0 8px;
+    }
+
+    .font-controls {
+        gap: 6px;
+    }
+
+    .font-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .font-option {
+        width: 26px;
+        height: 26px;
+        font-size: 10px;
+    }
+
+    .font-size-display {
+        min-width: 60px;
+        font-size: 13px;
+    }
+
+    .book-content {
+        padding: 15px;
+        font-size: 15px;
+    }
+
+    .book-content pre {
+        font-size: 15px;
+    }
+
+    /* pagination for mobile screen */
+    .page-indicator {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .page-numbers {
+        font-size: 16px;
+        gap: 6px;
+    }
+
+    .current-page {
+        font-size: 18px;
+    }
+
+    .page-progress {
+        font-size: 11px;
+    }
+
+    .pagination-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .next-btn {
+        margin-top: 6px;
+    }
+
+    .scroll-down-arrow {
+        width: 44px;
+        height: 44px;
+        bottom: 70px;
+        right: 15px;
+    }
+
+    .scroll-down-arrow i {
+        font-size: 20px;
+    }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .reading-progress {
+        height: 5px;
+        margin-bottom: 10px;
+    }
+
+    .reading-controls {
+        margin: 0 10px 15px;
+        padding: 10px;
+    }
+
+    .reader-main {
+        padding: 0 10px 60px;
+    }
+
+    .reader-container {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .book-content {
+        min-height: 200px;
+        max-height: 50vh;
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .pagination-controls {
+        padding: 10px 0;
+        margin-top: 15px;
+        gap: 8px;
+    }
+
+    .page-indicator {
+        padding: 10px 14px;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .pagination-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .next-btn {
+        margin-top: 6px;
+    }
+
+    .scroll-down-arrow {
+        bottom: 60px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .scroll-down-arrow i {
+        font-size: 18px;
+    }
+}
