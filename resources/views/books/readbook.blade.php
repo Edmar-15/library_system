@@ -9,13 +9,6 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
 <body class="font-medium">
-    <!-- Reading Progress -->
-    <div class="reading-progress">
-        <div class="progress-bar" id="progressBar" style="width: {{ ($page / $totalPages) * 100 }}%">
-            <span class="progress-text" id="progressText">{{ $page }} / {{ $totalPages }}</span>
-        </div>
-    </div>
-
     <!-- Header -->
     <header class="reader-header">
         <div class="header-content">
@@ -36,7 +29,16 @@
                 </a>
             </div>
         </div>
+
+        <!-- Reading Progress -->
+    <div class="reading-progress">
+        <div class="progress-bar" id="progressBar" style="width: {{ ($page / $totalPages) * 100 }}%">
+            <span class="progress-text" id="progressText">{{ $page }} / {{ $totalPages }}</span>
+        </div>
+    </div>
     </header>
+
+    
 
     <div class="reading-controls">
         <div class="control-group">
