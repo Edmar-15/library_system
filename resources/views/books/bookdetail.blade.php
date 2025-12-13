@@ -171,7 +171,7 @@
                     </div>
 
                     @auth
-                        @if(auth()->user()->id === 1) <!-- Admin check -->
+                        @if(auth()->user()) <!-- Admin check -->
                             <div class="admin-actions">
                                 <a href="{{ route('books.edit', $book) }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit Book
