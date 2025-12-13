@@ -157,13 +157,21 @@
                 {{ $newBook->description }}
               </p>
               <div class="book-actions">
-                <a href="#read" class="book-btn primary">
+                @auth
+                <button
+                  class="book-btn primary add-to-list-btn"
+                  data-book-id="{{ $newBook->id }}">
                   <i class="fas fa-plus"></i> Add to List
-                </a>
-                <a href="#details" class="book-btn secondary">
+                </button>
+                @endauth
+
+                <a
+                  href="{{ route('books.show', $newBook) }}"
+                  class="book-btn secondary">
                   <i class="fas fa-info-circle"></i> View Details
                 </a>
               </div>
+
             </div>
           </div>
         </div>
@@ -240,6 +248,49 @@
       const query = document.querySelector('.search-input').value.trim();
       if (query) alert(`Searching for: "${query}"`);
     });
+
+    document.querySelectorAll('.add-to-list-btn').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const bookId = this.dataset.bookId;
+      const button = this;
+
+      button.disabled = true;
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+      try {
+        const response = await fetch('/booklists', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          },
+          body: JSON.stringify({
+            book_id: bookId,
+            status: 'want_to_read'
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          button.innerHTML = '<i class="fas fa-check"></i>';
+          button.classList.add('success');
+        } else {
+          alert(result.message || 'Already in your list.');
+          resetBtn(button);
+        }
+      } catch {
+        alert('Request failed.');
+        resetBtn(button);
+      }
+    });
+  });
+
+  function resetBtn(btn) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-plus"></i> Add to List';
+  }
   </script>
 </body>
 
