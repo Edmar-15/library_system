@@ -224,18 +224,11 @@ input[type="password"]:focus {
 }
 /* Footer */
 footer {
-    background: transparent;
+    
     padding: 1.5rem;
     text-align: center;
-    width: 100%;
-    position: relative;
-    margin-top: 0;
-}
-
-footer p {
-    color: #0d0601;
+    color: #4a3728;
     font-size: 0.9rem;
-    margin: 0;
 }
 
 /* Error Messages */

@@ -47,7 +47,7 @@ main {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    min-height: 500px;
+    height: 500px;
     position: relative;
     width: 100%;
 }
@@ -100,18 +100,37 @@ main {
 .orange-back {
     flex: 1;
     background: linear-gradient(135deg, #e8993a 0%, #d68825 100%);
-    padding: 3rem 2.5rem;
+    padding: 2rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0 12px 12px 0;
+    overflow-y: auto;
+}
+
+.orange-back::-webkit-scrollbar {
+    width: 6px;
+}
+
+.orange-back::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.orange-back::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.orange-back::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 #Title {
     color: white;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
     font-weight: 700;
     text-align: center;
 }
@@ -120,15 +139,15 @@ main {
 .form-group {
     width: 100%;
     max-width: 400px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.65rem;
 }
 
 .form-group label {
     display: block;
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
 /* Form Inputs */
@@ -136,8 +155,8 @@ input[type="name"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
-    padding: 0.875rem 1rem;
-    font-size: 1rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
     border: 2px solid transparent;
     border-radius: 6px;
     background: white;
@@ -163,45 +182,22 @@ input.success {
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2) !important;
 }
 
-/* Validation Messages */
+/* Validation Messages - HIDDEN */
 .error-message,
 .success-message {
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
-    margin-bottom: 0;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    display: none;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.error-message {
-    color: #ff4444;
-    background: rgba(255, 68, 68, 0.1);
-    border-left: 3px solid #ff4444;
-}
-
-.success-message {
-    color: #4CAF50;
-    background: rgba(76, 175, 80, 0.1);
-    border-left: 3px solid #4CAF50;
-}
-
-.error-message.show,
-.success-message.show {
-    display: block;
-    opacity: 1;
-    height: auto;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Register Button */
 #btn {
     width: 100%;
-    padding: 0.875rem;
-    font-size: 1.05rem;
+    padding: 0.65rem;
+    font-size: 1rem;
     font-weight: 600;
     border: none;
     border-radius: 6px;
@@ -209,7 +205,7 @@ input.success {
     transition: all 0.3s ease;
     background: white;
     color: #e8993a;
-    margin-top: 0.5rem;
+    margin-top: 0.2rem;
 }
 
 #btn:hover {

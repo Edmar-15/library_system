@@ -81,7 +81,7 @@
                     </div>
             </div>
             <footer>
-        <p>&copy; {{ date('Y') }} LibrarySystem.</p>
+            © 2025 LibrarySystem.
     </footer>
 
 
