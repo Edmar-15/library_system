@@ -97,7 +97,7 @@
 
             <!-- Pagination -->
             <div class="pagination-controls">
-                <span class="page-indicator" aria-live="polite">
+                <button class="page-indicator" aria-live="polite" id="saveBookmark">
                     <i class="fas fa-bookmark"></i>
                     <div class="page-numbers">
                         <span class="current-page" id="currentPage">{{ $page }}</span>
@@ -107,7 +107,7 @@
                     <div class="page-progress" id="pageProgress">
                         {{ round(($page / $totalPages) * 100) }}% complete
                     </div>
-                </span>
+                </button>
 
                 <div class="pagination-buttons">
                     @if ($page > 1)
@@ -140,7 +140,7 @@
         </div>
     </main>
 
-    <div class="pagination-controls">
+    {{-- <div class="pagination-controls">
 
         <button id="saveBookmark" class="pagination-btn">
             <i class="fas fa-bookmark"></i> Save Bookmark
@@ -149,7 +149,7 @@
         <span class="page-indicator">
             Page {{ $page }} of {{ $totalPages }}
         </span>
-    </div>
+    </div> --}}
 
     <!-- Floating Scroll Down -->
     <div class="scroll-down-arrow" id="scrollDownArrow" title="Scroll down">
