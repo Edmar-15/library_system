@@ -20,7 +20,6 @@
                 <a href="{{ route('show.home') }}"><i class="fas fa-home"></i> Home</a>
                 <a href="{{ route('books.index') }}"><i class="fas fa-book"></i> Books</a>
                 <a href="{{ route('booklists.index') }}" class="active"><i class="fas fa-list"></i> My Booklists</a>
-                <a href="{{ route('show.profile') }}"><i class="fas fa-user"></i> Profile</a>
             </nav>
         </div>
     </header>
@@ -148,19 +147,24 @@
                                 @endif
 
                                 <div class="booklist-actions">
-                                    <a href="{{ route('books.show', $item->book) }}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-eye"></i> View
-                                    </a>
-                                    <button class="btn btn-sm btn-secondary edit-notes-btn" data-id="{{ $item->id }}">
-                                        <i class="fas fa-edit"></i> Notes
-                                    </button>
+                                    <!-- Delete button -->
                                     <form action="{{ route('booklists.destroy', $item) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove this book from your list?')">
+                                        <button type="submit" class="btn btn-sm btn-danger btn-icon" data-tooltip="Delete" onclick="return confirm('Remove this book from your list?')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
+
+                                    <!-- Notes button -->
+                                    <button class="btn btn-sm btn-secondary btn-icon edit-notes-btn" data-tooltip="Edit Notes" data-id="{{ $item->id }}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+
+                                    <!-- View button -->
+                                    <a href="{{ route('books.show', $item->book) }}" class="btn btn-sm btn-primary btn-icon" data-tooltip="View Book">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -213,9 +217,9 @@
 
         document.getElementById('notesForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const notes = document.getElementById('notesTextarea').value;
-            
+
             try {
                 const response = await fetch(`/booklists/${currentItemId}`, {
                     method: 'PUT',
@@ -227,7 +231,7 @@
                 });
 
                 const result = await response.json();
-                
+
                 if (result.success) {
                     alert('Notes saved!');
                     modal.style.display = 'none';
