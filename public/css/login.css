@@ -13,7 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Subtle Background Pattern (Matches welcome page) */
 body::before {
     content: '';
     position: fixed;
@@ -30,7 +29,6 @@ body::before {
     opacity: 0.5;
 }
 
-/* Header - Matches welcome page */
 header {
     background: linear-gradient(135deg, #e8993a 0%, #d68825 100%);
     padding: 1.8rem 3rem;
@@ -55,7 +53,6 @@ header h1:hover {
     transform: translateY(-2px);
 }
 
-/* Main Container */
 main {
     flex: 1;
     display: flex;
@@ -73,7 +70,6 @@ main {
     animation: fadeInUp 0.6s ease-out;
 }
 
-/* Container (Book-like Design) */
 .container {
     display: flex;
     background: white;
@@ -96,7 +92,6 @@ main {
         0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Left Side - White Background */
 .white-back {
     flex: 1;
     background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
@@ -150,7 +145,6 @@ main {
     border: 1px solid rgba(232, 153, 58, 0.1);
 }
 
-/* Right Side - Orange Background */
 .orange-back {
     flex: 1;
     background: linear-gradient(135deg, #e8993a 0%, #d68825 100%);
@@ -174,7 +168,6 @@ main {
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 }
 
-/* Form Labels */
 label {
     align-self: flex-start;
     color: white;
@@ -195,7 +188,6 @@ label:hover {
     transform: translateX(5px);
 }
 
-/* Form Inputs */
 input[type="email"],
 input[type="password"] {
     width: 100%;
@@ -218,7 +210,6 @@ input[type="password"]:focus {
     transform: translateY(-2px);
 }
 
-/* Forgot Password Link */
 #F {
     color: white;
     text-decoration: none;
@@ -253,7 +244,6 @@ input[type="password"]:focus {
     opacity: 0.9;
 }
 
-/* Login Button */
 #btn {
     width: 100%;
     max-width: 400px;
@@ -279,7 +269,6 @@ input[type="password"]:focus {
     box-shadow: 0 8px 25px rgba(232, 153, 58, 0.3);
 }
 
-/* Ripple Effect for Buttons */
 .ripple {
     position: absolute;
     border-radius: 50%;
@@ -296,7 +285,6 @@ input[type="password"]:focus {
     animation: rippleEffect 0.6s ease-out;
 }
 
-/* "Or" Divider */
 .or-divider {
     color: white;
     text-align: center;
@@ -331,7 +319,6 @@ input[type="password"]:focus {
     left: 100%;
 }
 
-/* Create Account Button (Enhanced) */
 .create-account-btn {
     display: block;
     width: 100%;
@@ -381,7 +368,6 @@ input[type="password"]:focus {
     box-shadow: 0 4px 15px rgba(232, 153, 58, 0.25);
 }
 
-/* Footer - Matches welcome page */
 footer {
     background: rgba(232, 153, 58, 0.9);
     padding: 2rem;
@@ -404,7 +390,6 @@ footer::before {
     background: linear-gradient(90deg, transparent, white, transparent);
 }
 
-/* Error Messages - Enhanced */
 .orange-back>ul {
     background: rgba(255, 255, 255, 0.1) !important;
     border-left: 4px solid rgba(255, 255, 255, 0.8);
@@ -435,7 +420,6 @@ footer::before {
     margin-bottom: 0;
 }
 
-/* Animations */
 @keyframes gentleBounce {
 
     0%,
@@ -502,7 +486,6 @@ footer::before {
     }
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .form-container {
         max-width: 900px;

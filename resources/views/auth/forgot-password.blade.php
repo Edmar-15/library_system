@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ asset('css/forgot.css') }}">
 </head>
 <body>
-    <!-- EXACT SAME HEADER as welcome page -->
     <header>
         <h1 id="headerTitle">Library System</h1>
     </header>
@@ -17,10 +16,8 @@
             <div class="card-wrapper">
                 <!-- Left white curved box -->
                 <div class="left-panel">
-                    <!-- Emoji and content added via CSS pseudo-elements -->
                 </div>
 
-                <!-- Orange box -->
                 <div class="forgot-card" id="card">
                     @if(session('status'))
                         <p><i>{{ session('status') }}</i></p>
@@ -45,8 +42,8 @@
 
                         <button type="submit" class="confirm-btn">Send Reset Link</button>
                     </form>
-                </div> <!-- End orange card -->
-            </div> <!-- End card wrapper -->
+                </div>
+            </div>
         </div>
     </main>
 
@@ -55,7 +52,7 @@
     </footer>
 
     <script>
-        // Add ripple effect to buttons like welcome page
+        // ripple effect
         document.querySelector('.confirm-btn').addEventListener('click', function(e) {
             createRipple(e, this);
         });

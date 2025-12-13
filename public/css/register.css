@@ -1,4 +1,3 @@
-/* register.css - EXACT MATCH to welcome.css with login.css inputs and padding */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Subtle Background Pattern - EXACT COPY from welcome.css */
 body::before {
     content: '';
     position: fixed;
@@ -31,7 +29,6 @@ body::before {
     opacity: 0.5;
 }
 
-/* Header - EXACT COPY from welcome.css */
 header {
     background: linear-gradient(135deg, #e8993a 0%, #d68825 100%);
     padding: 1.8rem 3rem;
@@ -56,7 +53,6 @@ header h1:hover {
     transform: translateY(-2px);
 }
 
-/* Main Container - EXACT COPY from welcome.css */
 main {
     flex: 1;
     width: 100%;
@@ -67,7 +63,6 @@ main {
     perspective: 1000px;
 }
 
-/* Book Container - Reduced padding to match login */
 .form-container .container {
     display: flex;
     position: relative;
@@ -81,7 +76,6 @@ main {
         0 20px 50px rgba(214, 136, 37, 0.2),
         0 10px 30px rgba(0, 0, 0, 0.1);
     min-height: 480px;
-    /* Reduced from 500px */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 6px solid white;
     animation: bookAppear 0.8s ease-out;
@@ -94,12 +88,10 @@ main {
         0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Left Page - Reduced padding to match login */
 .white-back {
     flex: 1;
     background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
     padding: 3rem 2.5rem;
-    /* Reduced from 3.5rem 3rem */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -122,18 +114,14 @@ main {
 
 .white-back .emoji {
     font-size: 70px;
-    /* Reduced from 80px */
     margin-bottom: 1.5rem;
-    /* Reduced from 2rem */
     animation: gentleBounce 3s ease-in-out infinite;
 }
 
 .white-back .title {
     font-size: 2rem;
-    /* Reduced from 2.2rem */
     color: #333;
     margin-bottom: 0.8rem;
-    /* Reduced from 1rem */
     font-weight: 700;
     background: linear-gradient(135deg, #e8993a, #d68825);
     -webkit-background-clip: text;
@@ -143,27 +131,20 @@ main {
 
 .white-back .description {
     font-size: 1rem;
-    /* Reduced from 1.1rem */
     color: #666;
     line-height: 1.5;
-    /* Reduced from 1.6 */
     max-width: 380px;
-    /* Reduced from 400px */
     margin-top: 1.2rem;
-    /* Reduced from 1.5rem */
     padding: 1.2rem;
-    /* Reduced from 1.5rem */
     background: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     border: 1px solid rgba(232, 153, 58, 0.1);
 }
 
-/* Right Page - Reduced padding to match login */
 .orange-back {
     flex: 1;
     background: linear-gradient(135deg, #e8993a 0%, #d68825 100%);
     padding: 3rem 2.5rem;
-    /* Reduced from 3.5rem 3rem */
     color: white;
     display: flex;
     flex-direction: column;
@@ -184,39 +165,29 @@ main {
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 }
 
-/* Title inside orange-back - Reduced size to match login */
 .orange-back h1 {
     margin: 0;
     font-size: 2.5rem;
-    /* Reduced from 2.8rem */
     font-weight: 700;
     color: white;
     margin-bottom: 1.2rem;
-    /* Reduced from 1.5rem */
     text-align: center;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Form Groups - EXACT COPY from login.css form styling */
 .form-group {
     width: 100%;
     max-width: 380px;
-    /* Reduced from 400px */
     margin-bottom: 0.8rem;
-    /* Reduced from 1rem */
 }
 
-/* Labels - EXACT COPY from login.css label styling */
 .form-group label {
     display: block;
     color: white;
     font-size: 0.95rem;
-    /* Reduced from 1rem */
     font-weight: 500;
     margin-bottom: 0.4rem;
-    /* Reduced from 0.5rem */
     margin-top: 0.4rem;
-    /* Reduced from 0.5rem */
     width: 100%;
     transition: all 0.3s ease;
 }
@@ -225,20 +196,16 @@ main {
     transform: translateX(5px);
 }
 
-/* Inputs - EXACT COPY from login.css input styling */
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="password"] {
     width: 100%;
     padding: 0.9rem 1rem;
-    /* Reduced from 1rem 1.2rem */
     font-size: 0.95rem;
-    /* Reduced from 1rem */
     border: 2px solid transparent;
     border-radius: 10px;
     background: white;
     margin-bottom: 0.4rem;
-    /* Reduced from 0.5rem */
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     color: #333;
@@ -253,32 +220,24 @@ main {
     transform: translateY(-2px);
 }
 
-/* Input placeholder styling */
 .form-group input::placeholder {
     color: rgba(51, 51, 51, 0.7);
     font-weight: 400;
 }
 
-/* Button Container - Reduced gap to match login */
 .button-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    /* Reduced from 1.2rem */
     width: 100%;
     max-width: 380px;
-    /* Reduced from 400px */
     margin-top: 1.2rem;
-    /* Reduced from 1.5rem */
 }
 
-/* Register Button - Slightly reduced padding */
 #btn {
     width: 100%;
     padding: 1rem;
-    /* Reduced from 1.1rem */
     font-size: 1rem;
-    /* Reduced from 1.1rem */
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
@@ -294,7 +253,6 @@ main {
     color: #e8993a;
     border: 2px solid white;
     margin-top: 0.3rem;
-    /* Reduced from 0.5rem */
 }
 
 #btn:hover {
@@ -303,13 +261,10 @@ main {
     box-shadow: 0 8px 25px rgba(232, 153, 58, 0.3);
 }
 
-/* Login link - Slightly reduced padding */
 .login-link {
     width: 100%;
     padding: 1rem;
-    /* Reduced from 1.1rem */
     font-size: 1rem;
-    /* Reduced from 1.1rem */
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
@@ -327,7 +282,6 @@ main {
     border: 2px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px);
     margin-top: 0.3rem;
-    /* Reduced from 0.5rem */
 }
 
 .login-link:hover {
@@ -337,20 +291,15 @@ main {
     border-color: white;
 }
 
-/* Validation Messages - Reduced size */
 .error-message,
 .success-message {
     font-size: 0.85rem;
-    /* Reduced from 0.9rem */
     margin-top: 0.3rem;
-    /* Reduced from 0.5rem */
     padding: 0.5rem 0.8rem;
-    /* Reduced from 0.6rem 1rem */
     border-radius: 8px;
     display: none;
     width: 100%;
     max-width: 380px;
-    /* Reduced from 400px */
     text-align: left;
     font-weight: 500;
 }
@@ -374,7 +323,6 @@ main {
     display: block;
 }
 
-/* Input states - updated to match white background inputs */
 input.success {
     border-color: #68d391 !important;
     box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.3), 0 3px 10px rgba(0, 0, 0, 0.1) !important;
@@ -385,7 +333,6 @@ input.error {
     box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.3), 0 3px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Footer - EXACT COPY from welcome.css */
 footer {
     background: rgba(232, 153, 58, 0.9);
     padding: 2rem;
@@ -407,14 +354,11 @@ footer::before {
     background: linear-gradient(90deg, transparent, white, transparent);
 }
 
-/* Error List - Reduced padding */
 ul[style*="background-color: ffe2e2;"] {
     width: 100%;
     max-width: 1000px;
     margin: 1.2rem auto 0;
-    /* Reduced from 1.5rem */
     padding: 1.2rem !important;
-    /* Reduced from 1.5rem */
     background: rgba(255, 226, 226, 0.9) !important;
     border-radius: 10px;
     border-left: 4px solid #f44336;
@@ -426,12 +370,9 @@ ul[style*="background-color: ffe2e2;"] li {
     color: #d32f2f !important;
     font-weight: 500;
     padding: 0.25rem 0;
-    /* Reduced from 0.3rem */
     font-size: 0.9rem;
-    /* Reduced from 0.95rem */
 }
 
-/* Ripple Effect - EXACT COPY from welcome.css */
 .ripple {
     position: absolute;
     border-radius: 50%;
@@ -440,7 +381,6 @@ ul[style*="background-color: ffe2e2;"] li {
     animation: rippleEffect 0.6s ease-out;
 }
 
-/* Animations - EXACT COPY from welcome.css */
 @keyframes gentleBounce {
 
     0%,
@@ -472,7 +412,6 @@ ul[style*="background-color: ffe2e2;"] li {
     }
 }
 
-/* Responsive Design - Adjusted for reduced padding */
 @media (max-width: 1024px) {
     .form-container .container {
         max-width: 900px;
@@ -481,22 +420,18 @@ ul[style*="background-color: ffe2e2;"] li {
     .white-back,
     .orange-back {
         padding: 2.5rem 2rem;
-        /* Reduced from 3rem 2.5rem */
     }
 
     .white-back .title {
         font-size: 1.8rem;
-        /* Reduced from 2rem */
     }
 
     .orange-back h1 {
         font-size: 2.2rem;
-        /* Reduced from 2.4rem */
     }
 
     .white-back .emoji {
         font-size: 65px;
-        /* Reduced from 70px */
     }
 }
 
@@ -507,7 +442,6 @@ ul[style*="background-color: ffe2e2;"] li {
         border-width: 4px;
         margin: 0 1rem;
         min-height: auto;
-        /* Reset min-height */
     }
 
     .form-container .container:hover {
@@ -517,7 +451,6 @@ ul[style*="background-color: ffe2e2;"] li {
     .white-back {
         border-radius: 12px 12px 0 0;
         padding: 2rem 1.5rem;
-        /* Reduced from 2.5rem 2rem */
     }
 
     .white-back::after {
@@ -527,29 +460,23 @@ ul[style*="background-color: ffe2e2;"] li {
     .orange-back {
         border-radius: 0 0 12px 12px;
         padding: 2rem 1.5rem;
-        /* Reduced from 2.5rem 2rem */
     }
 
     .orange-back h1 {
         font-size: 2rem;
-        /* Reduced from 2.2rem */
     }
 
     .white-back .emoji {
         font-size: 60px;
-        /* Reduced from 70px */
     }
 
     .white-back .title {
         font-size: 1.6rem;
-        /* Reduced from 1.8rem */
     }
 
     .white-back .description {
         font-size: 0.95rem;
-        /* Reduced from 1rem */
         padding: 1rem;
-        /* Reduced from 1.2rem */
     }
 
     header {
@@ -568,21 +495,16 @@ ul[style*="background-color: ffe2e2;"] li {
     #btn,
     .login-link {
         padding: 0.85rem;
-        /* Reduced from 1rem */
         font-size: 0.95rem;
-        /* Reduced from 1rem */
     }
 
     .form-group {
         max-width: 320px;
-        /* Reduced from 350px */
     }
 
     .button-container {
         max-width: 320px;
-        /* Reduced from 350px */
         gap: 0.8rem;
-        /* Reduced from 1rem */
     }
 }
 
@@ -595,34 +517,28 @@ ul[style*="background-color: ffe2e2;"] li {
     .white-back,
     .orange-back {
         padding: 1.5rem 1.2rem;
-        /* Reduced from 2rem 1.5rem */
     }
 
     .white-back .emoji {
         font-size: 55px;
-        /* Reduced from 60px */
     }
 
     .orange-back h1 {
         font-size: 1.7rem;
-        /* Reduced from 1.9rem */
     }
 
     .form-group input,
     #btn,
     .login-link {
         padding: 0.8rem;
-        /* Reduced from 0.9rem */
         font-size: 0.9rem;
     }
 
     .form-group {
         max-width: 280px;
-        /* Reduced from 300px */
     }
 
     .button-container {
         max-width: 280px;
-        /* Reduced from 300px */
     }
 }

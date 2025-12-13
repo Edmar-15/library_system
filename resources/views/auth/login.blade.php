@@ -17,7 +17,7 @@
             @csrf
 
             <div class="container">
-                <!-- Left Side - Welcome Message -->
+                <!-- Left Side -->
                 <div class="white-back">
                     <div class="emoji">📚</div>
                     <div class="title">Welcome Back!</div>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <!-- Right Side - Login Form -->
+                <!-- Right Side -->
                 <div class="orange-back">
                     <label for="EM" id="lbl1">Enter Email</label>
                     <input type="email" id="EM" name="email" value="{{ old('email') }}" required
@@ -76,7 +76,7 @@
             const headerTitle = document.querySelector('header h1');
             const emoji = document.querySelector('.emoji');
 
-            // Enhanced ripple effect function
+            // ripple effect function
             function createRipple(e, button, color = 'rgba(255, 255, 255, 0.6)') {
                 const ripple = document.createElement('span');
                 const rippleClass = button.classList.contains('create-account-btn')
@@ -142,13 +142,12 @@
                 });
             }
 
-            // Create Account button enhancements
+            // Create Account button
             if (createAccountBtn) {
                 createAccountBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     createRipple(e, this, 'rgba(232, 153, 58, 0.4)');
 
-                    // Add click animation
                     this.style.transform = 'scale(0.98)';
                     setTimeout(() => {
                         this.style.transform = '';
@@ -257,7 +256,6 @@
                 });
             }
 
-            // Add CSS for smooth transitions and new styles
             const style = document.createElement('style');
             style.textContent = `
                 .emoji {
