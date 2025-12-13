@@ -6,6 +6,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BooklistController;
@@ -68,3 +69,9 @@ Route::middleware('auth')->group(function () {
 // Book content routes
 Route::get('/books/{book}/read', [BookController::class, 'readContent'])->name('books.readbook');
 Route::get('/books/{book}/download', [BookController::class, 'downloadContent'])->name('books.download');
+
+Route::post('/books/{book}/bookmark', [BookmarkController::class, 'save'])
+    ->name('books.bookmark');
+
+Route::get('/bookmarks', [BookmarkController::class, 'index'])
+    ->name('bookmarks.index');

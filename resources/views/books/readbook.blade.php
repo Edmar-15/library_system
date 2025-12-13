@@ -58,8 +58,36 @@
         </div>
     </main>
 
+    <div class="pagination-controls">
+
+        <button id="saveBookmark" class="pagination-btn">
+            <i class="fas fa-bookmark"></i> Save Bookmark
+        </button>
+
+        <span class="page-indicator">
+            Page {{ $page }} of {{ $totalPages }}
+        </span>
+    </div>
+
     <footer class="reader-footer">
         <p>&copy; {{ date('Y') }} LibrarySystem. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById('saveBookmark').addEventListener('click', function () {
+        fetch('{{ route('books.bookmark', $book->id) }}', {
+            method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+            body: JSON.stringify({
+                page: {{ $page }}
+            })
+            }).then(res => res.json())
+            .then(() => alert('Bookmark saved!'));
+        });
+    </script>
+
 </body>
 </html>

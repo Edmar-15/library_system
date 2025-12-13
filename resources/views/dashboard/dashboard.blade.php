@@ -69,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#bookmarks" class="nav-link" title="Bookmarks">
+            <a href="{{ route('bookmarks.index') }}" class="nav-link" title="Bookmarks">
               <i class="fas fa-bookmark nav-icon"></i>
               <span class="nav-text">Bookmark</span>
             </a>
