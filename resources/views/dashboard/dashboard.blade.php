@@ -18,19 +18,22 @@
       <div class="logo-text">LibrarySystem</div>
     </div>
 
+    <a href="{{ route('news.index') }}" class="book-btn secondary"
+      style="margin-left: 15px; display:flex; align-items:center;">
+      <i class="fas fa-newspaper" style="margin-right:5px;"></i> News and Announcements
+    </a>
+
     @auth
-    <div class="user-section">
-      <div class="user-info">
-        <a href="{{ route('show.profile') }}" class="user-avatar">
-          <img
-            src="{{ $profile?->profile_picture
-                ? asset('storage/' . $profile->profile_picture)
-                : asset('images/default.jpg') }}"
-            alt="profile-pic">
-          <i class="user-name">{{ Auth::user()->name }}</i>
-        </a>
+      <div class="user-section">
+        <div class="user-info">
+          <a href="{{ route('show.profile') }}" class="user-avatar">
+            <img src="{{ $profile?->profile_picture
+      ? asset('storage/' . $profile->profile_picture)
+      : asset('images/default.jpg') }}" alt="profile-pic">
+            <i class="user-name">{{ Auth::user()->name }}</i>
+          </a>
+        </div>
       </div>
-    </div>
     @endauth
   </header>
 
@@ -68,7 +71,7 @@
               <span class="nav-text">Staff</span>
             </a>
           </li>
-          
+
         </ul>
         <div class="sidebar-logout">
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
@@ -86,7 +89,7 @@
       <!-- Page Header -->
       <div class="page-header">
         @auth
-            <h1 class="page-title">Welcome, {{ Auth::user()->name }}</h1>
+          <h1 class="page-title">Welcome, {{ Auth::user()->name }}</h1>
         @endauth
         <p class="page-subtitle">
           Here's what's happening with your library today. Continue your reading journey or explore new
@@ -143,11 +146,9 @@
           <h2><i class="fas fa-crown"></i> New Book Upload</h2>
           <div class="book-of-month">
             <div class="book-cover">
-              <img
-                src="{{ $newBook?->cover_picture
-                    ? asset('storage/' . $newBook->cover_picture)
-                    : asset('images/book-cover.png') }}"
-                alt="book_cover" class="book-cover">
+              <img src="{{ $newBook?->cover_picture
+  ? asset('storage/' . $newBook->cover_picture)
+  : asset('images/book-cover.png') }}" alt="book_cover" class="book-cover">
             </div>
             <div class="book-info">
               <h3 class="book-title">{{ $newBook->title ?? 'No Book Upload Yet' }}</h3>
@@ -157,9 +158,7 @@
               </p>
               <div class="book-actions">
                 @if($newBook?->id)
-                  <button
-                    class="book-btn primary add-to-list-btn"
-                    data-book-id="{{ $newBook->id }}">
+                  <button class="book-btn primary add-to-list-btn" data-book-id="{{ $newBook->id }}">
                     <i class="fas fa-plus"></i> Add to List
                   </button>
                 @else
@@ -189,32 +188,30 @@
 
           <div class="releases-grid">
             @foreach ($popularBooks as $book)
-              <div class="release-item">
-                <div class="release-cover">
-                  <img
-                    src="{{ $book->cover_picture
-                        ? asset('storage/' . $book->cover_picture)
-                        : asset('images/book-cover.png') }}"
-                    alt="book_cover" class="release-cover-img">
-                </div>
+                      <div class="release-item">
+                        <div class="release-cover">
+                          <img src="{{ $book->cover_picture
+              ? asset('storage/' . $book->cover_picture)
+              : asset('images/book-cover.png') }}" alt="book_cover" class="release-cover-img">
+                        </div>
 
-                <div class="release-info">
-                  <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
-                  <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
+                        <div class="release-info">
+                          <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
+                          <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
 
-                  <div class="release-rating">
-                    @for ($i = 1; $i <= 5; $i++)
-                      @if ($i <= floor($book->rating))
-                        <i class="fas fa-star"></i>
-                      @elseif ($i - $book->rating >= 0.5)
-                        <i class="fas fa-star-half-alt"></i>
-                      @else
-                        <i class="far fa-star"></i>
-                      @endif
-                    @endfor
-                  </div>
-                </div>
-              </div>
+                          <div class="release-rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                              @if ($i <= floor($book->rating))
+                                <i class="fas fa-star"></i>
+                              @elseif ($i - $book->rating >= 0.5)
+                                <i class="fas fa-star-half-alt"></i>
+                              @else
+                                <i class="far fa-star"></i>
+                              @endif
+                            @endfor
+                          </div>
+                        </div>
+                      </div>
             @endforeach
           </div>
         </div>
@@ -247,48 +244,48 @@
     });
 
     document.querySelectorAll('.add-to-list-btn').forEach(btn => {
-    btn.addEventListener('click', async function () {
-      const bookId = this.dataset.bookId;
-      if (!bookId) return;
-      const button = this;
+      btn.addEventListener('click', async function () {
+        const bookId = this.dataset.bookId;
+        if (!bookId) return;
+        const button = this;
 
-      button.disabled = true;
-      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
-      try {
-        const response = await fetch('/booklists', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-          },
-          body: JSON.stringify({
-            book_id: bookId,
-            status: 'want_to_read'
-          })
-        });
+        try {
+          const response = await fetch('/booklists', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+              book_id: bookId,
+              status: 'want_to_read'
+            })
+          });
 
-        const result = await response.json();
+          const result = await response.json();
 
-        if (response.ok && result.success) {
-          button.innerHTML = '<i class="fas fa-check"></i>';
-          button.classList.add('success');
-        } else {
-          alert(result.message || 'Already in your list.');
+          if (response.ok && result.success) {
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.classList.add('success');
+          } else {
+            alert(result.message || 'Already in your list.');
+            resetBtn(button);
+          }
+        } catch {
+          alert('Request failed.');
           resetBtn(button);
         }
-      } catch {
-        alert('Request failed.');
-        resetBtn(button);
-      }
+      });
     });
-  });
 
-  function resetBtn(btn) {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-plus"></i> Add to List';
-  }
+    function resetBtn(btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-plus"></i> Add to List';
+    }
   </script>
 </body>
 
