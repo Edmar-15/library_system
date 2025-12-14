@@ -20,7 +20,7 @@ class UserController extends Controller
         if (!$profile) {
             $profile = Profile::create([
                 'user_id' => $user->id,
-                'profile_picture' => 'profile_pictures/default.jpg',
+                'profile_picture' => 'images/default.jpg',
                 'bio' => '',
                 'phone' => '',
                 'address' => '',

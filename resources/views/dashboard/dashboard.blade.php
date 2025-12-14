@@ -32,7 +32,11 @@
     <div class="user-section">
       <div class="user-info">
         <a href="{{ route('show.profile') }}" class="user-avatar">
-          <img src="{{ asset('storage/' . $profile->profile_picture) }}" alt="profile-pic" srcset="">
+          <img
+            src="{{ $profile?->profile_picture
+                ? asset('storage/' . $profile->profile_picture)
+                : asset('images/default.jpg') }}"
+            alt="profile-pic">
           <i class="user-name">{{ Auth::user()->name }}</i>
         </a>
       </div>
@@ -108,7 +112,7 @@
               <i class="fas fa-book-open"></i>
             </div>
           </div>
-          <div class="stat-value">{{ $booklist }}</div>
+          <div class="stat-value">{{ $booklist ?? 0 }}</div>
         </div>
 
         <div class="stat-card">
@@ -118,7 +122,7 @@
               <i class="fas fa-check-circle"></i>
             </div>
           </div>
-          <div class="stat-value">{{ $booklistCounts['finished'] }}</div>
+          <div class="stat-value">{{ $booklistCounts['finished'] ?? 0 }}</div>
         </div>
 
         <div class="stat-card">
@@ -128,7 +132,7 @@
               <i class="fas fa-clock"></i>
             </div>
           </div>
-          <div class="stat-value">{{ $booklistCounts['reading'] }}</div>
+          <div class="stat-value">{{ $booklistCounts['reading'] ?? 0 }}</div>
         </div>
 
         <div class="stat-card">
@@ -138,7 +142,7 @@
               <i class="fas fa-bookmark"></i>
             </div>
           </div>
-          <div class="stat-value">{{ $bookmarks }}</div>
+          <div class="stat-value">{{ $bookmarks ?? 0 }}</div>
         </div>
       </div>
 
@@ -148,28 +152,40 @@
           <h2><i class="fas fa-crown"></i> New Book Upload</h2>
           <div class="book-of-month">
             <div class="book-cover">
-              <img src="{{ asset('storage/' . $newBook->cover_picture) }}" alt="book_cover" class="book-cover">
+              <img
+                src="{{ $newBook?->cover_picture
+                    ? asset('storage/' . $newBook->cover_picture)
+                    : asset('images/book-cover.png') }}"
+                alt="book_cover" class="book-cover">
             </div>
             <div class="book-info">
-              <h3 class="book-title">{{ $newBook->title }}</h3>
-              <p class="book-author">{{ $newBook->author }}</p>
+              <h3 class="book-title">{{ $newBook->title ?? 'No Book Upload Yet' }}</h3>
+              <p class="book-author">{{ $newBook->author ?? 'Unknown Author' }}</p>
               <p class="book-description">
-                {{ $newBook->description }}
+                {{ $newBook->description ?? 'Coming Soon...' }}
               </p>
               <div class="book-actions">
-                @auth
-                <button
-                  class="book-btn primary add-to-list-btn"
-                  data-book-id="{{ $newBook->id }}">
-                  <i class="fas fa-plus"></i> Add to List
-                </button>
-                @endauth
+                @if($newBook?->id)
+                  <button
+                    class="book-btn primary add-to-list-btn"
+                    data-book-id="{{ $newBook->id }}">
+                    <i class="fas fa-plus"></i> Add to List
+                  </button>
+                @else
+                  <button class="book-btn primary" disabled>
+                    <i class="fas fa-ban"></i> No book available
+                  </button>
+                @endif
 
-                <a
-                  href="{{ route('books.show', $newBook) }}"
-                  class="book-btn secondary">
-                  <i class="fas fa-info-circle"></i> View Details
-                </a>
+                @if($newBook?->id)
+                  <a href="{{ route('books.show', $newBook) }}" class="book-btn secondary">
+                    <i class="fas fa-info-circle"></i> View Details
+                  </a>
+                @else
+                  <span class="book-btn secondary disabled">
+                    No details
+                  </span>
+                @endif
               </div>
 
             </div>
@@ -184,12 +200,16 @@
             @foreach ($popularBooks as $book)
               <div class="release-item">
                 <div class="release-cover">
-                  <img src="{{ asset('storage/' . $book->cover_picture) }}" alt="book_cover" class="release-cover-img">
+                  <img
+                    src="{{ $book->cover_picture
+                        ? asset('storage/' . $book->cover_picture)
+                        : asset('images/book-cover.png') }}"
+                    alt="book_cover" class="release-cover-img">
                 </div>
 
                 <div class="release-info">
-                  <h4 class="release-title">{{ $book->title }}</h4>
-                  <p class="release-author">{{ $book->author }}</p>
+                  <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
+                  <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
 
                   <div class="release-rating">
                     @for ($i = 1; $i <= 5; $i++)
@@ -252,6 +272,7 @@
     document.querySelectorAll('.add-to-list-btn').forEach(btn => {
     btn.addEventListener('click', async function () {
       const bookId = this.dataset.bookId;
+      if (!bookId) return;
       const button = this;
 
       button.disabled = true;
