@@ -64,10 +64,6 @@
                                     <i class="fas fa-download"></i> Download Book
                                 </a>
                             @endif
-                        @else
-                            <a href="{{ route('show.login') }}" class="btn btn-primary btn-large">
-                                <i class="fas fa-sign-in-alt"></i> Login to Add
-                            </a>
                         @endauth
                     </div>
                 </div>
@@ -171,7 +167,7 @@
                     </div>
 
                     @auth
-                        @if(auth()->user()) <!-- Admin check -->
+                        @if(auth()->user()->role === 'librarian') <!-- Admin check -->
                             <div class="admin-actions">
                                 <a href="{{ route('books.edit', $book) }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit Book

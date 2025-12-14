@@ -45,6 +45,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
+            if (Auth::user()->role === 'super_admin') {
+                return redirect()->route('show.admin');
+            }
             return redirect()->route('show.home');
         }
         throw ValidationException::withMessages([

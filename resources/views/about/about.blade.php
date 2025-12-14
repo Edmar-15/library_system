@@ -17,17 +17,14 @@
             <div class="logo-text">LibrarySystem</div>
         </div>
 
-        <div class="auth-section">
-            @auth
+        @if (auth()->user()->role === 'librarian')
+            <div class="auth-section">
                 <a href="{{ route('about.edit') }}" class="auth-btn edit-btn">
                     <i class="fas fa-edit"></i> Edit About
                 </a>
-            @else
-                <a href="{{ route('show.login') }}" class="auth-btn login-btn">
-                    <i class="fas fa-lock"></i> Login to Edit
-                </a>
-            @endauth
-        </div>
+            </div>
+        @endif
+        
     </header>
 
     <div class="dashboard-container">
@@ -58,14 +55,14 @@
                             <span class="nav-text">Bookmark</span>
                         </a>
                     </li>
-                    @auth
-                    <li class="nav-item">
-                        <a href="{{ route('about.edit') }}" class="nav-link" title="Edit About">
-                            <i class="fas fa-edit nav-icon"></i>
-                            <span class="nav-text">Edit About</span>
-                        </a>
-                    </li>
-                    @endauth
+                    @if (auth()->user()->role === 'librarian')
+                        <li class="nav-item">
+                            <a href="{{ route('about.edit') }}" class="nav-link" title="Edit About">
+                                <i class="fas fa-edit nav-icon"></i>
+                                <span class="nav-text">Edit About</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 @auth
                 <div class="sidebar-logout">

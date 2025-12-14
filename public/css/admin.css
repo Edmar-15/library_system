@@ -1,0 +1,134 @@
+/* ADMIN PAGE */
+
+.admin-container {
+    padding: 30px 40px;
+}
+
+.admin-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.admin-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.admin-title i {
+    color: var(--primary);
+}
+
+/* TABLE */
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.admin-table thead {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.admin-table th {
+    font-weight: 600;
+}
+
+.admin-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+    background: var(--light-bg);
+}
+
+/* SELECT */
+
+.admin-table select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    font-size: 13px;
+}
+
+.admin-table select:disabled {
+    background: #f3f3f3;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* BUTTON */
+
+.admin-table button {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-table button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.admin-table button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.search-container {
+    margin-bottom: 15px;
+}
+#userSearch {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 20px;
+    }
+
+    .admin-card {
+        padding: 20px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .admin-title {
+        font-size: 18px;
+    }
+}

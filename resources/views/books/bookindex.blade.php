@@ -35,13 +35,13 @@
                 <h1 class="page-title">Browse Books</h1>
                 <p class="page-subtitle">Explore our collection of books</p>
 
-                @auth
-            <div style="margin-bottom: 20px;">
-                <a href="{{ route('books.create') }}" class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
-                    <i class="fas fa-plus"></i> Add New Book
-                </a>
-            </div>
-        @endauth
+                @if (auth()->user()->role === 'librarian')
+                    <div style="margin-bottom: 20px;">
+                        <a href="{{ route('books.create') }}" class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+                            <i class="fas fa-plus"></i> Add New Book
+                        </a>
+                    </div> 
+                @endif
 
                 <form action="{{ route('books.index') }}" method="GET" class="search-form">
                     <div class="search-bar">

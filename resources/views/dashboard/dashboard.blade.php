@@ -64,10 +64,11 @@
           </li>
           <li class="nav-item">
             <a href="#edit" class="nav-link" title="Edit">
-              <i class="fas fa-edit nav-icon"></i>
-              <span class="nav-text">Edit</span>
+              <i class="fas fa-address-card nav-icon"></i>
+              <span class="nav-text">Staff</span>
             </a>
           </li>
+          
         </ul>
         <div class="sidebar-logout">
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
