@@ -18,16 +18,6 @@
       <div class="logo-text">LibrarySystem</div>
     </div>
 
-    <div class="search-section">
-      <div class="search-container">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" class="search-input" placeholder="Search books, authors, categories...">
-        <button class="search-btn">
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-
     @auth
     <div class="user-section">
       <div class="user-info">
@@ -253,20 +243,6 @@
         document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('active'));
         this.classList.add('active');
       });
-    });
-
-    // Search input (enter key)
-    document.querySelector('.search-input')?.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        const query = this.value.trim();
-        if (query) alert(`Searching for: "${query}"`);
-      }
-    });
-
-    // Search button
-    document.querySelector('.search-btn')?.addEventListener('click', function () {
-      const query = document.querySelector('.search-input').value.trim();
-      if (query) alert(`Searching for: "${query}"`);
     });
 
     document.querySelectorAll('.add-to-list-btn').forEach(btn => {

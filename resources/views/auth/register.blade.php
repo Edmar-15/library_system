@@ -10,92 +10,71 @@
     <header>
         <h1>Library System</h1>
     </header>
-    {{-- <header>
-        <h1>Register</h1>
-        <nav>
-            <a href="/">Home</a>
-        </nav>
-    </header> --}}
+
     <main>
-        <form action="{{ route('register') }}" method="POST" class="form-container">
-            @csrf
-            
-            {{-- <div class="form-group">
-                <label for="name">Username: </label>
-                <input type="name" name="name" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email: </label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password: </label>
-                <input type="password" name="password" id="password" required>
-            </div>
-            <div class="form-group">
-                <label for="password_comfirmation">Confirm Password: </label>
-                <input type="password" name="password_confirmation" id="password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Register</button>
-            </div>  --}}
-    
+        <div class="form-container">
             <div class="container">
-<div class="white-back">
-    <div class="emoji">📚</div>
-    <div class="title">Welcome to Our Digital Library</div>
-    <div class="description">Access thousands of books, journals, and resources from anywhere, anytime. Join our community of readers and learners today.</div>
-</div>
-                
-                    <div class="orange-back">
-                        <h1 id="Title">Register</h1>
-                        <div class="form-group">
-                            <label for="name">Username: </label>
-                            <input type="name" name="name" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email: </label>
-                            <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password: </label>
-                            <input type="password" name="password" id="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password_comfirmation">Confirm Password: </label>
-                            <input type="password" name="password_confirmation" id="password_comfirm" required>
-                        </div>
-                        <div class="form-group">
-                            <button id = "btn" type="submit">Register</button>
-                        </div> 
-                        
-                        {{-- <h1>Register</h1>
-                        <label for="EM" id="lbl1">Enter Email</label>
-                        <input type="email" id="EM" name="email">
-
-                        <label for="password_Comfirmation">Enter password</label>
-                        <input type="password" id="PASS" name="password">
-
-
-                        <label for="password_Comfirmation">Re-Enter Password</label>
-                        <input type="password" id="re-enter" name="password_confirmation">
-
-                        <button id ="btn">confirm</button> --}}
+                <!-- Left Page -->
+                <div class="white-back">
+                    <div class="emoji">📚</div>
+                    <div class="title">Join Our Digital Library</div>
+                    <div class="description">
+                        Create your account to access thousands of books, journals,
+                        and resources. Start your reading journey today!
                     </div>
+                </div>
+
+                <!-- Right Page -->
+                <div class="orange-back">
+                    <h1>Register</h1>
+
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input type="text" name="name" id="name" placeholder="Enter your username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm your password" required>
+                        </div>
+
+                        <div class="button-container">
+                            <button id="btn" type="submit">Create Account</button>
+                            <a href="{{ route('login') }}" class="login-link">Already have an account? Login</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-              <footer>
+        </div>
+    </main>
+
+    <footer>
         <p>&copy; {{ date('Y') }} LibrarySystem.</p>
     </footer>
-        </form>
-        <script src=" {{ asset('js/register.js') }}"></script>
 
-        @if ($errors->any())
-            <ul style="padding: 8px 16px; background-color: ffe2e2;">
+    <script src="{{ asset('js/register.js') }}"></script>
+
+    @if ($errors->any())
+        <div class="error-container">
+            <ul>
                 @foreach ($errors->all() as $error)
-                    <li style="color: red;">{{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        @endif
-    </main>
+        </div>
+    @endif
 </body>
 </html>
