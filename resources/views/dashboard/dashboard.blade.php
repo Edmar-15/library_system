@@ -63,7 +63,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#edit" class="nav-link" title="Edit">
+            <a href="{{ route('staff.index') }}" class="nav-link" title="Edit">
               <i class="fas fa-address-card nav-icon"></i>
               <span class="nav-text">Staff</span>
             </a>

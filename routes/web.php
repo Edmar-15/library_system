@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BooklistController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\StaffController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/booklists', [BooklistController::class, 'store'])->name('booklists.store');
     Route::put('/booklists/{booklist}', [BooklistController::class, 'update'])->name('booklists.update');
     Route::delete('/booklists/{booklist}', [BooklistController::class, 'destroy'])->name('booklists.destroy');
+    Route::resource('staff', StaffController::class);
 });
 
 Route::middleware(['auth', 'role:librarian'])->group(function () {
