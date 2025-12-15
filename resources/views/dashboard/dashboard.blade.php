@@ -1,3 +1,12 @@
+@php
+use App\Models\Menu;
+
+$headerMenus = Menu::where('is_active', 1)
+    ->orderBy('order')
+    ->limit(3)
+    ->get();
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -17,6 +26,28 @@
       <div class="logo-icon">📚</div>
       <div class="logo-text">LibrarySystem</div>
     </div>
+
+    <nav class="header-nav">
+  @foreach ($headerMenus as $menu)
+
+    @if ($menu->type === 'internal')
+      <a href="{{ url($menu->url) }}" class="header-link">
+        {{ $menu->title }}
+      </a>
+
+    @elseif ($menu->type === 'external')
+      <a href="{{ $menu->url }}" target="_blank" class="header-link">
+        {{ $menu->title }}
+      </a>
+
+    @elseif ($menu->type === 'content')
+      <a href="{{ route('menus.show', $menu->id) }}" class="header-link">
+        {{ $menu->title }}
+      </a>
+    @endif
+
+  @endforeach
+</nav>
 
     @auth
       <div class="user-section">
@@ -72,6 +103,14 @@
               <span class="nav-text">News</span>
             </a>
           </li>
+          @if (auth()->user()->role === 'librarian')
+              <li class="nav-item">
+  <a href="{{ url('/menus') }}" class="nav-link" title="Navigation">
+    <i class="fas fa-bars nav-icon"></i>
+    <span class="nav-text">Navigation</span>
+  </a>
+</li>
+          @endif
         </ul>
         <div class="sidebar-logout">
           <form action="{{ route('logout') }}" method="POST" class="logout-form">

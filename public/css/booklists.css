@@ -5,6 +5,13 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #f5dcc8 0%, #f0d4bb 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 :root {
     --primary: #E07B16;
     --primary-light: #F39C3D;
@@ -21,15 +28,6 @@
     --shadow-hover: 0 8px 24px rgba(139, 94, 52, 0.24);
 }
 
-body {
-    background: var(--page-bg);
-    color: var(--text-dark);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.6;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -38,71 +36,59 @@ body {
 
 /* Header */
 .booklists-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: var(--text-white);
-    padding: 1rem 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #E07B16 0%, #d68825 100%);
+    padding: 1.5rem 3rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
 .header-content {
+   max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 .logo-section {
-    display: flex;
-    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+.logo-section {
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .logo-link {
+    color: white;
+    text-decoration: none;
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: var(--text-white);
-    font-size: 1.5rem;
-    font-weight: 600;
-    gap: 10px;
-    transition: all 0.3s ease;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0);
-    
+    gap: 0.75rem;
 }
 
 .logo-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
+    opacity: 0.9;
 }
-
-.logo-link i {
-    font-size: 1.8rem;
-}
-
 .header-nav {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    gap: 2rem;
 }
 
 .header-nav a {
-    color: var(--text-white);
+    color: white;
     text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 0.75rem 1.25rem;
-    transition: all 0.3s ease;
-    font-weight: 500;
-
+    gap: 0.5rem;
 }
 
 .header-nav a:hover {
@@ -592,8 +578,8 @@ body {
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, var(--error) 0%, #c0392b 100%);
-    color: var(--white);
+    background: rgb(255, 0, 0);
+    color:rgb(255, 255, 255);
     box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
 }
 
@@ -853,23 +839,23 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header-content {
+      .header-content {
         flex-direction: column;
         gap: 1rem;
-        padding: 1rem;
+        padding: 0.3rem 0.3rem;
     }
 
     .header-nav {
-        width: 100%;
-        justify-content: center;
+        gap: 1rem;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        justify-content: center;
     }
 
     .header-nav a {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
+    
 
     .page-title {
         font-size: 2rem;
