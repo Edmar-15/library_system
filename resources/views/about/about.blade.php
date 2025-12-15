@@ -12,10 +12,11 @@
 <body>
     <!-- Header -->
     <header class="dashboard-header">
-        <div class="logo-section">
-            <div class="logo-icon">📚</div>
-            <div class="logo-text">LibrarySystem</div>
-        </div>
+    <div class="logo-section">
+      <div class="logo-icon">📚</div>
+      <div class="logo-text">LibrarySystem</div>
+    </div>
+
 
         @if (auth()->user()->role === 'librarian')
             <div class="auth-section">

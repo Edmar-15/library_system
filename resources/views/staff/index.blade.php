@@ -94,6 +94,13 @@
             @endforeach
         </main>
     </div>
+      <!-- Footer -->
+  <footer class="dashboard-footer">
+    <div class="copyright">
+      &copy; {{ date('Y') }} LibrarySystem.
+    </div>
+    </div>
+  </footer>
 </body>
 
 </html>
