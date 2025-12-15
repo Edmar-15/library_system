@@ -1,12 +1,3 @@
-@php
-use App\Models\Menu;
-
-$headerMenus = Menu::where('is_active', 1)
-    ->orderBy('order')
-    ->limit(3)
-    ->get();
-@endphp
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -14,7 +5,7 @@ $headerMenus = Menu::where('is_active', 1)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $menu->title }}</title>
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu-management.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -45,44 +36,44 @@ $headerMenus = Menu::where('is_active', 1)
             <div class="sidebar-content">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="{{ route('show.home') }}" class="nav-link" title="Dashboard">
+                        <a href="{{ route('show.home') }}" class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}" title="Dashboard">
                             <i class="fas fa-home nav-icon"></i>
                             <span class="nav-text">Home</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('show.about') }}" class="nav-link" title="About">
+                        <a href="{{ route('show.about') }}" class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}" title="About">
                             <i class="fas fa-eye nav-icon"></i>
                             <span class="nav-text">About</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('books.index') }}" class="nav-link" title="Books">
+                        <a href="{{ route('books.index') }}" class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
                             <i class="fas fa-book nav-icon"></i>
                             <span class="nav-text">Books</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('bookmarks.index') }}" class="nav-link" title="Bookmarks">
+                        <a href="{{ route('bookmarks.index') }}" class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}" title="Bookmarks">
                             <i class="fas fa-bookmark nav-icon"></i>
                             <span class="nav-text">Bookmark</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('staff.index') }}" class="nav-link" title="Staff">
+                        <a href="{{ route('staff.index') }}" class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
                             <i class="fas fa-address-card nav-icon"></i>
                             <span class="nav-text">Staff</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('news.index') }}" class="nav-link" title="News">
+                        <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}" title="News">
                             <i class="fas fa-newspaper nav-icon"></i>
                             <span class="nav-text">News</span>
                         </a>
                     </li>
                     @if(auth()->user()->role === 'librarian')
                         <li class="nav-item">
-                            <a href="{{ url('/menus') }}" class="nav-link" title="Navigation">
+                            <a href="{{ url('/menus') }}" class="nav-link {{ request()->is('menus*') ? 'active' : '' }}" title="Navigation">
                                 <i class="fas fa-bars nav-icon"></i>
                                 <span class="nav-text">Navigation</span>
                             </a>
@@ -107,18 +98,33 @@ $headerMenus = Menu::where('is_active', 1)
                 <h1 class="page-title">{{ $menu->title }}</h1>
             </div>
 
-                <div class="content-card">
-                    {!! $menu->content !!}
-                </div>
+            <div class="content-card">
+                {!! $menu->content !!}
+            </div>
         </main>
     </div>
 
     <!-- Footer -->
     <footer class="dashboard-footer">
         <div class="copyright">
-            &copy; {{ date('Y') }} LibrarySystem.
+            &copy; <span id="currentYear"></span> LibrarySystem.
         </div>
     </footer>
 
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Add active class to current page link in sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && currentPath.includes(href.replace(/\//g, ''))) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

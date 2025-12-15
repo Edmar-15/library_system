@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Admin – User Management</title>
 
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
@@ -61,57 +61,59 @@
                         <input type="text" id="userSearch" placeholder="Search users..." onkeyup="filterUsers()">
                     </div>
 
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($users as $user)
-                                @php
-                                    $isSuperAdmin = $user->role === 'super_admin';
-                                @endphp
-
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-
-                                    <td>
-                                        <form method="POST" action="{{ route('admin.users.update', $user) }}">
-                                            @csrf
-                                            @method('PATCH')
-
-                                            <select name="role" {{ $isSuperAdmin ? 'disabled' : '' }}>
-                                                <option value="student" {{ $user->role === 'student' ? 'selected' : '' }}>
-                                                    Student
-                                                </option>
-                                                <option value="librarian" {{ $user->role === 'librarian' ? 'selected' : '' }}>
-                                                    Librarian
-                                                </option>
-
-                                                @if ($isSuperAdmin)
-                                                    <option value="super_admin" selected>
-                                                        Super Admin
-                                                    </option>
-                                                @endif
-                                            </select>
-                                    </td>
-
-                                    <td>
-                                        <button type="submit" {{ $isSuperAdmin ? 'disabled' : '' }}>
-                                            Update
-                                        </button>
-                                        </form>
-                                    </td>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($users as $user)
+                                    @php
+                                        $isSuperAdmin = $user->role === 'super_admin';
+                                    @endphp
+
+                                    <tr>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+
+                                        <td>
+                                            <form method="POST" action="{{ route('admin.users.update', $user) }}">
+                                                @csrf
+                                                @method('PATCH')
+
+                                                <select name="role" {{ $isSuperAdmin ? 'disabled' : '' }}>
+                                                    <option value="student" {{ $user->role === 'student' ? 'selected' : '' }}>
+                                                        Student
+                                                    </option>
+                                                    <option value="librarian" {{ $user->role === 'librarian' ? 'selected' : '' }}>
+                                                        Librarian
+                                                    </option>
+
+                                                    @if ($isSuperAdmin)
+                                                        <option value="super_admin" selected>
+                                                            Super Admin
+                                                        </option>
+                                                    @endif
+                                                </select>
+                                        </td>
+
+                                        <td>
+                                            <button type="submit" {{ $isSuperAdmin ? 'disabled' : '' }}>
+                                                Update
+                                            </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
@@ -130,6 +132,11 @@
                 row.style.display = (name.includes(filter) || email.includes(filter)) ? "" : "none";
             });
         }
+
+        // Initialize search on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            filterUsers();
+        });
     </script>
 
 </body>
