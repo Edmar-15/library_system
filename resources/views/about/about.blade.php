@@ -55,6 +55,12 @@
                             <span class="nav-text">Bookmark</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('staff.index') }}" class="nav-link" title="Edit">
+                            <i class="fas fa-address-card nav-icon"></i>
+                        <span class="nav-text">Staff</span>
+                        </a>
+                    </li>
                     @if (auth()->user()->role === 'librarian')
                         <li class="nav-item">
                             <a href="{{ route('about.edit') }}" class="nav-link" title="Edit About">

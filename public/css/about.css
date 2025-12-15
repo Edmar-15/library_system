@@ -577,11 +577,6 @@ body {
         padding: 10px 15px;
         flex-wrap: wrap;
     }
-
-    .logo-text {
-        display: none;
-    }
-
     .auth-section {
         width: 100%;
         order: 3;
