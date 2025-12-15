@@ -193,6 +193,7 @@
         </main>
     </div>
 
+
     <!-- Footer -->
     <footer class="dashboard-footer">
         <div class="copyright">
