@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News & Announcements – LibrarySystem</title>
+    <link rel="stylesheet" href="{{ asset('css/index-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -51,6 +52,7 @@
                                 </div>
                             @endif
                         </div>
+
                         <div class="release-info">
                             <div class="release-title">{{ $news->title }}</div>
                             <div class="release-author">{{ Str::limit($news->content, 80) }}</div>
