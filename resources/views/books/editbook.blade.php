@@ -88,7 +88,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="rating"><i class="fas fa-star"></i> Rating</label>
-                            <input type="number" id="rating" name="rating" step="0.1" min="0" max="5" value="{{ old('rating', $book->rating) }}">
+                            <input type="number" id="rating" name="rating" step="0.01" min="0" max="5" value="{{ old('rating', $book->rating) }}">
                             @error('rating')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror

@@ -131,7 +131,7 @@
                                                 <i class="far fa-star"></i>
                                             @endif
                                         @endfor
-                                        <span class="rating-value">{{ number_format($book->rating, 1) }}</span>
+                                        <span class="rating-value">{{ number_format($book->rating, 2) }}</span>
                                     </div>
 
                                     <div class="book-meta">

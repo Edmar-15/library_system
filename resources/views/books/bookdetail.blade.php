@@ -85,7 +85,7 @@
                                 @endif
                             @endfor
                         </div>
-                        <span class="rating-number">{{ number_format($book->rating, 1) }}/5.0</span>
+                        <span class="rating-number">{{ number_format($book->rating, 2) }}/5.0</span>
                     </div>
 
                     @if($book->description)
