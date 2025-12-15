@@ -79,6 +79,12 @@
       </div>
     </main>
   </div>
+
+    <footer class="dashboard-footer">
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> LibrarySystem.
+        </div>
+    </footer>
 </body>
 
 </html>
