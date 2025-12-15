@@ -341,17 +341,20 @@ body {
 
 /* Footer */
 .book-footer {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+    background: #8B5E34;
+    color: var(--text-white);
     text-align: center;
-    margin-top: 2rem;
+    padding: 1.5rem;
+    margin-top: auto;
 }
 
 .book-footer p {
-    color: #4a3728;
-    font-size: 0.9rem;
     margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
 }
+
+
 
 /* Font Awesome Icons */
 .fas,
