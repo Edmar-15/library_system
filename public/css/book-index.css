@@ -11,10 +11,25 @@ body {
     display: flex;
     flex-direction: column;
 }
+:root {
+    --primary: #E07B16;
+    --primary-light: #F39C3D;
+    --primary-dark: #B35E0F;
+    --secondary: #8B5E34;
+    --secondary-dark: #5A3E24;
+    --light-bg: #FFF3E0;
+    --white: #FFFFFF;
+    --text-dark: #3A2F28;
+    --text-light: #7B6754;
+    --text-white: #FFFFFF;
+    --border-color: #E6D4B8;
+    --shadow: 0 4px 12px rgba(139, 94, 52, 0.16);
+    --shadow-hover: 0 8px 24px rgba(139, 94, 52, 0.24);
+}
 
 /* Header */
 .books-header {
-    background: linear-gradient(135deg, #e8993a 0%, #d68825 100%);
+    background: linear-gradient(135deg, #E07B16 0%, #d68825 100%);
     padding: 1.5rem 3rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
