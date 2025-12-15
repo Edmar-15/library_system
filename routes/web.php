@@ -51,12 +51,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/booklists/{booklist}', [BooklistController::class, 'destroy'])->name('booklists.destroy');
     Route::resource('staff', StaffController::class);
     Route::resource('news', NewsController::class);
+    Route::get('menus/{menu}', [MenuController::class, 'show'])->name('menus.show');
 });
 
 Route::middleware(['auth', 'role:librarian'])->group(function () {
     Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
     Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
-    Route::resource('menus', MenuController::class);
+    Route::resource('menus', MenuController::class)->except('show');
 });
 
 Route::middleware(['auth', 'role:super_admin'])->group(function () {
