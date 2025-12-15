@@ -44,7 +44,7 @@
                         <h1 class="page-title">{{ $news->title }}</h1>
                         <p class="page-subtitle">Published on {{ $news->created_at->format('F j, Y') }}</p>
                         <div class="book-info">
-                            <p>{!! nl2br(e($news->content)) !!}</p>
+                            <p class="book-description">{!! nl2br(e($news->content)) !!}</p>
                         </div>
                     </div>
 
