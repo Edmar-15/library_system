@@ -589,18 +589,7 @@ body {
         flex-wrap: nowrap;
         justify-content: center;
         gap: 5px;
-        overflow-x: auto;
         padding-bottom: 5px;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-menu::-webkit-scrollbar {
-        height: 3px;
-    }
-
-    .nav-menu::-webkit-scrollbar-thumb {
-        background: var(--primary-light);
-        border-radius: 3px;
     }
 
     .nav-item {
