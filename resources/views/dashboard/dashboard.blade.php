@@ -18,11 +18,6 @@
       <div class="logo-text">LibrarySystem</div>
     </div>
 
-    <a href="{{ route('news.index') }}" class="book-btn secondary"
-      style="margin-left: 15px; display:flex; align-items:center;">
-      <i class="fas fa-newspaper" style="margin-right:5px;"></i> News and Announcements
-    </a>
-
     @auth
       <div class="user-section">
         <div class="user-info">
@@ -71,7 +66,12 @@
               <span class="nav-text">Staff</span>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="{{ route('news.index') }}" class="nav-link" title="News">
+              <i class="fas fa-newspaper nav-icon"></i>
+              <span class="nav-text">News</span>
+            </a>
+          </li>
         </ul>
         <div class="sidebar-logout">
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
