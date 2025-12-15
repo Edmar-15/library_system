@@ -13,6 +13,7 @@ use App\Http\Controllers\BooklistController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\MenuController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +56,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:librarian'])->group(function () {
     Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
     Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
+    Route::resource('menus', MenuController::class);
 });
 
 Route::middleware(['auth', 'role:super_admin'])->group(function () {
