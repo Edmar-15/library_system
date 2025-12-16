@@ -52,12 +52,6 @@
                                 <i class="fas fa-plus"></i> Add to My List
                             </button>
 
-                            @if($book->isAvailable())
-                                <button class="btn btn-secondary btn-large">
-                                    <i class="fas fa-bookmark"></i> Reserve Book
-                                </button>
-                            @endif
-
                             {{-- Book Content Actions --}}
                             @if($book->hasContentFile())
                                 <a href="{{ route('books.readbook', $book) }}" class="btn btn-info btn-large">
