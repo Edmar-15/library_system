@@ -16,11 +16,16 @@
             <div class="card-wrapper">
                 <!-- Left white curved box -->
                 <div class="left-panel">
+                    <div class="left-content">
+                        <div class="lock-icon">🔐</div>
+                        <h3>Secure Password Reset</h3>
+                        <p class="left-description">Enter your email address and we'll send you a link to reset your password securely.</p>
+                    </div>
                 </div>
 
                 <div class="forgot-card" id="card">
                     @if(session('status'))
-                        <p><i>{{ session('status') }}</i></p>
+                        <p class="success-message"><i>{{ session('status') }}</i></p>
                     @endif
 
                     <h2>Forgot password?</h2>
@@ -35,7 +40,7 @@
                         </div>
 
                         @error('email')
-                            <p>{{ $message }}</p>
+                            <p class="error-message">{{ $message }}</p>
                         @enderror
 
                         <a href="{{ route('login') }}" class="try-way">Remember your password? Login</a>
@@ -52,12 +57,20 @@
     </footer>
 
     <script>
-        // ripple effect
+        // Enhanced ripple effect with better mobile support
         document.querySelector('.confirm-btn').addEventListener('click', function(e) {
             createRipple(e, this);
         });
 
         function createRipple(event, element) {
+            // For touch devices
+            if (event.type === 'touchstart') {
+                event.preventDefault();
+                const touch = event.touches[0];
+                event.clientX = touch.clientX;
+                event.clientY = touch.clientY;
+            }
+
             const ripple = document.createElement('span');
             const rect = element.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
@@ -69,12 +82,21 @@
             ripple.style.top = y + 'px';
             ripple.classList.add('ripple');
 
+            // Remove any existing ripples
+            const existingRipples = element.querySelectorAll('.ripple');
+            existingRipples.forEach(r => r.remove());
+
             element.appendChild(ripple);
 
             setTimeout(() => {
                 ripple.remove();
             }, 600);
         }
+
+        // Add touch support for mobile
+        document.querySelector('.confirm-btn').addEventListener('touchstart', function(e) {
+            createRipple(e, this);
+        }, { passive: false });
     </script>
 </body>
 </html>
