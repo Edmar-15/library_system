@@ -44,6 +44,13 @@ $headerMenus = Menu::where('is_active', 1)
             <div class="sidebar-content">
                 <ul class="nav-menu">
                     <!-- Sidebar links -->
+                    <li class="nav-item">
+                        <a href="{{ route('show.home') }}"
+                            class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}" title="Dashboard">
+                            <i class="fas fa-home nav-icon"></i>
+                            <span class="nav-text">Home</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="sidebar-logout">
                     <form action="{{ route('logout') }}" method="POST" class="logout-form">
