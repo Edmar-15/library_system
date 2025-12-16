@@ -31,17 +31,33 @@ class MenuController extends Controller
         return view('menu.page', compact('menu'));
     }
 
+    public function edit(Menu $menu)
+    {
+        return view('menu.edit', compact('menu'));
+    }
+
     public function update(Request $request, Menu $menu)
     {
-        $menu->update([
-            'title' => $request->title,
-            'type' => $request->type,
-            'url' => $request->url,
-            'order' => $request->order,
-            'is_active' => $request->has('is_active')
-        ]);
+        // Base validation
+        $rules = ['title' => 'required|string|max:255'];
 
-        return redirect()->back();
+        // Only content-type menus need 'content'
+        if ($menu->type === 'content') {
+            $rules['content'] = 'required|string';
+        } else {
+            // For other menu types, validate 'type', 'url', and 'order'
+            $rules['type'] = 'required|in:internal,external,content';
+            $rules['url'] = $request->type !== 'content' ? 'required|string|max:255' : '';
+            $rules['order'] = 'required|integer';
+        }
+
+        $validated = $request->validate($rules);
+
+        // Update only provided fields
+        $menu->update($validated);
+
+        return redirect()->route('menus.show', $menu->id)
+                        ->with('success', 'Menu updated successfully.');
     }
 
     public function destroy(Menu $menu)

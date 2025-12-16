@@ -1,3 +1,11 @@
+@php
+    use App\Models\Menu;
+
+    $headerMenus = Menu::where('is_active', 1)
+        ->orderBy('order')
+        ->limit(3)
+        ->get();
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -36,44 +44,52 @@
             <div class="sidebar-content">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="{{ route('show.home') }}" class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}" title="Dashboard">
+                        <a href="{{ route('show.home') }}"
+                            class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}" title="Dashboard">
                             <i class="fas fa-home nav-icon"></i>
                             <span class="nav-text">Home</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('show.about') }}" class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}" title="About">
+                        <a href="{{ route('show.about') }}"
+                            class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}" title="About">
                             <i class="fas fa-eye nav-icon"></i>
                             <span class="nav-text">About</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('books.index') }}" class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
+                        <a href="{{ route('books.index') }}"
+                            class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
                             <i class="fas fa-book nav-icon"></i>
                             <span class="nav-text">Books</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('bookmarks.index') }}" class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}" title="Bookmarks">
+                        <a href="{{ route('bookmarks.index') }}"
+                            class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}"
+                            title="Bookmarks">
                             <i class="fas fa-bookmark nav-icon"></i>
                             <span class="nav-text">Bookmark</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('staff.index') }}" class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
+                        <a href="{{ route('staff.index') }}"
+                            class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
                             <i class="fas fa-address-card nav-icon"></i>
                             <span class="nav-text">Staff</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}" title="News">
+                        <a href="{{ route('news.index') }}"
+                            class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}" title="News">
                             <i class="fas fa-newspaper nav-icon"></i>
                             <span class="nav-text">News</span>
                         </a>
                     </li>
                     @if(auth()->user()->role === 'librarian')
                         <li class="nav-item">
-                            <a href="{{ url('/menus') }}" class="nav-link {{ request()->is('menus*') ? 'active' : '' }}" title="Navigation">
+                            <a href="{{ url('/menus') }}" class="nav-link {{ request()->is('menus*') ? 'active' : '' }}"
+                                title="Navigation">
                                 <i class="fas fa-bars nav-icon"></i>
                                 <span class="nav-text">Navigation</span>
                             </a>
@@ -98,6 +114,15 @@
                 <h1 class="page-title">{{ $menu->title }}</h1>
             </div>
 
+            @if(auth()->user()->role === 'librarian')
+                <div class="edit-button-container" style="margin-bottom: 1rem;">
+                    <a href="{{ route('menus.edit', $menu->id) }}" class="btn-edit"
+                        style="padding: 0.5rem 1rem; background: #007bff; color: #fff; border-radius: 5px; text-decoration: none;">
+                        <i class="fas fa-edit"></i> Edit Page
+                    </a>
+                </div>
+            @endif
+
             <div class="content-card">
                 {!! $menu->content !!}
             </div>
@@ -116,7 +141,7 @@
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         // Add active class to current page link in sidebar
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
             document.querySelectorAll('.nav-link').forEach(link => {
                 const href = link.getAttribute('href');
@@ -127,4 +152,5 @@
         });
     </script>
 </body>
+
 </html>
