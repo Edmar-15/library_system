@@ -8,16 +8,14 @@ use App\Models\Profile;
 
 Route::middleware('auth:sanctum')->get('/librarysystem/profile/api', [ProfileController::class, 'getProfileApi']);
 
-Route::middleware('auth')->group(function () {
-    Route::apiResource('users', ProfileController::class);
+Route::apiResource('users', ProfileController::class);
 
-    Route::get('/about', [AboutController::class, 'getAboutData']);
+Route::get('/about', [AboutController::class, 'getAboutData']);
 
-    Route::apiResource('book', BookController::class);
+Route::apiResource('book', BookController::class);
 
-    Route::get('/books', [BookController::class, 'apiIndex']);
+Route::get('/books', [BookController::class, 'apiIndex']);
 
-    Route::get('/books/{book}', [BookController::class, 'apiShow']);
+Route::get('/books/{book}', [BookController::class, 'apiShow']);
 
-    Route::patch('/books/{book}/rating', [BookController::class, 'updateRating']);
-});
+Route::patch('/books/{book}/rating', [BookController::class, 'updateRating']);
