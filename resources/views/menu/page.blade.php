@@ -18,14 +18,6 @@
 </head>
 
 <body>
-    @php
-    use App\Models\Menu;
-
-    $headerMenus = Menu::where('is_active', 1)
-        ->orderBy('order')
-        ->limit(3)
-        ->get();
-@endphp
     <!-- Header -->
     <header class="dashboard-header">
         <div class="logo-section">
