@@ -1,7 +1,7 @@
 @php
-use App\Models\Menu;
+  use App\Models\Menu;
 
-$headerMenus = Menu::where('is_active', 1)
+  $headerMenus = Menu::where('is_active', 1)
     ->orderBy('order')
     ->limit(3)
     ->get();
@@ -53,8 +53,8 @@ $headerMenus = Menu::where('is_active', 1)
         <div class="user-info">
           <a href="{{ route('show.profile') }}" class="user-avatar" title="View Profile">
             <img src="{{ $profile?->profile_picture
-              ? asset('storage/' . $profile->profile_picture)
-              : asset('images/default.jpg') }}" alt="Profile Picture">
+      ? asset('storage/' . $profile->profile_picture)
+      : asset('images/default.jpg') }}" alt="Profile Picture">
             <span class="user-name">{{ Auth::user()->name }}</span>
           </a>
         </div>
@@ -67,44 +67,51 @@ $headerMenus = Menu::where('is_active', 1)
       <div class="sidebar-content">
         <ul class="nav-menu">
           <li class="nav-item">
-            <a href="{{ route('show.home') }}" class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}" title="Dashboard">
+            <a href="{{ route('show.home') }}" class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}"
+              title="Dashboard">
               <i class="fas fa-home nav-icon"></i>
               <span class="nav-text">Home</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('show.about') }}" class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}" title="About">
+            <a href="{{ route('show.about') }}" class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}"
+              title="About">
               <i class="fas fa-solid fa-eye nav-icon"></i>
               <span class="nav-text">About</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('books.index') }}" class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
+            <a href="{{ route('books.index') }}"
+              class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
               <i class="fas fa-book nav-icon"></i>
               <span class="nav-text">Books</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('bookmarks.index') }}" class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}" title="Bookmarks">
+            <a href="{{ route('bookmarks.index') }}"
+              class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}" title="Bookmarks">
               <i class="fas fa-bookmark nav-icon"></i>
               <span class="nav-text">Bookmark</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('staff.index') }}" class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
+            <a href="{{ route('staff.index') }}"
+              class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
               <i class="fas fa-address-card nav-icon"></i>
               <span class="nav-text">Staff</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}" title="News">
+            <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}"
+              title="News">
               <i class="fas fa-newspaper nav-icon"></i>
               <span class="nav-text">News</span>
             </a>
           </li>
           @if (auth()->user()->role === 'librarian')
             <li class="nav-item">
-              <a href="{{ url('/menus') }}" class="nav-link {{ request()->is('menus') ? 'active' : '' }}" title="Navigation">
+              <a href="{{ url('/menus') }}" class="nav-link {{ request()->is('menus') ? 'active' : '' }}"
+                title="Navigation">
                 <i class="fas fa-bars nav-icon"></i>
                 <span class="nav-text">Navigation</span>
               </a>
@@ -185,10 +192,8 @@ $headerMenus = Menu::where('is_active', 1)
           <div class="book-of-month">
             <div class="book-cover">
               <img src="{{ $newBook?->cover_picture
-                ? asset('storage/' . $newBook->cover_picture)
-                : asset('images/book-cover.png') }}"
-                alt="{{ $newBook->title ?? 'Book Cover' }}"
-                class="book-cover-img">
+  ? asset('storage/' . $newBook->cover_picture)
+  : asset('images/book-cover.png') }}" alt="{{ $newBook->title ?? 'Book Cover' }}" class="book-cover-img">
             </div>
             <div class="book-info">
               <h3 class="book-title">{{ $newBook->title ?? 'No Book Upload Yet' }}</h3>
@@ -226,36 +231,45 @@ $headerMenus = Menu::where('is_active', 1)
           <h2><i class="fas fa-fire"></i> Popular Releases</h2>
           <div class="releases-grid">
             @forelse ($popularBooks as $book)
-              <div class="release-item">
-                <div class="release-cover">
-                  <img src="{{ $book->cover_picture
-                    ? asset('storage/' . $book->cover_picture)
-                    : asset('images/book-cover.png') }}"
-                    alt="{{ $book->title ?? 'Book Cover' }}"
-                    class="release-cover-img">
-                </div>
-                <div class="release-info">
-                  <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
-                  <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
-                  <div class="release-rating">
-                    @for ($i = 1; $i <= 5; $i++)
-                      @if ($i <= floor($book->rating ?? 0))
-                        <i class="fas fa-star"></i>
-                      @elseif ($i - ($book->rating ?? 0) < 0.5 && $i - ($book->rating ?? 0) > 0)
-                        <i class="fas fa-star-half-alt"></i>
-                      @else
-                        <i class="far fa-star"></i>
-                      @endif
-                    @endfor
-                  </div>
-                </div>
-              </div>
+                      <div class="release-item">
+                        <div class="release-cover">
+                          <img src="{{ $book->cover_picture
+              ? asset('storage/' . $book->cover_picture)
+              : asset('images/book-cover.png') }}" alt="{{ $book->title ?? 'Book Cover' }}" class="release-cover-img">
+                        </div>
+                        <div class="release-info">
+                          <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
+                          <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
+                          <div class="release-rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                              @if ($i <= floor($book->rating ?? 0))
+                                <i class="fas fa-star"></i>
+                              @elseif ($i - ($book->rating ?? 0) < 0.5 && $i - ($book->rating ?? 0) > 0)
+                                <i class="fas fa-star-half-alt"></i>
+                              @else
+                                <i class="far fa-star"></i>
+                              @endif
+                            @endfor
+                          </div>
+                        </div>
+                      </div>
             @empty
               <p class="no-releases">No popular releases available.</p>
             @endforelse
           </div>
         </div>
       </div>
+      <!-- Logout Modal -->
+      <div id="logoutModal" class="modal">
+        <div class="modal-content">
+          <p class="logout-text">Are you sure you want to logout?</p>
+          <div class="logout-actions">
+            <button id="confirmLogout" class="primary">Yes</button>
+            <button id="cancelLogout" class="secondary">No</button>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -268,12 +282,12 @@ $headerMenus = Menu::where('is_active', 1)
 
   <script>
     // Mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const mobileMenuToggle = document.getElementById('mobileMenuToggle');
       const headerNav = document.getElementById('headerNav');
 
       if (mobileMenuToggle && headerNav) {
-        mobileMenuToggle.addEventListener('click', function(e) {
+        mobileMenuToggle.addEventListener('click', function (e) {
           e.stopPropagation();
           headerNav.classList.toggle('active');
           // Change icon
@@ -288,10 +302,10 @@ $headerMenus = Menu::where('is_active', 1)
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
           if (headerNav.classList.contains('active') &&
-              !headerNav.contains(event.target) &&
-              !mobileMenuToggle.contains(event.target)) {
+            !headerNav.contains(event.target) &&
+            !mobileMenuToggle.contains(event.target)) {
             headerNav.classList.remove('active');
             const icon = mobileMenuToggle.querySelector('i');
             icon.classList.remove('fa-times');
@@ -300,7 +314,7 @@ $headerMenus = Menu::where('is_active', 1)
         });
 
         // Close menu on escape key
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
           if (event.key === 'Escape' && headerNav.classList.contains('active')) {
             headerNav.classList.remove('active');
             const icon = mobileMenuToggle.querySelector('i');
@@ -310,7 +324,7 @@ $headerMenus = Menu::where('is_active', 1)
         });
 
         // Close menu on window resize (if resizing to larger screen)
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
           if (window.innerWidth > 992 && headerNav.classList.contains('active')) {
             headerNav.classList.remove('active');
             const icon = mobileMenuToggle.querySelector('i');
@@ -322,7 +336,7 @@ $headerMenus = Menu::where('is_active', 1)
 
       // Add to list functionality
       document.querySelectorAll('.add-to-list-btn').forEach(btn => {
-        btn.addEventListener('click', async function() {
+        btn.addEventListener('click', async function () {
           const bookId = this.dataset.bookId;
           if (!bookId) return;
 
@@ -383,13 +397,31 @@ $headerMenus = Menu::where('is_active', 1)
 
       // Logout confirmation (optional)
       const logoutBtn = document.querySelector('.sidebar-logout-btn');
+      const modal = document.getElementById('logoutModal');
+      const confirmBtn = document.getElementById('confirmLogout');
+      const cancelBtn = document.getElementById('cancelLogout');
+
       if (logoutBtn) {
-        logoutBtn.addEventListener('click', function(e) {
-          if (!confirm('Are you sure you want to logout?')) {
-            e.preventDefault();
-          }
+        logoutBtn.addEventListener('click', function (e) {
+          e.preventDefault(); // prevent default action
+          modal.style.display = 'flex'; // show modal
         });
       }
+
+      confirmBtn.addEventListener('click', function () {
+        window.location.href = logoutBtn.href; // redirect to logout link
+      });
+
+      cancelBtn.addEventListener('click', function () {
+        modal.style.display = 'none'; // hide modal
+      });
+
+      // Close modal on outside click
+      window.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
     });
 
     // Helper function to update stats counter (if needed)

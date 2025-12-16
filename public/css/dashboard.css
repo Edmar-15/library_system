@@ -170,6 +170,67 @@ body {
     width: 100%;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0; /* shorthand for top:0; left:0; right:0; bottom:0; */
+  background-color: rgba(58, 47, 40, 0.5); /* semi-transparent overlay using --text-dark */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--white);
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-content p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.modal-content button {
+  margin: 5px;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.modal-content button.primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.modal-content button.secondary {
+  background: var(--light-bg);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+}
+
+.modal-content button.primary:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.modal-content button.secondary:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
 .nav-menu {
     list-style: none;
     width: 100%;
