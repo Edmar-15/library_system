@@ -13,8 +13,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/about', [AboutController::class, 'getAboutData']);
 
-    Route::patch('/about/{id}', [AboutController::class, 'updateJson'])->name('api.about.update');
-
     Route::apiResource('book', BookController::class);
 
     Route::get('/books', [BookController::class, 'apiIndex']);
@@ -23,4 +21,3 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/books/{book}/rating', [BookController::class, 'updateRating']);
 });
-

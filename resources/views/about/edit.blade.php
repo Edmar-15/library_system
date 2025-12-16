@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>LibrarySystem | Edit About Page</title>
     <link rel="stylesheet" href="{{ asset('css/editAbout.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,15 +62,15 @@
                     </li>
                 </ul>
                 @auth
-                <div class="sidebar-logout">
-                    <form action="{{ route('logout') }}" method="POST" class="logout-form">
-                        @csrf
-                        <button type="submit" class="sidebar-logout-btn">
-                            <i class="fas fa-sign-out-alt sidebar-logout-icon"></i>
-                            <span class="sidebar-logout-text">Logout</span>
-                        </button>
-                    </form>
-                </div>
+                    <div class="sidebar-logout">
+                        <form action="{{ route('logout') }}" method="POST" class="logout-form">
+                            @csrf
+                            <button type="submit" class="sidebar-logout-btn">
+                                <i class="fas fa-sign-out-alt sidebar-logout-icon"></i>
+                                <span class="sidebar-logout-text">Logout</span>
+                            </button>
+                        </form>
+                    </div>
                 @endauth
             </div>
         </nav>
@@ -86,6 +88,8 @@
                 <h2><i class="fas fa-edit"></i> Edit About Content</h2>
 
                 <form id="aboutForm" enctype="multipart/form-data" class="form-grid">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                     <!-- Title -->
                     <div class="form-group">
                         <label for="title"><i class="fas fa-heading"></i> Page Title:</label>
@@ -95,13 +99,15 @@
                     <!-- Contact Email -->
                     <div class="form-group">
                         <label for="contact_email"><i class="fas fa-envelope"></i> Contact Email:</label>
-                        <input type="email" id="contact_email" name="contact_email" value="{{ old('contact_email', $about->contact_email) }}">
+                        <input type="email" id="contact_email" name="contact_email"
+                            value="{{ old('contact_email', $about->contact_email) }}">
                     </div>
 
                     <!-- Description -->
                     <div class="form-group full-width">
                         <label for="description"><i class="fas fa-align-left"></i> Description:</label>
-                        <textarea id="description" name="description" rows="4">{{ old('description', $about->description) }}</textarea>
+                        <textarea id="description" name="description"
+                            rows="4">{{ old('description', $about->description) }}</textarea>
                     </div>
 
                     <!-- Mission -->
@@ -119,14 +125,16 @@
                     <!-- Features -->
                     <div class="form-group full-width">
                         <label for="features"><i class="fas fa-cogs"></i> System Features:</label>
-                        <textarea id="features" name="features" rows="6">{{ old('features', $about->features) }}</textarea>
+                        <textarea id="features" name="features"
+                            rows="6">{{ old('features', $about->features) }}</textarea>
                         <small><i class="fas fa-info-circle"></i> Separate features with commas or new lines</small>
                     </div>
 
                     <!-- Contact Phone -->
                     <div class="form-group">
                         <label for="contact_phone"><i class="fas fa-phone"></i> Contact Phone:</label>
-                        <input type="text" id="contact_phone" name="contact_phone" value="{{ old('contact_phone', $about->contact_phone) }}">
+                        <input type="text" id="contact_phone" name="contact_phone"
+                            value="{{ old('contact_phone', $about->contact_phone) }}">
                     </div>
 
                     <!-- Image Upload -->
@@ -140,12 +148,12 @@
                         </div>
 
                         @if($about->image)
-                        <div class="current-image">
-                            <p><strong>Current image:</strong></p>
-                            <div class="image-preview">
-                                <img src="{{ asset('storage/' . $about->image) }}" alt="Current logo">
+                            <div class="current-image">
+                                <p><strong>Current image:</strong></p>
+                                <div class="image-preview">
+                                    <img src="{{ asset('storage/' . $about->image) }}" alt="Current logo">
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
 
@@ -168,26 +176,27 @@
                 </p>
 
                 @if($about->developer_name && is_array($about->developer_name))
-                <div class="team-list">
-                    @foreach($about->developer_name as $index => $member)
-                    <div class="team-member-card">
-                        <div class="team-member-header">
-                            <span class="member-number">{{ $index + 1 }}</span>
-                            <h3 class="member-name">{{ $member['name'] }}</h3>
-                        </div>
-                        <div class="team-member-details">
-                            <p class="member-role"><strong><i class="fas fa-briefcase"></i> Role:</strong> {{ $member['role'] }}</p>
-                            <p class="member-email"><strong><i class="fas fa-envelope"></i> Email:</strong>
-                                <a href="mailto:{{ $member['email'] }}" class="email-link">{{ $member['email'] }}</a>
-                            </p>
-                        </div>
+                    <div class="team-list">
+                        @foreach($about->developer_name as $index => $member)
+                            <div class="team-member-card">
+                                <div class="team-member-header">
+                                    <span class="member-number">{{ $index + 1 }}</span>
+                                    <h3 class="member-name">{{ $member['name'] }}</h3>
+                                </div>
+                                <div class="team-member-details">
+                                    <p class="member-role"><strong><i class="fas fa-briefcase"></i> Role:</strong>
+                                        {{ $member['role'] }}</p>
+                                    <p class="member-email"><strong><i class="fas fa-envelope"></i> Email:</strong>
+                                        <a href="mailto:{{ $member['email'] }}" class="email-link">{{ $member['email'] }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
                 @else
-                <div class="no-team-message">
-                    <p><i class="fas fa-user-slash"></i> No team members configured.</p>
-                </div>
+                    <div class="no-team-message">
+                        <p><i class="fas fa-user-slash"></i> No team members configured.</p>
+                    </div>
                 @endif
             </div>
         </main>
@@ -202,7 +211,7 @@
     </footer>
 
     <script>
-        document.getElementById('aboutForm').addEventListener('submit', async function(event) {
+        document.getElementById('aboutForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
             const formData = new FormData(this);
@@ -217,7 +226,7 @@
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
                 submitBtn.disabled = true;
 
-                const response = await fetch("{{ url('api/about') }}/" + id, {
+                const response = await fetch("{{ url('about') }}/" + id, {
                     method: "POST", // use POST to send FormData
                     headers: {
                         "Accept": "application/json"
@@ -260,7 +269,7 @@
         });
 
         // File upload styling
-        document.getElementById('image').addEventListener('change', function(e) {
+        document.getElementById('image').addEventListener('change', function (e) {
             const fileName = e.target.files[0]?.name;
             const label = document.querySelector('.file-upload-label');
             if (fileName) {
@@ -277,4 +286,5 @@
         });
     </script>
 </body>
+
 </html>
