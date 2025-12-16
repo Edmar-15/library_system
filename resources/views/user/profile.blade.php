@@ -83,8 +83,13 @@
                                         <label for="phone">Phone Number</label>
                                         <input type="tel" id="phone" name="phone"
                                                value="{{ $user->profile->phone ?? '' }}"
-                                               placeholder="Enter your phone number">
+                                               placeholder="Enter your phone number"
+                                               pattern="[0-9+\-\s()]*"
+                                               oninput="validatePhoneNumber(this)"
+                                               onkeypress="return allowNumbersOnly(event)"
+                                               title="Please enter numbers only (digits 0-9, +, -, (, ), or spaces)">
                                         <div class="input-info">Include country code if international</div>
+                                        <div class="validation-message" id="phoneValidation"></div>
                                     </div>
 
                                     <div class="form-group">
@@ -234,6 +239,100 @@
             }
         }
 
+        // Phone number validation functions
+        function allowNumbersOnly(event) {
+            const charCode = event.which ? event.which : event.keyCode;
+            const char = String.fromCharCode(charCode);
+
+            // Allow numbers (0-9), plus (+), hyphen (-), parentheses (), space, and backspace
+            const allowedChars = /[0-9+\-()\s]|Backspace|Delete|Tab|Enter|Escape|Home|End|ArrowLeft|ArrowRight|ArrowUp|ArrowDown/;
+
+            // Check if it's a special key (backspace, delete, arrow keys, etc.)
+            if (event.key.length > 1 || allowedChars.test(event.key)) {
+                return true;
+            }
+
+            // Prevent default for other characters
+            event.preventDefault();
+            return false;
+        }
+
+        function validatePhoneNumber(input) {
+            const validationMessage = document.getElementById('phoneValidation');
+            const value = input.value;
+
+            // Clear any previous validation message
+            validationMessage.textContent = '';
+            validationMessage.className = 'validation-message';
+
+            // If empty, no validation needed
+            if (!value.trim()) {
+                return true;
+            }
+
+            // Remove all non-numeric characters except +, -, (, ), and spaces for validation
+            const cleaned = value.replace(/[^0-9+\-()\s]/g, '');
+
+            // If the cleaned value is different, update the input
+            if (cleaned !== value) {
+                input.value = cleaned;
+            }
+
+            // Validate the phone number format
+            const phoneRegex = /^[+]?[0-9\s\-()]+$/;
+
+            if (!phoneRegex.test(cleaned)) {
+                validationMessage.textContent = 'Invalid phone number format. Please use only numbers and valid symbols (+, -, (, ), spaces).';
+                validationMessage.classList.add('error');
+                return false;
+            }
+
+            // Additional validation: must contain at least 6 digits
+            const digitCount = (cleaned.match(/\d/g) || []).length;
+
+            if (digitCount < 6) {
+                validationMessage.textContent = 'Phone number should contain at least 6 digits.';
+                validationMessage.classList.add('warning');
+                return false;
+            }
+
+            // Check for suspicious patterns (like all same digits)
+            if (digitCount >= 6) {
+                const digits = cleaned.match(/\d/g);
+                const allSame = digits && digits.every(d => d === digits[0]);
+
+                if (allSame) {
+                    validationMessage.textContent = 'Phone number appears to be invalid.';
+                    validationMessage.classList.add('warning');
+                    return false;
+                }
+            }
+
+            // Valid phone number
+            validationMessage.textContent = '✓ Valid phone number format';
+            validationMessage.classList.add('success');
+            return true;
+        }
+
+        // Format phone number as user types
+        function formatPhoneNumber(input) {
+            let value = input.value.replace(/\D/g, '');
+
+            // Don't format if it starts with + (international number)
+            if (input.value.startsWith('+')) {
+                return;
+            }
+
+            // Format as (XXX) XXX-XXXX for US numbers
+            if (value.length > 3 && value.length <= 6) {
+                value = '(' + value.substring(0, 3) + ') ' + value.substring(3);
+            } else if (value.length > 6) {
+                value = '(' + value.substring(0, 3) + ') ' + value.substring(3, 6) + '-' + value.substring(6, 10);
+            }
+
+            input.value = value;
+        }
+
         // Character counter for bio
         const bioTextarea = document.getElementById('bio');
         const charCount = document.getElementById('bioCharCount');
@@ -254,6 +353,16 @@
 
         if (profileForm && submitBtn) {
             profileForm.addEventListener('submit', async (e) => {
+                // First validate phone number
+                const phoneInput = document.getElementById('phone');
+                if (phoneInput && phoneInput.value.trim() && !validatePhoneNumber(phoneInput)) {
+                    e.preventDefault();
+                    NotificationSystem.show('error', 'Invalid Phone Number',
+                        'Please enter a valid phone number with at least 6 digits.');
+                    phoneInput.focus();
+                    return;
+                }
+
                 e.preventDefault();
 
                 const originalText = submitBtn.innerHTML;
@@ -517,6 +626,25 @@
 
             // Load profile data
             loadProfile();
+
+            // Phone number validation setup
+            const phoneInput = document.getElementById('phone');
+
+            if (phoneInput) {
+                // Validate on input change
+                phoneInput.addEventListener('input', function(e) {
+                    // First, restrict input
+                    this.value = this.value.replace(/[^0-9+\-()\s]/g, '');
+
+                    // Then validate
+                    validatePhoneNumber(this);
+                });
+
+                // Validate on blur
+                phoneInput.addEventListener('blur', function() {
+                    validatePhoneNumber(this);
+                });
+            }
         });
 
         document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
@@ -534,6 +662,14 @@
             e.preventDefault();
             profileForm.reset();
             updateCharCount();
+
+            // Clear phone validation message
+            const phoneValidation = document.getElementById('phoneValidation');
+            if (phoneValidation) {
+                phoneValidation.textContent = '';
+                phoneValidation.className = 'validation-message';
+            }
+
             NotificationSystem.show('info', 'Form Reset', 'All changes have been discarded');
         });
     </script>
