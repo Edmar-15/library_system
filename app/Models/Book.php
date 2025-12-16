@@ -24,6 +24,7 @@ class Book extends Model
         'publication_year',
         'category',
         'language',
+        'external_link',
         'pages',
         'status',
     ];

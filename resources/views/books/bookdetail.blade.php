@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $book->title }} - LibrarySystem</title>
     <link rel="stylesheet" href="{{ asset('css/book-details.css') }}">
 </head>
+
 <body>
     <header class="book-header">
         <div class="header-content">
@@ -28,7 +30,8 @@
                 <!-- Book Cover -->
                 <div class="book-cover-section">
                     @if($book->cover_picture)
-                        <img src="{{ asset('storage/' . $book->cover_picture) }}" alt="{{ $book->title }}" class="book-cover-large">
+                        <img src="{{ asset('storage/' . $book->cover_picture) }}" alt="{{ $book->title }}"
+                            class="book-cover-large">
                     @else
                         <div class="book-placeholder-large">
                             <i class="fas fa-book"></i>
@@ -48,7 +51,7 @@
                             <button class="btn btn-primary btn-large add-to-list-btn" data-book-id="{{ $book->id }}">
                                 <i class="fas fa-plus"></i> Add to My List
                             </button>
-                            
+
                             @if($book->isAvailable())
                                 <button class="btn btn-secondary btn-large">
                                     <i class="fas fa-bookmark"></i> Reserve Book
@@ -104,50 +107,51 @@
                                     <span class="meta-value">{{ $book->isbn }}</span>
                                 </li>
                             @endif
-                            
+
                             @if($book->publisher)
                                 <li>
                                     <span class="meta-label">Publisher:</span>
                                     <span class="meta-value">{{ $book->publisher }}</span>
                                 </li>
                             @endif
-                            
+
                             @if($book->publication_year)
                                 <li>
                                     <span class="meta-label">Publication Year:</span>
                                     <span class="meta-value">{{ $book->publication_year }}</span>
                                 </li>
                             @endif
-                            
+
                             @if($book->category)
                                 <li>
                                     <span class="meta-label">Category:</span>
                                     <span class="meta-value">{{ $book->category }}</span>
                                 </li>
                             @endif
-                            
+
                             @if($book->language)
                                 <li>
                                     <span class="meta-label">Language:</span>
                                     <span class="meta-value">{{ $book->language }}</span>
                                 </li>
                             @endif
-                            
+
                             @if($book->pages)
                                 <li>
                                     <span class="meta-label">Pages:</span>
                                     <span class="meta-value">{{ $book->pages }} pages</span>
                                 </li>
                             @endif
-                            
+
                             <li>
                                 <span class="meta-label">Total Copies:</span>
                                 <span class="meta-value">{{ $book->total_copies }}</span>
                             </li>
-                            
+
                             <li>
                                 <span class="meta-label">Available Copies:</span>
-                                <span class="meta-value {{ $book->available_copies > 0 ? 'text-success' : 'text-danger' }}">
+                                <span
+                                    class="meta-value {{ $book->available_copies > 0 ? 'text-success' : 'text-danger' }}">
                                     {{ $book->available_copies }}
                                 </span>
                             </li>
@@ -166,13 +170,23 @@
                         </ul>
                     </div>
 
+                    <div class="book-description">
+                        <h3>Reference</h3>
+                        @if(!empty($book->external_link))
+                            <a href="{{ $book->external_link }}" target="_blank" rel="noopener noreferrer">
+                                {{ parse_url($book->external_link, PHP_URL_HOST) ?? $book->external_link }}
+                            </a>
+                        @endif
+                    </div>
+
                     @auth
                         @if(auth()->user()->role === 'librarian') <!-- Admin check -->
                             <div class="admin-actions">
                                 <a href="{{ route('books.edit', $book) }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit Book
                                 </a>
-                                <form action="{{ route('books.destroy', $book) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this book?')">
+                                <form action="{{ route('books.destroy', $book) }}" method="POST" style="display: inline-block;"
+                                    onsubmit="return confirm('Are you sure you want to delete this book?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">
@@ -192,14 +206,14 @@
     </footer>
 
     <script>
-        document.querySelector('.add-to-list-btn')?.addEventListener('click', async function() {
+        document.querySelector('.add-to-list-btn')?.addEventListener('click', async function () {
             const bookId = this.dataset.bookId;
             const button = this;
-            
+
             // Disable button to prevent double clicks
             button.disabled = true;
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
-            
+
             try {
                 const response = await fetch('/booklists', {
                     method: 'POST',
@@ -208,14 +222,14 @@
                         'Accept': 'application/json',
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    body: JSON.stringify({ 
+                    body: JSON.stringify({
                         book_id: bookId,
                         status: 'want_to_read'
                     })
                 });
 
                 const result = await response.json();
-                
+
                 if (response.ok && result.success) {
                     alert('✓ Book added to your list!');
                     button.innerHTML = '<i class="fas fa-check"></i> Added to List';
@@ -234,4 +248,5 @@
         });
     </script>
 </body>
+
 </html>
