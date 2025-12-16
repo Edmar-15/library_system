@@ -18,7 +18,9 @@
                 </a>
             </div>
             <nav class="header-nav">
-            
+                <a href="{{ route('show.home') }}" class="home-btn">
+                    <i class="fas fa-home"></i> Home
+                </a>
                 <a href="{{ route('books.index') }}" class="active"><i class="fas fa-book"></i> Books</a>
                 <a href="{{ route('booklists.index') }}"><i class="fas fa-list"></i> My Booklists</a>
                 

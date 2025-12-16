@@ -12,11 +12,10 @@
 <body>
     <!-- Header -->
     <header class="dashboard-header">
-    <div class="logo-section">
-      <div class="logo-icon">📚</div>
-      <div class="logo-text">LibrarySystem</div>
-    </div>
-
+        <div class="logo-section">
+            <div class="logo-icon">📚</div>
+            <div class="logo-text">LibrarySystem</div>
+        </div>
 
         @if (auth()->user()->role === 'librarian')
             <div class="auth-section">
@@ -25,7 +24,6 @@
                 </a>
             </div>
         @endif
-        
     </header>
 
     <div class="dashboard-container">
@@ -33,32 +31,38 @@
             <div class="sidebar-content">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="{{ route('show.home') }}" class="nav-link" title="Dashboard">
+                        <a href="{{ route('show.home') }}" class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}" title="Dashboard">
                             <i class="fas fa-home nav-icon"></i>
                             <span class="nav-text">Home</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('show.about') }}" class="nav-link active" title="About">
+                        <a href="{{ route('show.about') }}" class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}" title="About">
                             <i class="fas fa-solid fa-eye nav-icon"></i>
                             <span class="nav-text">About</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('books.index') }}" class="nav-link" title="Books">
+                        <a href="{{ route('books.index') }}" class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
                             <i class="fas fa-book nav-icon"></i>
                             <span class="nav-text">Books</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('bookmarks.index') }}" class="nav-link" title="Bookmarks">
+                        <a href="{{ route('bookmarks.index') }}" class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}" title="Bookmarks">
                             <i class="fas fa-bookmark nav-icon"></i>
                             <span class="nav-text">Bookmark</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('staff.index') }}" class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
+                            <i class="fas fa-address-card nav-icon"></i>
+                            <span class="nav-text">Staff</span>
+                        </a>
+                    </li>
                     @if (auth()->user()->role === 'librarian')
                         <li class="nav-item">
-                            <a href="{{ route('about.edit') }}" class="nav-link" title="Edit About">
+                            <a href="{{ route('about.edit') }}" class="nav-link {{ request()->routeIs('about.edit') ? 'active' : '' }}" title="Edit About">
                                 <i class="fas fa-edit nav-icon"></i>
                                 <span class="nav-text">Edit About</span>
                             </a>
@@ -69,7 +73,7 @@
                 <div class="sidebar-logout">
                     <form action="{{ route('logout') }}" method="POST" class="logout-form">
                         @csrf
-                        <button type="submit" class="sidebar-logout-btn">
+                        <button type="submit" class="sidebar-logout-btn" title="Logout">
                             <i class="fas fa-sign-out-alt sidebar-logout-icon"></i>
                             <span class="sidebar-logout-text">Logout</span>
                         </button>
@@ -176,9 +180,17 @@
         // Set current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Fetch about data when page loads
+        // Fetch about data
         document.addEventListener('DOMContentLoaded', function() {
             fetchAboutData();
+
+            // Set active sidebar links based on current URL
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
         });
 
         async function fetchAboutData() {
@@ -304,13 +316,15 @@
             }
         }
 
-        // Sidebar active links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function () {
-                document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
+        // Logout confirmation (optional)
+        const logoutBtn = document.querySelector('.sidebar-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to logout?')) {
+                    e.preventDefault();
+                }
             });
-        });
+        }
     </script>
 </body>
 </html>

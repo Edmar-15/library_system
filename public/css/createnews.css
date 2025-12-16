@@ -195,7 +195,7 @@ body {
     overflow-y: auto;
 }
 
-/* Edit Form Specific Styles */
+/* Create Form Specific Styles */
 .back-btn {
     display: inline-flex;
     align-items: center;
@@ -259,8 +259,8 @@ label i {
 }
 
 input[type="text"],
-input[type="email"],
-input[type="file"] {
+input[type="file"],
+textarea {
     width: 100%;
     padding: 12px 15px;
     margin-top: 8px;
@@ -272,16 +272,25 @@ input[type="file"] {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
-input:hover {
+input:hover,
+textarea:hover {
     background: #fff5e6;
     border-color: var(--primary-light);
 }
 
-input:focus {
+input:focus,
+textarea:focus {
     background: var(--white);
     border-color: var(--primary);
     outline: none;
     box-shadow: 0 0 0 3px rgba(224, 123, 22, 0.15);
+}
+
+/* Textarea specific styles */
+textarea {
+    resize: vertical;
+    min-height: 150px;
+    line-height: 1.6;
 }
 
 /* File Upload */
@@ -318,29 +327,6 @@ input:focus {
     color: var(--primary);
 }
 
-/* Current Profile Image */
-.current-profile-wrapper {
-    margin-top: 15px;
-    padding: 15px;
-    background: var(--light-bg);
-    border-radius: 10px;
-    border-left: 4px solid var(--primary);
-}
-
-.current-profile-label {
-    font-weight: 600;
-    color: var(--secondary);
-    margin-bottom: 10px;
-    display: block;
-}
-
-.current-profile {
-    max-width: 120px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    display: block;
-}
-
 /* Form Actions */
 .form-actions {
     margin-top: 30px;
@@ -350,7 +336,7 @@ input:focus {
     gap: 15px;
 }
 
-.staff-btn {
+.news-btn {
     padding: 12px 24px;
     border-radius: 10px;
     font-weight: 600;
@@ -366,27 +352,42 @@ input:focus {
     min-width: 180px;
 }
 
-.staff-btn.edit {
+.news-btn.add {
     background: var(--primary);
     color: var(--white);
 }
 
-.staff-btn.edit:hover {
+.news-btn.add:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
 
-.staff-btn.cancel {
+.news-btn.cancel {
     background: var(--light-bg);
     color: var(--text-dark);
     border: 2px solid var(--border-color);
 }
 
-.staff-btn.cancel:hover {
+.news-btn.cancel:hover {
     background: #f8e9d5;
     transform: translateY(-2px);
     box-shadow: var(--shadow);
+}
+
+/* Image Preview */
+.image-preview-container {
+    margin-top: 15px;
+    display: none;
+}
+
+.image-preview {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    margin-top: 10px;
+    object-fit: cover;
 }
 
 /* Small helper text */
@@ -589,8 +590,8 @@ small i {
     }
 
     input[type="text"],
-    input[type="email"],
-    input[type="file"] {
+    input[type="file"],
+    textarea {
         padding: 10px 12px;
         font-size: 14px;
     }
@@ -600,18 +601,10 @@ small i {
         gap: 12px;
     }
 
-    .staff-btn {
+    .news-btn {
         width: 100%;
         min-width: auto;
         padding: 12px 20px;
-    }
-
-    .current-profile-wrapper {
-        text-align: center;
-    }
-
-    .current-profile {
-        margin: 0 auto;
     }
 
     .dashboard-footer {
@@ -694,8 +687,8 @@ small i {
     }
 
     input[type="text"],
-    input[type="email"],
-    input[type="file"] {
+    input[type="file"],
+    textarea {
         padding: 8px 10px;
         font-size: 13px;
     }
@@ -705,13 +698,9 @@ small i {
         font-size: 13px;
     }
 
-    .staff-btn {
+    .news-btn {
         padding: 10px 15px;
         font-size: 14px;
-    }
-
-    .current-profile {
-        max-width: 100px;
     }
 
     small {
@@ -782,12 +771,8 @@ small i {
         padding: 8px;
     }
 
-    .staff-btn {
+    .news-btn {
         font-size: 13px;
-    }
-
-    .current-profile {
-        max-width: 90px;
     }
 
     .dashboard-footer {
@@ -832,7 +817,7 @@ small i {
         font-size: 14px;
     }
 
-    .staff-btn {
+    .news-btn {
         padding: 9px 12px;
         font-size: 12px;
     }

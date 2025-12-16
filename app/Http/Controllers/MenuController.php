@@ -31,15 +31,30 @@ class MenuController extends Controller
         return view('menu.page', compact('menu'));
     }
 
+    public function edit(Menu $menu)
+    {
+        return view('menu.edit', compact('menu'));
+    }
+
     public function update(Request $request, Menu $menu)
     {
-        $menu->update([
-            'title' => $request->title,
-            'type' => $request->type,
-            'url' => $request->url,
-            'order' => $request->order,
-            'is_active' => $request->has('is_active')
-        ]);
+        if ($menu->type === 'content') {
+            // Only update content
+            $menu->update([
+                'title' => $request->title,
+                'content' => $request->content,
+                'is_active' => $request->has('is_active')
+            ]);
+        } else {
+            // Update all fields for internal/external
+            $menu->update([
+                'title' => $request->title,
+                'type' => $request->type,
+                'url' => $request->url,
+                'order' => $request->order,
+                'is_active' => $request->has('is_active')
+            ]);
+        }
 
         return redirect()->back();
     }

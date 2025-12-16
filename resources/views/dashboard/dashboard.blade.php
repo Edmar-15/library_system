@@ -1,7 +1,7 @@
 @php
-use App\Models\Menu;
+  use App\Models\Menu;
 
-$headerMenus = Menu::where('is_active', 1)
+  $headerMenus = Menu::where('is_active', 1)
     ->orderBy('order')
     ->limit(3)
     ->get();
@@ -25,38 +25,37 @@ $headerMenus = Menu::where('is_active', 1)
     <div class="logo-section">
       <div class="logo-icon">📚</div>
       <div class="logo-text">LibrarySystem</div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
 
-    <nav class="header-nav">
-  @foreach ($headerMenus as $menu)
-
-    @if ($menu->type === 'internal')
-      <a href="{{ url($menu->url) }}" class="header-link">
-        {{ $menu->title }}
-      </a>
-
-    @elseif ($menu->type === 'external')
-      <a href="{{ $menu->url }}" target="_blank" class="header-link">
-        {{ $menu->title }}
-      </a>
-
-    @elseif ($menu->type === 'content')
-      <a href="{{ route('menus.show', $menu->id) }}" class="header-link">
-        {{ $menu->title }}
-      </a>
-    @endif
-
-  @endforeach
-</nav>
+    <nav class="header-nav" id="headerNav">
+      @foreach ($headerMenus as $menu)
+        @if ($menu->type === 'internal')
+          <a href="{{ url($menu->url) }}" class="header-link">
+            {{ $menu->title }}
+          </a>
+        @elseif ($menu->type === 'external')
+          <a href="{{ $menu->url }}" target="_blank" class="header-link">
+            {{ $menu->title }}
+          </a>
+        @elseif ($menu->type === 'content')
+          <a href="{{ route('menus.show', $menu->id) }}" class="header-link">
+            {{ $menu->title }}
+          </a>
+        @endif
+      @endforeach
+    </nav>
 
     @auth
       <div class="user-section">
         <div class="user-info">
-          <a href="{{ route('show.profile') }}" class="user-avatar">
+          <a href="{{ route('show.profile') }}" class="user-avatar" title="View Profile">
             <img src="{{ $profile?->profile_picture
       ? asset('storage/' . $profile->profile_picture)
-      : asset('images/default.jpg') }}" alt="profile-pic">
-            <i class="user-name">{{ Auth::user()->name }}</i>
+      : asset('images/default.jpg') }}" alt="Profile Picture">
+            <span class="user-name">{{ Auth::user()->name }}</span>
           </a>
         </div>
       </div>
@@ -68,54 +67,61 @@ $headerMenus = Menu::where('is_active', 1)
       <div class="sidebar-content">
         <ul class="nav-menu">
           <li class="nav-item">
-            <a href="{{ route('show.home') }}" class="nav-link active" title="Dashboard">
+            <a href="{{ route('show.home') }}" class="nav-link {{ request()->routeIs('show.home') ? 'active' : '' }}"
+              title="Dashboard">
               <i class="fas fa-home nav-icon"></i>
               <span class="nav-text">Home</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('show.about') }}" class="nav-link" title="About">
+            <a href="{{ route('show.about') }}" class="nav-link {{ request()->routeIs('show.about') ? 'active' : '' }}"
+              title="About">
               <i class="fas fa-solid fa-eye nav-icon"></i>
               <span class="nav-text">About</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('books.index') }}" class="nav-link" title="Books">
+            <a href="{{ route('books.index') }}"
+              class="nav-link {{ request()->routeIs('books.index') ? 'active' : '' }}" title="Books">
               <i class="fas fa-book nav-icon"></i>
               <span class="nav-text">Books</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('bookmarks.index') }}" class="nav-link" title="Bookmarks">
+            <a href="{{ route('bookmarks.index') }}"
+              class="nav-link {{ request()->routeIs('bookmarks.index') ? 'active' : '' }}" title="Bookmarks">
               <i class="fas fa-bookmark nav-icon"></i>
               <span class="nav-text">Bookmark</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('staff.index') }}" class="nav-link" title="Edit">
+            <a href="{{ route('staff.index') }}"
+              class="nav-link {{ request()->routeIs('staff.index') ? 'active' : '' }}" title="Staff">
               <i class="fas fa-address-card nav-icon"></i>
               <span class="nav-text">Staff</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('news.index') }}" class="nav-link" title="News">
+            <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}"
+              title="News">
               <i class="fas fa-newspaper nav-icon"></i>
               <span class="nav-text">News</span>
             </a>
           </li>
           @if (auth()->user()->role === 'librarian')
-              <li class="nav-item">
-  <a href="{{ url('/menus') }}" class="nav-link" title="Navigation">
-    <i class="fas fa-bars nav-icon"></i>
-    <span class="nav-text">Navigation</span>
-  </a>
-</li>
+            <li class="nav-item">
+              <a href="{{ url('/menus') }}" class="nav-link {{ request()->is('menus') ? 'active' : '' }}"
+                title="Navigation">
+                <i class="fas fa-bars nav-icon"></i>
+                <span class="nav-text">Navigation</span>
+              </a>
+            </li>
           @endif
         </ul>
         <div class="sidebar-logout">
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
             @csrf
-            <button type="submit" class="sidebar-logout-btn">
+            <button type="submit" class="sidebar-logout-btn" title="Logout">
               <i class="fas fa-sign-out-alt sidebar-logout-icon"></i>
               <span class="sidebar-logout-text">Logout</span>
             </button>
@@ -187,7 +193,7 @@ $headerMenus = Menu::where('is_active', 1)
             <div class="book-cover">
               <img src="{{ $newBook?->cover_picture
   ? asset('storage/' . $newBook->cover_picture)
-  : asset('images/book-cover.png') }}" alt="book_cover" class="book-cover">
+  : asset('images/book-cover.png') }}" alt="{{ $newBook->title ?? 'Book Cover' }}" class="book-cover-img">
             </div>
             <div class="book-info">
               <h3 class="book-title">{{ $newBook->title ?? 'No Book Upload Yet' }}</h3>
@@ -216,7 +222,6 @@ $headerMenus = Menu::where('is_active', 1)
                   </span>
                 @endif
               </div>
-
             </div>
           </div>
         </div>
@@ -224,25 +229,22 @@ $headerMenus = Menu::where('is_active', 1)
         <!-- Popular Releases -->
         <div class="content-card">
           <h2><i class="fas fa-fire"></i> Popular Releases</h2>
-
           <div class="releases-grid">
-            @foreach ($popularBooks as $book)
+            @forelse ($popularBooks as $book)
                       <div class="release-item">
                         <div class="release-cover">
                           <img src="{{ $book->cover_picture
               ? asset('storage/' . $book->cover_picture)
-              : asset('images/book-cover.png') }}" alt="book_cover" class="release-cover-img">
+              : asset('images/book-cover.png') }}" alt="{{ $book->title ?? 'Book Cover' }}" class="release-cover-img">
                         </div>
-
                         <div class="release-info">
                           <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
                           <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
-
                           <div class="release-rating">
                             @for ($i = 1; $i <= 5; $i++)
-                              @if ($i <= floor($book->rating))
+                              @if ($i <= floor($book->rating ?? 0))
                                 <i class="fas fa-star"></i>
-                              @elseif ($i - $book->rating >= 0.5)
+                              @elseif ($i - ($book->rating ?? 0) < 0.5 && $i - ($book->rating ?? 0) > 0)
                                 <i class="fas fa-star-half-alt"></i>
                               @else
                                 <i class="far fa-star"></i>
@@ -251,79 +253,179 @@ $headerMenus = Menu::where('is_active', 1)
                           </div>
                         </div>
                       </div>
-            @endforeach
+            @empty
+              <p class="no-releases">No popular releases available.</p>
+            @endforelse
           </div>
         </div>
-
       </div>
-  </div>
-  </main>
+      <!-- Logout Modal -->
+      <div id="logoutModal" class="modal">
+        <div class="modal-content">
+          <p class="logout-text">Are you sure you want to logout?</p>
+          <div class="logout-actions">
+            <button id="confirmLogout" class="primary">Yes</button>
+            <button id="cancelLogout" class="secondary">No</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
   </div>
 
   <!-- Footer -->
   <footer class="dashboard-footer">
     <div class="copyright">
-      &copy; {{ date('Y') }} LibrarySystem.
-    </div>
+      &copy; {{ date('Y') }} LibrarySystem. All rights reserved.
     </div>
   </footer>
 
   <script>
-    // Logout button
-    document.querySelector('.sidebar-logout-btn')?.addEventListener('click', function (e) {
-      // Optional custom logic
-    });
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const headerNav = document.getElementById('headerNav');
 
-    // Sidebar active links
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function () {
-        document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    document.querySelectorAll('.add-to-list-btn').forEach(btn => {
-      btn.addEventListener('click', async function () {
-        const bookId = this.dataset.bookId;
-        if (!bookId) return;
-        const button = this;
-
-        button.disabled = true;
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-
-        try {
-          const response = await fetch('/booklists', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({
-              book_id: bookId,
-              status: 'want_to_read'
-            })
-          });
-
-          const result = await response.json();
-
-          if (response.ok && result.success) {
-            button.innerHTML = '<i class="fas fa-check"></i>';
-            button.classList.add('success');
+      if (mobileMenuToggle && headerNav) {
+        mobileMenuToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          headerNav.classList.toggle('active');
+          // Change icon
+          const icon = this.querySelector('i');
+          if (headerNav.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
           } else {
-            alert(result.message || 'Already in your list.');
-            resetBtn(button);
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
           }
-        } catch {
-          alert('Request failed.');
-          resetBtn(button);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+          if (headerNav.classList.contains('active') &&
+            !headerNav.contains(event.target) &&
+            !mobileMenuToggle.contains(event.target)) {
+            headerNav.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape' && headerNav.classList.contains('active')) {
+            headerNav.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+
+        // Close menu on window resize (if resizing to larger screen)
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 992 && headerNav.classList.contains('active')) {
+            headerNav.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+      }
+
+      // Add to list functionality
+      document.querySelectorAll('.add-to-list-btn').forEach(btn => {
+        btn.addEventListener('click', async function () {
+          const bookId = this.dataset.bookId;
+          if (!bookId) return;
+
+          const button = this;
+          const originalHTML = button.innerHTML;
+
+          button.disabled = true;
+          button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+
+          try {
+            const response = await fetch('/booklists', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+              },
+              body: JSON.stringify({
+                book_id: bookId,
+                status: 'want_to_read'
+              })
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+              button.innerHTML = '<i class="fas fa-check"></i> Added!';
+              button.classList.add('success');
+
+              // Revert button after 2 seconds
+              setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('success');
+                button.disabled = false;
+              }, 2000);
+
+            } else {
+              alert(result.message || 'Book is already in your list.');
+              button.innerHTML = originalHTML;
+              button.disabled = false;
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to add book to list. Please try again.');
+            button.innerHTML = originalHTML;
+            button.disabled = false;
+          }
+        });
+      });
+
+      // Set active sidebar link based on current URL
+      const currentPath = window.location.pathname;
+      document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active');
+        }
+      });
+
+      // Logout confirmation (optional)
+      const logoutBtn = document.querySelector('.sidebar-logout-btn');
+      const modal = document.getElementById('logoutModal');
+      const confirmBtn = document.getElementById('confirmLogout');
+      const cancelBtn = document.getElementById('cancelLogout');
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function (e) {
+          e.preventDefault(); // prevent default action
+          modal.style.display = 'flex'; // show modal
+        });
+      }
+
+      confirmBtn.addEventListener('click', function () {
+        window.location.href = logoutBtn.href; // redirect to logout link
+      });
+
+      cancelBtn.addEventListener('click', function () {
+        modal.style.display = 'none'; // hide modal
+      });
+
+      // Close modal on outside click
+      window.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
         }
       });
     });
 
-    function resetBtn(btn) {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-plus"></i> Add to List';
+    // Helper function to update stats counter (if needed)
+    function updateStatsCounter() {
     }
   </script>
 </body>

@@ -70,6 +70,7 @@ class BookController extends Controller
             'publication_year' => 'nullable|integer|min:1000|max:' . date('Y'),
             'category' => 'nullable|string|max:100',
             'language' => 'nullable|string|max:50',
+            'external_link' => 'nullable|url|max:255',
             'pages' => 'nullable|integer|min:1',
         ]);
 
@@ -129,6 +130,7 @@ class BookController extends Controller
             'publication_year' => 'nullable|integer|min:1000|max:' . date('Y'),
             'category' => 'nullable|string|max:100',
             'language' => 'nullable|string|max:50',
+            'external_link' => 'nullable|url|max:255',
             'pages' => 'nullable|integer|min:1',
         ]);
 
