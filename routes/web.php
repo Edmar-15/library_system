@@ -58,6 +58,7 @@ Route::middleware(['auth', 'role:librarian'])->group(function () {
     Route::get('/librarysystem/about/edit', [AboutController::class, 'edit'])->name('about.edit');
     Route::put('/librarysystem/about/update', [AboutController::class, 'update'])->name('about.update');
     Route::resource('menus', MenuController::class)->except('show');
+    Route::patch('/about/{id}', [AboutController::class, 'updateJson'])->name('api.about.update');
 });
 
 Route::middleware(['auth', 'role:super_admin'])->group(function () {
