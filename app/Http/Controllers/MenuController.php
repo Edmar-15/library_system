@@ -38,26 +38,25 @@ class MenuController extends Controller
 
     public function update(Request $request, Menu $menu)
     {
-        // Base validation
-        $rules = ['title' => 'required|string|max:255'];
-
-        // Only content-type menus need 'content'
         if ($menu->type === 'content') {
-            $rules['content'] = 'required|string';
+            // Only update content
+            $menu->update([
+                'title' => $request->title,
+                'content' => $request->content,
+                'is_active' => $request->has('is_active')
+            ]);
         } else {
-            // For other menu types, validate 'type', 'url', and 'order'
-            $rules['type'] = 'required|in:internal,external,content';
-            $rules['url'] = $request->type !== 'content' ? 'required|string|max:255' : '';
-            $rules['order'] = 'required|integer';
+            // Update all fields for internal/external
+            $menu->update([
+                'title' => $request->title,
+                'type' => $request->type,
+                'url' => $request->url,
+                'order' => $request->order,
+                'is_active' => $request->has('is_active')
+            ]);
         }
 
-        $validated = $request->validate($rules);
-
-        // Update only provided fields
-        $menu->update($validated);
-
-        return redirect()->route('menus.show', $menu->id)
-                        ->with('success', 'Menu updated successfully.');
+        return redirect()->back();
     }
 
     public function destroy(Menu $menu)
