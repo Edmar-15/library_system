@@ -117,7 +117,7 @@
             @if(auth()->user()->role === 'librarian')
                 <div class="edit-button-container" style="margin-bottom: 1rem;">
                     <a href="{{ route('menus.edit', $menu->id) }}" class="btn-edit"
-                        style="padding: 0.5rem 1rem; background: #007bff; color: #fff; border-radius: 5px; text-decoration: none;">
+                        style="padding: 0.5rem 1rem; background: var(--primary); color: #fff; border-radius: 5px; text-decoration: none;">
                         <i class="fas fa-edit"></i> Edit Page
                     </a>
                 </div>
