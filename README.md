@@ -20,7 +20,7 @@ Table of contents
 - [License](#license)
 - [Team & Contact](#team--contact)
 
-Features
+#Features
 - Book Catalog Management
 - Member Registration
 - Borrowing & Return System
@@ -32,20 +32,20 @@ Features
 - Reservation System
 - Notifications
 
-Tech stack
+#Tech stack
 - Backend: Laravel (PHP)
 - Frontend: Blade templates, CSS, JS
 - Database: MySQL / MariaDB (typical XAMPP setup)
 - Build tools: Node.js / NPM (for frontend assets)
 
-Requirements
+#Requirements
 - PHP 8.0+ (check with `php -v`)
 - Composer
 - Node.js + npm (or yarn)
 - MySQL / MariaDB (or other DB supported by Laravel)
 - XAMPP if running locally on Windows
 
-Installation (local)
+#Installation (local)
 1. Clone the repo (if you haven't already)
    git clone https://github.com/Edmar-15/library_system.git
 
@@ -74,7 +74,7 @@ Installation (local)
    npm run dev
    (or `npm run build` for production)
 
-Database & Seeders
+#Database & Seeders
 - Run migrations
   php artisan migrate
 
@@ -86,22 +86,22 @@ Database & Seeders
 - If you need to reset + migrate + seed:
   php artisan migrate:fresh --seed
 
-Notes about About data
+#Notes about About data
 - Team members, contact email and project metadata are seeded in `database/seeders/AboutSeeder.php`.
 - Contact email (seeded): `contact@librarysystem.com`
 
-Running the app
+#Running the app
 - Local dev server
   php artisan serve
   Visit http://127.0.0.1:8000 (or the host/port shown in the console)
 
 - If using XAMPP, point your virtual host or `htdocs` folder to the project and ensure `public` is the web root.
 
-Testing
+#Testing
 - Run PHPUnit / Laravel test suite:
   php artisan test
 
-Common commands
+#Common commands
 - Generate storage symlink:
   php artisan storage:link
 - Clear cache:
@@ -112,21 +112,21 @@ Common commands
   npm run dev
   npm run build
 
-Development notes
+#Development notes
 - Frontend stylesheets are in `public/css` (examples: `readbook.css`, `showNew.css`, login styles).
 - Blade views (authentication) are in `resources/views/auth`.
 - Seeder example: `database/seeders/AboutSeeder.php` contains project metadata and developer list.
 - Adjust `.env` settings for mail, queue, cache, etc., when moving to staging/production.
 
-Contributing
+#Contributing
 - Fork -> create branch -> add feature/fix -> submit pull request.
 - Follow consistent code style and include migrations/seeds where necessary.
 - Please include tests for new features when applicable.
 
-License
+#License
 - This project is open-sourced under the MIT license. See the `LICENSE` file.
 
-Team & Contact
+#Team & Contact
 - Edmar Suayan — Backend Developer — edmarsuayan@gmail.com
 - Aguiluz Peregrin — Backend Developer — aguiluzperegrin@gmail.com
 - Gerrylorence Escamillas — Wireframing / Documentation — gerrylorenceescamillas@gmail.com
@@ -136,7 +136,7 @@ Team & Contact
 - Jemuel Jan Ballebar — Backend Developer — jemuelballebar@gmail.com
 - Denhmar Dimaculangan — Documentation — denhmardimaculangan@gmail.com
 
-Project contact
+#Project contact
 - contact@librarysystem.com
 - Phone (seeded): +63 000000000
 
