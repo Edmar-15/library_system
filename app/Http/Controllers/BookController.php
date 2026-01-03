@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -16,29 +17,30 @@ class BookController extends Controller
     {
         $query = Book::query();
 
-        // Search functionality
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $query->search($request->search);
         }
 
-        // Filter by category
-        if ($request->has('category') && $request->category != '') {
+        if ($request->filled('category')) {
             $query->byCategory($request->category);
         }
 
-        // Filter by availability
-        if ($request->has('available') && $request->available == '1') {
+        if ($request->available == '1') {
             $query->available();
         }
 
-        // Sort by rating
-        if ($request->has('sort') && $request->sort == 'rating') {
+        if ($request->sort === 'rating') {
             $query->orderBy('rating', 'desc');
         } else {
             $query->latest();
         }
 
         $books = $query->paginate(12);
+
+        // AJAX response
+        if ($request->ajax()) {
+            return view('books.partials.grid', compact('books'))->render();
+        }
 
         return view('books.bookindex', compact('books'));
     }
@@ -63,8 +65,6 @@ class BookController extends Controller
             'cover_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content_file' => 'nullable|file|mimes:txt|max:10240', // Max 10MB for txt files
             'rating' => 'nullable|numeric|min:0|max:5',
-            'total_copies' => 'required|integer|min:1',
-            'available_copies' => 'required|integer|min:0',
             'isbn' => 'nullable|string|unique:books,isbn',
             'publisher' => 'nullable|string|max:255',
             'publication_year' => 'nullable|integer|min:1000|max:' . date('Y'),
@@ -86,9 +86,6 @@ class BookController extends Controller
                 ->store('uploads/books/contents', 'public');
         }
 
-        // Set status based on available copies
-        $validated['status'] = $validated['available_copies'] > 0 ? 'available' : 'unavailable';
-
         $book = Book::create($validated);
 
         return redirect()->route('books.show', $book)
@@ -106,9 +103,9 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified book
      */
-    public function edit(Book $book)
+    public function edit(Book $book, Rating $bookRating)
     {
-        return view('books.editbook', compact('book'));
+        return view('books.editbook', compact('book', 'bookRating'));
     }
 
     /**
@@ -123,8 +120,6 @@ class BookController extends Controller
             'cover_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content_file' => 'nullable|file|mimes:txt|max:10240', // Max 10MB for txt files
             'rating' => 'nullable|numeric|min:0|max:5',
-            'total_copies' => 'required|integer|min:1',
-            'available_copies' => 'required|integer|min:0',
             'isbn' => ['nullable', 'string', Rule::unique('books')->ignore($book->id)],
             'publisher' => 'nullable|string|max:255',
             'publication_year' => 'nullable|integer|min:1000|max:' . date('Y'),

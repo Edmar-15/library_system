@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $book->title }} - LibrarySystem</title>
     <link rel="stylesheet" href="{{ asset('css/book-details.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -38,14 +39,6 @@
                         </div>
                     @endif
 
-                    <div class="availability-badge {{ $book->isAvailable() ? 'available' : 'unavailable' }}">
-                        @if($book->isAvailable())
-                            <i class="fas fa-check-circle"></i> Available
-                        @else
-                            <i class="fas fa-times-circle"></i> Unavailable
-                        @endif
-                    </div>
-
                     <div class="book-actions-large">
                         @auth
                             <button class="btn btn-primary btn-large add-to-list-btn" data-book-id="{{ $book->id }}">
@@ -70,20 +63,17 @@
                     <h1 class="book-title-large">{{ $book->title }}</h1>
                     <h2 class="book-author-large">by {{ $book->author }}</h2>
 
-                    <div class="book-rating-large">
-                        <div class="stars">
-                            @for($i = 1; $i <= 5; $i++)
-                                @if($i <= floor($book->rating))
-                                    <i class="fas fa-star"></i>
-                                @elseif($i - 0.5 <= $book->rating)
-                                    <i class="fas fa-star-half-alt"></i>
-                                @else
-                                    <i class="far fa-star"></i>
-                                @endif
-                            @endfor
-                        </div>
-                        <span class="rating-number">{{ number_format($book->rating, 2) }}/5.0</span>
+                    <div class="stars rating-stars" data-book-id="{{ $book->id }}">
+                        @for($i = 1; $i <= 5; $i++)
+                            <i class="fa-star fa {{ $i <= round($book->averageRating()) ? 'fas' : 'far' }}"
+                            data-value="{{ $i }}"></i>
+                        @endfor
                     </div>
+
+                    <span class="rating-number">
+                        Rating: 
+                        {{ $book->averageRating() ?? '0.00' }}/5
+                    </span>
 
                     @if($book->description)
                         <div class="book-description">
@@ -136,31 +126,6 @@
                                     <span class="meta-value">{{ $book->pages }} pages</span>
                                 </li>
                             @endif
-
-                            <li>
-                                <span class="meta-label">Total Copies:</span>
-                                <span class="meta-value">{{ $book->total_copies }}</span>
-                            </li>
-
-                            <li>
-                                <span class="meta-label">Available Copies:</span>
-                                <span
-                                    class="meta-value {{ $book->available_copies > 0 ? 'text-success' : 'text-danger' }}">
-                                    {{ $book->available_copies }}
-                                </span>
-                            </li>
-
-                            {{-- Content File Status --}}
-                            <li>
-                                <span class="meta-label">Book Content:</span>
-                                <span class="meta-value">
-                                    @if($book->hasContentFile())
-                                        <i class="fas fa-check-circle" style="color: green;"></i> Available
-                                    @else
-                                        <i class="fas fa-times-circle" style="color: red;"></i> Not Available
-                                    @endif
-                                </span>
-                            </li>
                         </ul>
                     </div>
 
@@ -239,6 +204,32 @@
                 button.disabled = false;
                 button.innerHTML = '<i class="fas fa-plus"></i> Add to My List';
             }
+        });
+
+        document.querySelectorAll('.rating-stars i').forEach(star => {
+            star.addEventListener('click', async function () {
+                const rating = this.dataset.value;
+                const bookId = this.closest('.rating-stars').dataset.bookId;
+
+                const res = await fetch(`/books/${bookId}/rate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ rating })
+                });
+
+                const data = await res.json();
+
+                document.querySelector('.rating-number').innerText =
+                    `${data.average}/5.0`;
+
+                document.querySelectorAll('.rating-stars i').forEach((s, i) => {
+                    s.classList.toggle('fas', i < rating);
+                    s.classList.toggle('far', i >= rating);
+                });
+            });
         });
     </script>
 </body>

@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label for="rating"><i class="fas fa-star"></i> Rating</label>
                             <input type="number" id="rating" name="rating" step="0.01" min="0" max="5"
-                                value="{{ old('rating', $book->rating) }}">
+                                value="{{ round($book->averageRating()) }}" readonly>
                             @error('rating')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
@@ -125,26 +125,6 @@
 
                 <!-- Right Column -->
                 <div class="form-column">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="total_copies"><i class="fas fa-copy"></i> Total Copies *</label>
-                            <input type="number" id="total_copies" name="total_copies"
-                                value="{{ old('total_copies', $book->total_copies) }}" min="1" required>
-                            @error('total_copies')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="available_copies"><i class="fas fa-check-circle"></i> Available Copies *</label>
-                            <input type="number" id="available_copies" name="available_copies"
-                                value="{{ old('available_copies', $book->available_copies) }}" min="0" required>
-                            @error('available_copies')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="isbn"><i class="fas fa-barcode"></i> ISBN</label>
                         <input type="text" id="isbn" name="isbn" value="{{ old('isbn', $book->isbn) }}">

@@ -10,19 +10,19 @@ use Illuminate\Support\Facades\Auth;
 class BooklistController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Auth::user()
-        ->booklists()
-        ->with('book');
+    {
+        $query = Auth::user()
+            ->booklists()
+            ->with('book');
 
-    if ($request->filled('status')) {
-        $query->byStatus($request->status);
+        if ($request->filled('status')) {
+            $query->byStatus($request->status);
+        }
+
+        $booklists = $query->latest()->paginate(12);
+
+        return view('books.userbooklist', compact('booklists'));
     }
-
-    $booklists = $query->latest()->paginate(12);
-
-    return view('books.userbooklist', compact('booklists'));
-}
 
     /**
      * Add a book to user's booklist

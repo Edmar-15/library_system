@@ -132,4 +132,14 @@ class Book extends Model
         }
         return null;
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function averageRating()
+    {
+        return round($this->ratings()->avg('rating'), 2);
+    }
 }

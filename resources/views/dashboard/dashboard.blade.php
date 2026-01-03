@@ -204,10 +204,14 @@
                                     <h4 class="release-title">{{ $book->title ?? 'Not Available' }}</h4>
                                     <p class="release-author">{{ $book->author ?? 'Coming Soon...' }}</p>
                                     <div class="release-rating">
+                                        @php
+                                            $rating = $book->averageRating(); // float: 0–5
+                                        @endphp
+
                                         @for ($i = 1; $i <= 5; $i++)
-                                            @if ($i <= floor($book->rating ?? 0))
+                                            @if ($i <= floor($rating))
                                                 <i class="fas fa-star"></i>
-                                            @elseif ($i - ($book->rating ?? 0) < 0.5 && $i - ($book->rating ?? 0) > 0)
+                                            @elseif ($i - $rating <= 0.5 && $i - $rating > 0)
                                                 <i class="fas fa-star-half-alt"></i>
                                             @else
                                                 <i class="far fa-star"></i>

@@ -86,78 +86,8 @@
 
         <!-- Books Grid -->
         <section class="books-section">
-            <div class="container">
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i> {{ session('success') }}
-                    </div>
-                @endif
-
-                @if($books->isEmpty())
-                    <div class="no-books">
-                        <i class="fas fa-book-open"></i>
-                        <h2>No books found</h2>
-                        <p>Try adjusting your search or filters</p>
-                    </div>
-                @else
-                    <div class="books-grid">
-                        @foreach($books as $book)
-                            <div class="book-card">
-                                <div class="book-cover">
-                                    @if($book->cover_picture)
-                                        <img src="{{ asset('storage/' . $book->cover_picture) }}" alt="{{ $book->title }}">
-                                    @else
-                                        <div class="book-placeholder">
-                                            <i class="fas fa-book"></i>
-                                        </div>
-                                    @endif
-                                    
-                                    <div class="book-status {{ $book->isAvailable() ? 'available' : 'unavailable' }}">
-                                        {{ $book->isAvailable() ? 'Available' : 'Unavailable' }}
-                                    </div>
-                                </div>
-
-                                <div class="book-info">
-                                    <h3 class="book-title">{{ Str::limit($book->title, 50) }}</h3>
-                                    <p class="book-author">by {{ $book->author }}</p>
-                                    
-                                    <div class="book-rating">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            @if($i <= floor($book->rating))
-                                                <i class="fas fa-star"></i>
-                                            @elseif($i - 0.5 <= $book->rating)
-                                                <i class="fas fa-star-half-alt"></i>
-                                            @else
-                                                <i class="far fa-star"></i>
-                                            @endif
-                                        @endfor
-                                        <span class="rating-value">{{ number_format($book->rating, 2) }}</span>
-                                    </div>
-
-                                    <div class="book-meta">
-                                        @if($book->category)
-                                            <span class="book-category">{{ $book->category }}</span>
-                                        @endif
-                                        <span class="book-copies">{{ $book->available_copies }}/{{ $book->total_copies }} copies</span>
-                                    </div>
-
-                                    <div class="book-actions">
-                                        <a href="{{ route('books.show', $book) }}" class="btn btn-primary">
-                                            <i class="fas fa-eye"></i> View Details
-                                        </a>
-                                        @auth
-                                            <button class="btn btn-secondary add-to-list-btn" data-book-id="{{ $book->id }}">
-                                                <i class="fas fa-plus"></i> Add to List
-                                            </button>
-                                        @endauth
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    
-                @endif
+            <div class="container" id="books-container">
+                @include('books.partials.grid', ['books' => $books])
             </div>
         </section>
     </main>
@@ -167,49 +97,56 @@
     </footer>
 
     <script>
-        // Add to booklist functionality
-        document.querySelectorAll('.add-to-list-btn').forEach(btn => {
-            btn.addEventListener('click', async function() {
-                const bookId = this.dataset.bookId;
-                const button = this;
-                
-                // Disable button to prevent double clicks
-                button.disabled = true;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
-                
-                try {
-                    const response = await fetch('/booklists', {
+        const form = document.querySelector('.search-form');
+        const container = document.getElementById('books-container');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const params = new URLSearchParams(new FormData(form));
+
+            fetch(`{{ route('books.index') }}?${params.toString()}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(res => res.text())
+            .then(html => {
+                container.innerHTML = html;
+                bindAddToListButtons();
+            });
+        });
+
+        function bindAddToListButtons() {
+            document.querySelectorAll('.add-to-list-btn').forEach(btn => {
+                btn.onclick = async () => {
+                    btn.disabled = true;
+                    btn.innerHTML = 'Adding...';
+
+                    const res = await fetch('/booklists', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Accept': 'application/json',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
-                        body: JSON.stringify({ 
-                            book_id: bookId,
+                        body: JSON.stringify({
+                            book_id: btn.dataset.bookId,
                             status: 'want_to_read'
                         })
                     });
 
-                    const result = await response.json();
-                    
-                    if (response.ok && result.success) {
-                        alert('✓ Book added to your list!');
-                        button.innerHTML = '<i class="fas fa-check"></i> Added';
-                        button.classList.add('btn-success');
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        btn.innerHTML = 'Added';
                     } else {
-                        alert(result.message || 'Failed to add book. It may already be in your list.');
-                        button.disabled = false;
-                        button.innerHTML = '<i class="fas fa-plus"></i> Add to List';
+                        btn.disabled = false;
+                        btn.innerHTML = 'Add to List';
+                        alert(data.message || 'Failed');
                     }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('An error occurred. Please try again.');
-                    button.disabled = false;
-                    button.innerHTML = '<i class="fas fa-plus"></i> Add to List';
-                }
+                };
             });
-        });
+        }
+
+        bindAddToListButtons();
     </script>
 </body>
 </html>

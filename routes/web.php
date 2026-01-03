@@ -13,7 +13,7 @@ use App\Http\Controllers\BooklistController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RatingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/booklists/{booklist}', [BooklistController::class, 'destroy'])->name('booklists.destroy');
     Route::resource('staff', StaffController::class);
     Route::resource('news', NewsController::class);
+    Route::post('/books/{book}/rate', [RatingController::class, 'rate']);
 });
 
 Route::middleware(['auth', 'role:librarian'])->group(function () {
